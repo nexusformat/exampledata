@@ -1,0 +1,22 @@
+The data in this directory are examples from the Advanced Photon Source.
+They were collected by the EPICS sscan record 
+	(http://www.aps.anl.gov/bcda/synApps/sscan/sscan.html)
+	(http://www.aps.anl.gov/bcda/synApps/sscan/sscanDoc.html)
+and saved in an APS format called MDA by the saveData software
+	(http://www.aps.anl.gov/bcda/synApps/sscan/saveData_fileFormat.txt)
+
+The data were then converted (much) later to NeXus HDF4 
+files using the scan2nexus software
+	(referenced indirectly at http://aps.anl.gov/bcda/dataVis/hdfb.html)
+
+The data were then converted NeXus XML files using the nxconvert software
+
+
+SIMULATED DATA
+sample1	      : see sample.mda.text for details
+
+EXPERIMENTAL DATA
+14BMC_0015    : 2005-01-27   1-D scan, 1 positioner, 15 detectors
+mts_0347      : 2005-03-28   2-D scan
+mts_0348      : 2005-03-29   2-D scan, 3 detectors, 2 positioners
+2iddf_0106    : 2003-07-17   3-D scan, 20 NXdata blocks

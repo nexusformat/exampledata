@@ -1,0 +1,33 @@
+sample1.mda is a 1D mda file of a 10-data-point scan with one positioner,
+no triggers, one detector, and a sample of many types of "extra" PVs --
+PV's named in saveData.req to be stored with every scan.  The following
+PV's are included in sample.mda as extra PV's:
+
+Name                    description              value
+--------------------------------------------------------------------------
+xxx:userCalc1.CALC      "string"                 "exp(-.5*(a-b)^2/c^2)"
+xxx:saveData_realTime1D "enum"                   "No"
+xxx:saveData_scanNumber "long"                   2
+xxx:saveData_fileSystem "filesystem"             "D:/data"
+xxx:scan1.P1SM          "scan mode"              "LINEAR"
+xxx:SR_ao.DISP          "sample uchar"           0
+xxx:SR_ao.PREC          "sample short"           1
+xxx:SR_bo.IVOV          "sample ushort"          1
+xxx:SR_ao.SCAN          "sample enum"            "Event"
+xxx:SR_ao.VAL           "sample double"          1.0
+xxx:SR_scaler.RATE      "sample float"           1.0
+xxx:SR_ao.DESC          "sample string"          "string"
+xxx:SR_ao.OUT           "sample link"            "link NPP NMS"
+xxx:SR_ao.RVAL          "sample long"            1
+xxx:SR_bi.SVAL          "sample ulong"           1
+i_dont_exist.VAL        "sample nosuch"          <not written to file>
+xxx:SR_char_array       "sample char array"      1 2 3 4 5 6 7 8 9 10
+xxx:SR_double_array     "sample double array"    1 2 3 4 5 6 7 8 9 10
+xxx:SR_float_array      "sample float array"     1 2 3 4 5 6 7 8 9 10
+xxx:SR_long_array       "sample long array"      1 2 3 4 5 6 7 8 9 10
+xxx:SR_short_array      "sample short array"     1 2 3 4 5 6 7 8 9 10
+xxx:SR_string_array     "sample string array"    "1" "2" "3" ...
+   <only the first string of the array was written to the mda file>
+xxx:SR_uchar_array      "sample uchar array"     1 2 3 4 5 6 7 8 9 10
+xxx:SR_ulong_array      "sample ulong array"     1 2 3 4 5 6 7 8 9 10
+xxx:SR_ushort_array     "sample ushort array"    1 2 3 4 5 6 7 8 9 10
