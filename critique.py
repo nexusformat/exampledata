@@ -111,9 +111,9 @@ class Critic(object):
         or this structure (valid starting 2015)::
         
             <file_root>:
-                @signal = "entry01"      (only needed to resolve ambiguity)
+                @default = "entry01"      (only needed to resolve ambiguity)
                 entry01 (NXentry)
-                    @signal = "data02"   (only needed to resolve ambiguity)
+                    @default = "data02"   (only needed to resolve ambiguity)
                     data01 (NXdata)
                         ...
                     data02 (NXdata)

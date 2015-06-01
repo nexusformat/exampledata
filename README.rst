@@ -18,15 +18,18 @@ For sure, we need more documentation here.
 NeXus compliance of files
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+..	new way to find the default dataset
+	https://github.com/nexusformat/definitions/issues/380
+
 An automated analysis of the files, by directory, 
 in this <exampledata> repository is shown below.
 Only HDF5 files that satisfy the structure::
 
-            <file_root>:
-                entry (NXentry)
-                    data (NXdata)
-                        <dataset>:
-                            @signal = 1
+	<file_root>:
+		entry (NXentry)
+			data (NXdata)
+				<dataset>:
+					@signal = 1
 
 are identified as *NeXus HDF5* files at this time.
 
