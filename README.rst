@@ -47,6 +47,7 @@ are identified as *NeXus HDF5* files at this time.
 :critique.py:  not HDF5 file
 :simple3D.h5:  NeXus HDF5 file, 1 **NXentry** group
 :verysimple.xml:  not HDF5 file
+:writer_1_3.h5:  NeXus HDF5 file, 1 **NXentry** group
 
 <exampledata>/ANSTO
 +++++++++++++++++++
