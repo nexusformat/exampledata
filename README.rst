@@ -41,9 +41,9 @@ HDF5 files that satisfy the structure::
 		entry (NXentry)
 			data (NXdata)
 				@signal = "detector02"
-				detector01
+				...
 				detector02
-				detector03
+				...
 
 are manually identified as *NeXus HDF5* files at this time.
 
