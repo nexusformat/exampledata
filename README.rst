@@ -15,6 +15,9 @@ For sure, we need more documentation here.
    Perhaps, also, having a top-level directory
    of really GOOD examples.
 
+The files *writer_1_3.h5* and *writer_1_3__niac2014.h5*
+are taken directly from the NeXus online documentation
+
 NeXus compliance of files
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
