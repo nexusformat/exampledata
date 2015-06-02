@@ -1,4 +1,4 @@
-#!/usr/bin/env Python
+#!/usr/bin/env python
 
 '''describe NeXus compliance of files in this repository'''
 
