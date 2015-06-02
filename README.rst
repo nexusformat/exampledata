@@ -21,9 +21,9 @@ NeXus compliance of files
 ..	new way to find the default dataset
 	https://github.com/nexusformat/definitions/issues/380
 
-An automated analysis of the files, by directory, 
+An automated analysis (via code *critique.py*) of the files, by directory, 
 in this <exampledata> repository is shown below.
-Only HDF5 files that satisfy the structure::
+HDF5 files that satisfy the structure::
 
 	<file_root>:
 		entry (NXentry)
@@ -31,7 +31,21 @@ Only HDF5 files that satisfy the structure::
 				<dataset>:
 					@signal = 1
 
-are identified as *NeXus HDF5* files at this time.
+are automatically identified as *NeXus HDF5* files at this time.
+
+The 2014 NIAC accepted a new method to identify the default data
+(http://wiki.nexusformat.org/2014_How_to_find_default_data).
+HDF5 files that satisfy the structure::
+
+	<file_root>:
+		entry (NXentry)
+			data (NXdata)
+				@signal = "detector02"
+				detector01
+				detector02
+				detector03
+
+are manually identified as *NeXus HDF5* files at this time.
 
 
 .. --- CRITIQUE report starts after this line ---
