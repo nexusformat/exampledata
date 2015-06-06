@@ -38,15 +38,11 @@ class Critic(object):
         
         # alternative to find_self.NXentry_NXdata_nodes(), deeper analysis
         # this code only checks for NXentry/NXdata/<data>/@signal=1
-        self.isNeXus = spec2nexus.h5toText.isNeXusFile(fullname)
+        self.isNeXus = self.isHDF5(fullname) and (spec2nexus.h5toText.isNeXusFile(fullname) or self.niac2014Compliance(fullname))
 
         # is it an HDF5 file?
         if not self.openHDF5(fullname):
             return
-
-        self.NXentry_nodes = self.find_NX_class_nodes(self.hdf5)
-        for entry in self.NXentry_nodes:
-            self.find_NXentry_NXdata_nodes(entry)
 
         # TODO: make lists of
         #    all field names
@@ -75,6 +71,13 @@ class Critic(object):
     def __str__(self, *args, **kwargs):
         return self.describe_file()
     
+    def isHDF5(self, fname):
+        '''is this an HDF5 file?'''
+        if not self.openHDF5(fname):
+            return False
+        self.hdf5.close()
+        return True
+
     def openHDF5(self, fname):
         '''try to open the file as HDF5'''
         try:
@@ -90,25 +93,13 @@ class Critic(object):
         for node in parent.values():
             if spec2nexus.h5toText.isNeXusGroup(node, nx_class):
                 node_list.append(node)
-        return node_list   
+        return node_list
     
-    def find_NXentry_NXdata_nodes(self, entry):
+    def niac2014Compliance(self, fullname):
         '''
-        identify if file satisfies valid NeXus NXentry/NXdata structure
-        
-        Either this structure::
-        
-            <file_root>:
-                entry (NXentry)
-                    data (NXdata)
-                        <dataset>:
-                            @signal = 1
-        
-        ..  search for "NXdata" in:
-            http://wiki.nexusformat.org/NIAC2014_Meeting#Minutes
-            http://wiki.nexusformat.org/2014_axes_and_uncertainties
-        
-        or this structure (valid starting 2015)::
+        tests file for compliance with NIAC2014 agreement on how to find the plottable data
+
+        Tests for this structure (as agreed at 2014 NIAC meeting)::
         
             <file_root>:
                 @default = "entry01"      (only needed to resolve ambiguity)
@@ -125,11 +116,37 @@ class Critic(object):
         
         :see: http://wiki.nexusformat.org/2014_How_to_find_default_data
         '''
-        # TODO: under construction
-        NXdata_nodes = self.find_NX_class_nodes(entry, nx_class = 'NXdata')
-        for node in NXdata_nodes:
-            # print node
-            pass
+        #
+        def get_default(group, subgroupclass):
+            subgroups = self.find_NX_class_nodes(group, nx_class = subgroupclass)
+
+            # subgroupclass not found, can't be a NIAC2014 file
+            if len(subgroups) == 0:
+                return False
+
+            # the easiest (and most common) possibility
+            elif len(subgroups) == 1:
+                return subgroups[0]
+
+            # multiple choice: MUST have a "default" attribute to arbitrate
+            if 'default' in group.attrs:
+                subgroupname = group.attrs['default']
+                if subgroupname in group:
+                    return group[subgroupname]
+            return False
+        #
+        compliance = False
+        if self.openHDF5(fullname):
+            entry = get_default(self.hdf5, 'NXentry')
+            if entry:
+                data = get_default(entry, 'NXdata')
+                if data:
+                    if 'signal' in data.attrs:
+                        signalname = data.attrs['signal']
+                        compliance = signalname in data
+
+        self.hdf5.close()
+        return compliance
 
 
 class Registrar(object):
