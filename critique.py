@@ -120,19 +120,19 @@ class Critic(object):
         def get_default(group, subgroupclass):
             subgroups = self.find_NX_class_nodes(group, nx_class = subgroupclass)
 
-            # subgroupclass not found, can't be a NIAC2014 file
-            if len(subgroups) == 0:
-                return False
+            # MUST have at least one of subgroupclass
+            if len(subgroups) > 0:
 
-            # the easiest (and most common) possibility
-            elif len(subgroups) == 1:
-                return subgroups[0]
+                # if "default" attribute is supplied
+                if 'default' in group.attrs:
+                    subgroupname = group.attrs['default']
+                    if subgroupname in group:
+                        return group[subgroupname]
+    
+                # fallback case, 'default' attribute is optional
+                if len(subgroups) == 1:
+                    return subgroups[0]
 
-            # multiple choice: MUST have a "default" attribute to arbitrate
-            if 'default' in group.attrs:
-                subgroupname = group.attrs['default']
-                if subgroupname in group:
-                    return group[subgroupname]
             return False
         #
         compliance = False
