@@ -98,8 +98,17 @@ class Critic(object):
     def niac2014Compliance(self, fullname):
         '''
         tests file for compliance with NIAC2014 agreement on how to find the plottable data
+        
+        .. note::  This test is not robust.
+           
+           * It does not test every NXdata group for compliance 
+             with the **NIAC2014** method.
+           * It does not test each NXentry for at least one NXdata 
+             group compliant with the **NIAC2014** method.
+           * It does not detect a file with mixed structure, 
+             both ``signal=1`` and **NIAC2014** methods.
 
-        Tests for this structure (as agreed at 2014 NIAC meeting)::
+        Tests data file for this structure (as agreed at 2014 NIAC meeting)::
         
             <file_root>:
                 @default = "entry01"      (only needed to resolve ambiguity)
@@ -116,7 +125,7 @@ class Critic(object):
         
         :see: http://wiki.nexusformat.org/2014_How_to_find_default_data
         '''
-        #
+        #------------------------------------------
         def get_default(group, subgroupclass):
             subgroups = self.find_NX_class_nodes(group, nx_class = subgroupclass)
 
@@ -134,7 +143,8 @@ class Critic(object):
                     return subgroups[0]
 
             return False
-        #
+        #------------------------------------------
+        # TODO: make test more robust
         compliance = False
         if self.openHDF5(fullname):
             entry = get_default(self.hdf5, 'NXentry')
