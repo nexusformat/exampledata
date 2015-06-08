@@ -144,8 +144,8 @@ class Critic(object):
                     if 'signal' in data.attrs:
                         signalname = data.attrs['signal']
                         compliance = signalname in data
+            self.hdf5.close()
 
-        self.hdf5.close()
         return compliance
 
 
