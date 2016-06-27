@@ -87,6 +87,10 @@ are manually identified as *NeXus HDF5* files at this time.
 ++++++++++++++++++++++++++++++++++++++++++++++++
 :AgBehenate_228.hdf5:  NeXus HDF5 file, 1 **NXentry** group
 
+<exampledata>/APS/NXsas
++++++++++++++++++++++++
+:nexus-example.hdf5:  NeXus HDF5 file, 1 **NXentry** group fitting **NXsas** application definition
+
 <exampledata>/APS/other
 +++++++++++++++++++++++
 :ID34_not_complete.h5:  NeXus HDF5 file, 1 **NXentry** group

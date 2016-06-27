@@ -1,0 +1,154 @@
+nexus-example.hdf5 : NeXus data file
+  @default = entry
+  @creator = areaDetector NDFileNexus plugin v0.2 and spec2nexus.eznx
+  entry:NXentry
+    @NX_class = NXentry
+    @default = data
+    definition:NX_CHAR[5] = NXsas
+      @URL = http://download.nexusformat.org/doc/html/classes/applications/NXsas.html
+    end_time:NX_CHAR[25] = 2016-06-23T16:00:20-06:00
+    start_time:NX_CHAR[25] = 2016-06-23T12:02:31-06:00
+    title:NX_CHAR[19] = NeXus NXsas example
+    data:NXdata
+      @NX_class = NXdata
+      @signal = frames
+      @axes = ['sample_times' 'vertical' 'horizontal']
+      @sample_times_indices = [0]
+      @vertical_indices = [1]
+      @horizontal_indices = [2]
+      blank --> /entry/instrument/detector/blank
+      frames --> /entry/instrument/detector/data
+      horizontal:NX_INT64[487] = [0, 1, 2, '...', 486]
+        @units = pixels
+      sample_times --> /entry/instrument/sample/image_times
+      vertical:NX_INT64[195] = [0, 1, 2, '...', 194]
+        @units = pixels
+    instrument:NXinstrument
+      @NX_class = NXinstrument
+      name:NX_CHAR[24] = APS 9-ID-C USAXS pinSAXS
+      collimator:NXcollimator
+        @NX_class = NXcollimator
+        geometry:NXgeometry
+          @NX_class = NXgeometry
+          shape:NXshape
+            @NX_class = NXshape
+            center_x:NX_FLOAT64 = 8.00000000112e-06
+              @units = mm
+            center_y:NX_FLOAT64 = 0.500036
+              @units = mm
+            shape:NX_CHAR[5] = nxbox
+            size_x:NX_FLOAT64 = 0.7998265
+              @units = mm
+            size_y:NX_FLOAT64 = 0.2001505
+              @units = mm
+      control:NXmonitor
+        @NX_class = NXmonitor
+        integral:NX_FLOAT64[10] = [2934680.0, 2930450.0, 2853831.0, '...', 2957693.0]
+          @units = clock
+          @clock_per_s = 100000
+        mode:NX_CHAR[4] = time
+        preset:NX_FLOAT64 = 30.0
+          @units = s
+      detector:NXdetector
+        @NX_class = NXdetector
+        beam_center_x:NX_FLOAT64 = 17.1914
+          @units = mm
+        beam_center_x_pixel:NX_FLOAT64 = 99.95
+        beam_center_y:NX_FLOAT64 = -0.9718
+          @units = mm
+        beam_center_y_pixel:NX_FLOAT64 = -5.65
+        blank:NX_INT32[195,487] = __array
+          __array = [
+              [78, 79, 61, '...', 17158]
+              [57, 51, 61, '...', 16036]
+              [67, 70, 76, '...', 15927]
+              ...
+              [69, 73, 75, '...', 16488]
+            ]
+          @units = counts
+          @source_file = HeaterBlank_30C_560min_0376.hdf
+          @target = /entry/instrument/detector/blank
+        data:NX_INT32[10,195,487] = __array
+          __array = [
+              [
+                  [41, 38, 57, '...', 9820]
+                  [33, 43, 55, '...', 9367]
+                  [46, 34, 44, '...', 9159]
+                  ...
+                  [59, 43, 67, '...', 10831]
+                ]
+              [
+                  [50, 58, 52, '...', 9982]
+                  [43, 41, 60, '...', 9446]
+                  [38, 39, 50, '...', 9355]
+                  ...
+                  [39, 58, 55, '...', 10798]
+                ]
+              [
+                  [49, 35, 42, '...', 9717]
+                  [52, 36, 44, '...', 9138]
+                  [30, 36, 46, '...', 9029]
+                  ...
+                  [55, 65, 63, '...', 10309]
+                ]
+              ...
+              [
+                  [41, 45, 37, '...', 10337]
+                  [40, 39, 36, '...', 9391]
+                  [46, 53, 53, '...', 9374]
+                  ...
+                  [49, 52, 68, '...', 10870]
+                ]
+            ]
+          @units = counts
+          @compression = gzip
+          @source_files = IN625AB_775C_3min_0378.hdf
+IN625AB_775C_30min_0383.hdf
+IN625AB_775C_58min_0388.hdf
+IN625AB_775C_86min_0393.hdf
+IN625AB_775C_112min_0398.hdf
+IN625AB_775C_140min_0403.hdf
+IN625AB_775C_168min_0408.hdf
+IN625AB_775C_196min_0413.hdf
+IN625AB_775C_223min_0418.hdf
+IN625AB_775C_240min_0421.hdf
+          @target = /entry/instrument/detector/data
+        distance:NX_FLOAT64 = 540.8
+          @units = mm
+        frame_files:NX_CHAR[284] = IN625AB_775C_3min_0378.hdf
+IN625AB_775C_30min_0383.hdf
+IN625AB_775C_58min_0388.hdf
+IN625AB_775C_86min_0393.hdf
+IN625AB_775C_112min_0398.hdf
+IN625AB_775C_140min_0403.hdf
+IN625AB_775C_168min_0408.hdf
+IN625AB_775C_196min_0413.hdf
+IN625AB_775C_223min_0418.hdf
+IN625AB_775C_240min_0421.hdf
+        x_pixel_size:NX_FLOAT64 = 0.172
+          @units = mm
+        y_pixel_size:NX_FLOAT64 = 0.172
+          @units = mm
+      monochromator:NXmonochromator
+        @NX_class = NXmonochromator
+        energy:NX_FLOAT64 = 20.9999615757
+          @units = keV
+        wavelength:NX_FLOAT64 = 0.59040224218
+          @units = Angstroms
+        wavelength_spread:NX_FLOAT64 = 8e-05
+          @units = Angstroms/Angstroms
+      sample:NXsample
+        @NX_class = NXsample
+        image_times:NX_INT64[10] = [3, 30, 58, '...', 240]
+          @units = minutes
+          @target = /entry/instrument/sample/image_times
+        name:NX_CHAR[32] = pinSAXS for IN625AB_775C_240min
+      source:NXsource
+        @NX_class = NXsource
+        current:NX_FLOAT64 = 101.74371564
+          @units = mA
+        energy:NX_FLOAT64 = 7.0
+          @units = GeV
+        name:NX_CHAR[48] = Advanced Photon Source Undulator A, sector 9ID-C
+        probe:NX_CHAR[5] = x-ray
+        type:NX_CHAR[24] = Synchrotron X-ray Source
