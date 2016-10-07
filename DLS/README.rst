@@ -21,3 +21,5 @@ format=nxs integrated_experiments.json integrated.pickle.
 
 This datafile provides an example for NXreflections, a candidate application
 definition for recording integrated Bragg reflection intensities.
+
+The file was modified to only contain 10 Bragg reflections to save space in git.
