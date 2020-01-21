@@ -1,1 +1,5 @@
 *.pyc
+
+# Microsoft VSCode
+settings.json
+launch.json
