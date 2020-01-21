@@ -3,10 +3,35 @@
 '''describe NeXus compliance of files in this repository'''
 
 
+import h5py
+import numpy
 import os
 import sys
-import h5py
-import spec2nexus.h5toText
+
+
+def isHdf5Group(obj):
+    """is `obj` an HDF5 Group?"""
+    return isinstance(obj, h5py.Group)
+
+
+def isNeXusGroup(obj, NXtype):
+    """is `obj` a NeXus group?"""
+    nxclass = None
+    if isHdf5Group(obj):
+        if "NX_class" not in obj.attrs:
+            return False
+        try:
+            nxclass = obj.attrs.get('NX_class', None)
+        except Exception as exc:
+            print(exc)
+            return False
+        if isinstance(nxclass, numpy.ndarray):
+            nxclass = nxclass[0]
+    return nxclass == str(NXtype)
+
+
+def is_spec_file(fullname):
+    return False    # see spec2nexus.spec.is_spec_file()
 
 
 class Critic(object):
@@ -38,7 +63,7 @@ class Critic(object):
         
         # alternative to find_self.NXentry_NXdata_nodes(), deeper analysis
         # this code only checks for NXentry/NXdata/<data>/@signal=1
-        self.isNeXus = self.isHDF5(fullname) and (spec2nexus.h5toText.isNeXusFile(fullname) or self.niac2014Compliance(fullname))
+        self.isNeXus = self.isHDF5(fullname) and (is_spec_file(fullname) or self.niac2014Compliance(fullname))
 
         # is it an HDF5 file?
         if not self.openHDF5(fullname):
@@ -91,7 +116,7 @@ class Critic(object):
         parent = parent or self.hdf5
         node_list = []
         for node in parent.values():
-            if spec2nexus.h5toText.isNeXusGroup(node, nx_class):
+            if isNeXusGroup(node, nx_class):
                 node_list.append(node)
         return node_list
     
