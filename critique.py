@@ -23,7 +23,7 @@ def isNeXusGroup(obj, NXtype):
         try:
             nxclass = obj.attrs.get('NX_class', None)
         except Exception as exc:
-            print(exc)
+            # print(exc)
             return False
         if isinstance(nxclass, numpy.ndarray):
             nxclass = nxclass[0]
