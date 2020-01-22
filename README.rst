@@ -51,6 +51,8 @@ HDF5 files that satisfy the structure::
 are manually identified as *NeXus HDF5* files at this time.
 
 
+An analysis by the `critique.py` program (in this repository)
+is available: [*critique*](critique.md]
 .. --- CRITIQUE report starts after this line ---
 .. date: 2015-05-31
 
