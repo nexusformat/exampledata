@@ -1,13 +1,33 @@
 #!/usr/bin/env python
 
 '''
-describe NeXus compliance of files in this repository
+tests all files in this repo for basic compliance with the NeXus standard (per 2016 NIAC)
 
-to update the compliance report in this repo, run this command::
+
+USAGE
+
+To update the compliance report in this repo::
 
     ./critique.py | tee critique.md
 
-note:  This code is compliant with both python 2 and python 3
+Notes:  
+
+* This code is compliant with both python 2 and python 3
+* This code does not perform a full validation of NeXus data files.
+  It only checks that a given file can be opened by h5py
+  and has at least one *NXentry* group.
+  
+  Tests for this structure 
+  (exact name of *entry01* is not required)::
+        
+    <file_root>:
+        entry01 (NXentry)
+            ...     # content not checked at this level
+        ...     # additional content not checked at this level
+        
+  :see: http://wiki.nexusformat.org/2014_How_to_find_default_data
+  :see: https://www.nexusformat.org/NIAC2016Minutes.html#nxdata
+
 '''
 
 
@@ -16,19 +36,13 @@ import h5py
 import numpy
 import pyRestTable
 import os
-import six
 import sys
-
-
-def isHdf5Group(obj):
-    """is `obj` an HDF5 Group?"""
-    return isinstance(obj, h5py.Group)
 
 
 def isNeXusGroup(obj, NXtype):
     """is `obj` a NeXus group?"""
     nxclass = None
-    if isHdf5Group(obj):
+    if isinstance(obj, h5py.Group):
         if "NX_class" not in obj.attrs:
             return False
         try:
@@ -39,14 +53,9 @@ def isNeXusGroup(obj, NXtype):
         if isinstance(nxclass, numpy.ndarray):
             nxclass = nxclass[0]
     
-    if six.PY3:
-        if isinstance(nxclass, bytes):
+    if isinstance(nxclass, bytes) and not isinstance(nxclass, str):
             nxclass = nxclass.decode()
     return nxclass == NXtype
-
-
-def is_spec_file(fullname):
-    return False    # see spec2nexus.spec.is_spec_file()
 
 
 class Critic(object):
@@ -59,9 +68,8 @@ class Critic(object):
     def __init__(self, path, fname):
         self.path = None
         self.fname = None
-        self.hdf5 = None
         self.NXentry_nodes = []
-        self.isNeXus = False
+        self.filetype = "not HDF5 file"
 
         # can the file be found?
         fullname = os.path.join(path, fname)
@@ -75,33 +83,20 @@ class Critic(object):
         # ok, passes basic qualifications, proceed
         self.path = path
         self.fname = fname
-        
-        # alternative to find_self.NXentry_NXdata_nodes(), deeper analysis
-        # this code only checks for NXentry/NXdata/<data>/@signal=1
-        self.isNeXus = self.isHDF5(fullname) and self.niac2014Compliance(fullname)
 
-        # is it an HDF5 file?
-        if not self.openHDF5(fullname):
-            return
+        try:
+            with h5py.File(fullname, mode="r") as root:
+                self.filetype = "HDF5 file"
+                self.NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
+                if len(self.NXentry_nodes) > 0:
+                    self.filetype = "NeXus HDF5 file"
+        except IOError:
+            pass        # cannot open with HDF5
 
-        # TODO: make lists of
-        #    all field names
-        #    group names
-        #    nx_class types
-        # TODO: check all field names
-        #    field names for fit to the regexp
-        #    field names for correct codepage
-        #    strings for correct codepage
-
-        # finally: close the HDF5 file
-        self.hdf5.close()
+        # no deeper validation of the NeXus data file
     
     def describe_file(self):
-        s = 'HDF5 file'
-        if self.hdf5 is None:
-            return 'not ' + s
-        if self.isNeXus:
-            s = 'NeXus ' + s
+        s = self.filetype
         if len(self.NXentry_nodes) > 0:
             s += ', %d **NXentry** group' % len(self.NXentry_nodes)
             if len(self.NXentry_nodes) > 1:
@@ -109,95 +104,16 @@ class Critic(object):
         return s
 
     def __str__(self, *args, **kwargs):
-        return self.describe_file()
+        return self.describe_file() 
     
-    def isHDF5(self, fname):
-        '''is this an HDF5 file?'''
-        if not self.openHDF5(fname):
-            return False
-        self.hdf5.close()
-        return True
-
-    def openHDF5(self, fname):
-        '''try to open the file as HDF5'''
-        try:
-            self.hdf5 = h5py.File(fname, 'r')
-        except IOError:
-            return False
-        return True    
-    
-    def find_NX_class_nodes(self, parent = None, nx_class = 'NXentry'):
+    def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
-        parent = parent or self.hdf5
+        parent = parent
         node_list = []
         for node in parent.values():
             if isNeXusGroup(node, nx_class):
                 node_list.append(node)
         return node_list
-    
-    def niac2014Compliance(self, fullname):
-        '''
-        tests file for compliance with NIAC2014 agreement on how to find the plottable data
-        
-        .. note::  This test is not robust.
-           
-           * It does not test every NXdata group for compliance 
-             with the **NIAC2014** method.
-           * It does not test each NXentry for at least one NXdata 
-             group compliant with the **NIAC2014** method.
-           * It does not detect a file with mixed structure, 
-             both ``signal=1`` and **NIAC2014** methods.
-
-        Tests data file for this structure (as agreed at 2014 NIAC meeting)::
-        
-            <file_root>:
-                @default = "entry01"      (only needed to resolve ambiguity)
-                entry01 (NXentry)
-                    @default = "data02"   (only needed to resolve ambiguity)
-                    data01 (NXdata)
-                        ...
-                    data02 (NXdata)
-                        @signal = "data1"
-                        data1
-                        data2
-                entry02 (NXentry)
-                    ...
-        
-        :see: http://wiki.nexusformat.org/2014_How_to_find_default_data
-        '''
-        #------------------------------------------
-        def get_default(group, subgroupclass):
-            subgroups = self.find_NX_class_nodes(group, nx_class = subgroupclass)
-
-            # MUST have at least one of subgroupclass
-            if len(subgroups) > 0:
-
-                # if "default" attribute is supplied
-                if 'default' in group.attrs:
-                    subgroupname = group.attrs['default']
-                    if subgroupname in group:
-                        return group[subgroupname]
-    
-                # fallback case, 'default' attribute is optional
-                if len(subgroups) == 1:
-                    return subgroups[0]
-
-            return False
-        #------------------------------------------
-        # TODO: make test more robust
-        compliance = False
-        if self.openHDF5(fullname):
-            entry = get_default(self.hdf5, 'NXentry')
-            if entry:
-                compliance = True
-                # data = get_default(entry, 'NXdata')
-                # if data:
-                #     if 'signal' in data.attrs:
-                #         signalname = data.attrs['signal']
-                #         compliance = data.get(signalname) is not None
-            self.hdf5.close()
-
-        return compliance
 
 
 class Registrar(object):
