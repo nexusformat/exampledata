@@ -1,26 +1,22 @@
 # Critique of *exampledata* files
 
-* date: 2020-01-22 11:46:36.763137
+* date: 2020-01-22 12:01:28.732098
 * h5py version: 2.10.0
 
 ## path: .
 
-| file                        | critique                             |
-| --------------------------- | ------------------------------------ |
-| ``.gitignore``              | not HDF5 file                        |
-| ``.project``                | not HDF5 file                        |
-| ``.pydevproject``           | not HDF5 file                        |
-| ``MANIFEST.in``             | not HDF5 file                        |
-| ``README.rst``              | not HDF5 file                        |
-| ``critique.md``             | not HDF5 file                        |
-| ``critique.py``             | not HDF5 file                        |
-| ``simple3D.h5``             | NeXus HDF5 file, 1 **NXentry** group |
-| ``verysimple.xml``          | not HDF5 file                        |
-| ``writer_1_3.h5``           | NeXus HDF5 file, 1 **NXentry** group |
-| ``writer_1_3__niac2014.h5`` | NeXus HDF5 file, 1 **NXentry** group |
+| file              | critique      |
+| ----------------- | ------------- |
+| ``.gitignore``    | not HDF5 file |
+| ``.project``      | not HDF5 file |
+| ``.pydevproject`` | not HDF5 file |
+| ``MANIFEST.in``   | not HDF5 file |
+| ``README.rst``    | not HDF5 file |
+| ``critique.md``   | not HDF5 file |
+| ``critique.py``   | not HDF5 file |
 
 
-## path: ./ANSTO
+## path: ./ANSTO/hdf4
 
 | file                  | critique                             |
 | --------------------- | ------------------------------------ |
@@ -29,9 +25,15 @@
 
 ## path: ./APS/CCDImageServer
 
+| file           | critique      |
+| -------------- | ------------- |
+| ``README.txt`` | not HDF5 file |
+
+
+## path: ./APS/CCDImageServer/hdf4
+
 | file                            | critique      |
 | ------------------------------- | ------------- |
-| ``README.txt``                  | not HDF5 file |
 | ``Smither400.3_apr0300051.hdf`` | not HDF5 file |
 | ``Smither400.3_apr0300052.hdf`` | not HDF5 file |
 | ``Smither400.3_apr0300053.hdf`` | not HDF5 file |
@@ -42,7 +44,7 @@
 | ``recon_0125.hdf``              | not HDF5 file |
 
 
-## path: ./APS/EPICSareaDetector/NeXus-plugin
+## path: ./APS/EPICSareaDetector/hdf5
 
 | file                    | critique                             |
 | ----------------------- | ------------------------------------ |
@@ -51,14 +53,20 @@
 
 ## path: ./APS/NXsas
 
-| file                     | critique                             |
-| ------------------------ | ------------------------------------ |
-| ``create_nexus_data.py`` | not HDF5 file                        |
-| ``nexus-example.hdf5``   | NeXus HDF5 file, 1 **NXentry** group |
-| ``xture.txt``            | not HDF5 file                        |
+| file                     | critique      |
+| ------------------------ | ------------- |
+| ``create_nexus_data.py`` | not HDF5 file |
+| ``xture.txt``            | not HDF5 file |
 
 
-## path: ./APS/other
+## path: ./APS/NXsas/hdf5
+
+| file                   | critique                             |
+| ---------------------- | ------------------------------------ |
+| ``nexus-example.hdf5`` | NeXus HDF5 file, 1 **NXentry** group |
+
+
+## path: ./APS/other/hdf5
 
 | file                     | critique                             |
 | ------------------------ | ------------------------------------ |
@@ -67,28 +75,40 @@
 
 ## path: ./APS/scan2nexus
 
+| file                | critique      |
+| ------------------- | ------------- |
+| ``14BMC_0015.mda``  | not HDF5 file |
+| ``2iddf_0106.mda``  | not HDF5 file |
+| ``README``          | not HDF5 file |
+| ``mts_0347.mda``    | not HDF5 file |
+| ``mts_0348.mda``    | not HDF5 file |
+| ``sample.mda.text`` | not HDF5 file |
+| ``sample1.mda``     | not HDF5 file |
+
+
+## path: ./APS/scan2nexus/hdf4
+
 | file                 | critique      |
 | -------------------- | ------------- |
-| ``14BMC_0015.mda``   | not HDF5 file |
 | ``14BMC_0015.nexus`` | not HDF5 file |
-| ``14BMC_0015.xml``   | not HDF5 file |
-| ``2iddf_0106.mda``   | not HDF5 file |
 | ``2iddf_0106.nexus`` | not HDF5 file |
-| ``2iddf_0106.xml``   | not HDF5 file |
-| ``README``           | not HDF5 file |
-| ``mts_0347.mda``     | not HDF5 file |
 | ``mts_0347.nexus``   | not HDF5 file |
-| ``mts_0347.xml``     | not HDF5 file |
-| ``mts_0348.mda``     | not HDF5 file |
 | ``mts_0348.nexus``   | not HDF5 file |
-| ``mts_0348.xml``     | not HDF5 file |
-| ``sample.mda.text``  | not HDF5 file |
-| ``sample1.mda``      | not HDF5 file |
 | ``sample1.nexus``    | not HDF5 file |
-| ``sample1.xml``      | not HDF5 file |
 
 
-## path: ./APS/tomo
+## path: ./APS/scan2nexus/xml
+
+| file               | critique      |
+| ------------------ | ------------- |
+| ``14BMC_0015.xml`` | not HDF5 file |
+| ``2iddf_0106.xml`` | not HDF5 file |
+| ``mts_0347.xml``   | not HDF5 file |
+| ``mts_0348.xml``   | not HDF5 file |
+| ``sample1.xml``    | not HDF5 file |
+
+
+## path: ./APS/tomo/hdf4
 
 | file                        | critique      |
 | --------------------------- | ------------- |
@@ -103,7 +123,7 @@
 | ``README.rst`` | not HDF5 file |
 
 
-## path: ./DLS/NXquadric
+## path: ./DLS/NXquadric/hdf5
 
 | file                     | critique                             |
 | ------------------------ | ------------------------------------ |
@@ -112,27 +132,33 @@
 
 ## path: ./DLS/i03_i04_NXmx
 
+| file           | critique      |
+| -------------- | ------------- |
+| ``README.txt`` | not HDF5 file |
+
+
+## path: ./DLS/i03_i04_NXmx/hdf5
+
 | file              | critique                             |
 | ----------------- | ------------------------------------ |
-| ``README.txt``    | not HDF5 file                        |
 | ``Therm_6_2.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
-## path: ./DLS/i16
+## path: ./DLS/i16/hdf5
 
 | file           | critique                             |
 | -------------- | ------------------------------------ |
 | ``538039.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
-## path: ./DLS/i16/538039-pilatus100k-files
+## path: ./DLS/i16/hdf5/538039-pilatus100k-files
 
 | file           | critique                             |
 | -------------- | ------------------------------------ |
 | ``538039.hdf`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
-## path: ./DLS/p45
+## path: ./DLS/p45/hdf5
 
 | file                  | critique                             |
 | --------------------- | ------------------------------------ |
@@ -142,22 +168,28 @@
 | ``p45-316.nxs``       | NeXus HDF5 file, 1 **NXentry** group |
 
 
-## path: ./DLS/reflections
+## path: ./DLS/reflections/hdf5
 
 | file                         | critique                             |
 | ---------------------------- | ------------------------------------ |
 | ``thaumatin_integrated.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
-## path: ./IPNS/LRMECS
+## path: ./IPNS/LRMECS/hdf4
+
+| file             | critique      |
+| ---------------- | ------------- |
+| ``lrcs3701.nxs`` | not HDF5 file |
+
+
+## path: ./IPNS/LRMECS/hdf5
 
 | file             | critique                              |
 | ---------------- | ------------------------------------- |
 | ``lrcs3701.nx5`` | NeXus HDF5 file, 2 **NXentry** groups |
-| ``lrcs3701.nxs`` | not HDF5 file                         |
 
 
-## path: ./Soleil
+## path: ./Soleil/hdf5
 
 | file           | critique                             |
 | -------------- | ------------------------------------ |
@@ -167,9 +199,15 @@
 
 ## path: ./SwissFEL
 
+| file       | critique      |
+| ---------- | ------------- |
+| ``README`` | not HDF5 file |
+
+
+## path: ./SwissFEL/hdf5
+
 | file                                   | critique                             |
 | -------------------------------------- | ------------------------------------ |
-| ``README``                             | not HDF5 file                        |
 | ``lyso009a_0087.JF07T32V01_master.h5`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
@@ -202,12 +240,34 @@
 | ``dmc02.xml.txt``  | not HDF5 file |
 
 
+## path: ./hdf5
+
+| file                        | critique                             |
+| --------------------------- | ------------------------------------ |
+| ``simple3D.h5``             | NeXus HDF5 file, 1 **NXentry** group |
+| ``writer_1_3.h5``           | NeXus HDF5 file, 1 **NXentry** group |
+| ``writer_1_3__niac2014.h5`` | NeXus HDF5 file, 1 **NXentry** group |
+
+
 ## path: ./nxpdb
 
-| file            | critique                             |
-| --------------- | ------------------------------------ |
-| ``4n8z.cif``    | not HDF5 file                        |
-| ``4n8z.h5``     | NeXus HDF5 file, 1 **NXentry** group |
-| ``4n8z.h5.cif`` | not HDF5 file                        |
-| ``README.rst``  | not HDF5 file                        |
+| file            | critique      |
+| --------------- | ------------- |
+| ``4n8z.cif``    | not HDF5 file |
+| ``4n8z.h5.cif`` | not HDF5 file |
+| ``README.rst``  | not HDF5 file |
+
+
+## path: ./nxpdb/hdf5
+
+| file        | critique                             |
+| ----------- | ------------------------------------ |
+| ``4n8z.h5`` | NeXus HDF5 file, 1 **NXentry** group |
+
+
+## path: ./xml
+
+| file               | critique      |
+| ------------------ | ------------- |
+| ``verysimple.xml`` | not HDF5 file |
 
