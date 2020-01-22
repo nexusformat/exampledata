@@ -108,7 +108,6 @@ class Critic(object):
     
     def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
-        parent = parent
         node_list = []
         for node in parent.values():
             if isNeXusGroup(node, nx_class):
