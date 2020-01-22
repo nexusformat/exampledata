@@ -1,5 +1,7 @@
 # Critique of *exampledata* files
-date: 2020-01-22 10:59:20.459078
+
+* date: 2020-01-22 11:46:36.763137
+* h5py version: 2.10.0
 
 ## path: .
 
@@ -118,9 +120,9 @@ date: 2020-01-22 10:59:20.459078
 
 ## path: ./DLS/i16
 
-| file           | critique  |
-| -------------- | --------- |
-| ``538039.nxs`` | HDF5 file |
+| file           | critique                             |
+| -------------- | ------------------------------------ |
+| ``538039.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
 ## path: ./DLS/i16/538039-pilatus100k-files

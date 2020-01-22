@@ -12,6 +12,8 @@ To update the compliance report in this repo::
 
 Notes:  
 
+* use h5py 2.10 or higher 
+  (https://github.com/nexusformat/exampledata/pull/14#issuecomment-577305522)
 * This code is compliant with both python 2 and python 3
 * This code does not perform a full validation of NeXus data files.
   It only checks that a given file can be opened by h5py
@@ -169,7 +171,9 @@ def main(path = None):
             walk_function(registrar, subdir, file_list)
     
     print("# Critique of *exampledata* files")
-    print("date: %s" % datetime.datetime.now())
+    print("")
+    print("* date: %s" % datetime.datetime.now())
+    print("* h5py version: %s" % h5py.__version__)
     registrar.report()
 
 
