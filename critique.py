@@ -3,9 +3,12 @@
 '''describe NeXus compliance of files in this repository'''
 
 
+import datetime
 import h5py
 import numpy
+import pyRestTable
 import os
+import six
 import sys
 
 
@@ -21,13 +24,17 @@ def isNeXusGroup(obj, NXtype):
         if "NX_class" not in obj.attrs:
             return False
         try:
-            nxclass = obj.attrs.get('NX_class', None)
+            nxclass = obj.attrs['NX_class']
         except Exception as exc:
             # print(exc)
             return False
         if isinstance(nxclass, numpy.ndarray):
             nxclass = nxclass[0]
-    return nxclass == str(NXtype)
+    
+    if six.PY3:
+        if isinstance(nxclass, bytes):
+            nxclass = nxclass.decode()
+    return nxclass == NXtype
 
 
 def is_spec_file(fullname):
@@ -63,7 +70,7 @@ class Critic(object):
         
         # alternative to find_self.NXentry_NXdata_nodes(), deeper analysis
         # this code only checks for NXentry/NXdata/<data>/@signal=1
-        self.isNeXus = self.isHDF5(fullname) and (is_spec_file(fullname) or self.niac2014Compliance(fullname))
+        self.isNeXus = self.isHDF5(fullname) and self.niac2014Compliance(fullname)
 
         # is it an HDF5 file?
         if not self.openHDF5(fullname):
@@ -174,11 +181,12 @@ class Critic(object):
         if self.openHDF5(fullname):
             entry = get_default(self.hdf5, 'NXentry')
             if entry:
-                data = get_default(entry, 'NXdata')
-                if data:
-                    if 'signal' in data.attrs:
-                        signalname = data.attrs['signal']
-                        compliance = signalname in data
+                compliance = True
+                # data = get_default(entry, 'NXdata')
+                # if data:
+                #     if 'signal' in data.attrs:
+                #         signalname = data.attrs['signal']
+                #         compliance = data.get(signalname) is not None
             self.hdf5.close()
 
         return compliance
@@ -200,9 +208,13 @@ class Registrar(object):
     
     def report(self):
         for path, flist in sorted(self.db.items()):
-            print '\n' + path + '\n' + '+'*len(path)
+            table = pyRestTable.Table()
+            table.labels = ["file", "critique"]
             for fname, critique in sorted(flist.items()):
-                print ':'+fname+': ', str(critique)
+                table.addRow(("``"+fname+"``", critique))
+            
+            print("\n## path: " + path + "\n")
+            print(table.reST(fmt="markdown"))
 
 
 def walk_function(registrar, path, files):
@@ -222,13 +234,22 @@ def walk_function(registrar, path, files):
 def main(path = None):
     '''traverse a directory and describe how each file conforms to NeXus'''
     registrar = Registrar()
-    path = path or os.path.dirname(__file__)
-    os.path.walk(path, walk_function, registrar)
+    paths = [path or os.path.dirname(__file__)]
+    while len(paths) > 0:
+        path = paths.pop()
+        for subdir, dir_list, file_list in os.walk(path):
+            if os.path.basename(subdir) in (".vscode", ".git"):
+                continue
+            paths += [
+                os.path.join(subdir, p) 
+                for p in dir_list]
+            walk_function(registrar, subdir, file_list)
+    
+    print("# Critique of *exampledata* files")
+    print("date: %s" % datetime.datetime.now())
     registrar.report()
-    # TODO: should modify the README.rst
-    #    after the line that reads:
-    #    .. --- CRITIQUE report starts after this line ---
 
 
 if __name__ == '__main__':
+    # ./critique.py | tee critique.md
     main()
