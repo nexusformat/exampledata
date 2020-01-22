@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 
-'''describe NeXus compliance of files in this repository'''
+'''
+describe NeXus compliance of files in this repository
+
+to update the compliance report in this repo, run this command::
+
+    ./critique.py | tee critique.md
+
+note:  This code is compliant with both python 2 and python 3
+'''
 
 
 import datetime
@@ -251,5 +259,4 @@ def main(path = None):
 
 
 if __name__ == '__main__':
-    # ./critique.py | tee critique.md
     main()
