@@ -205,6 +205,11 @@ def sanity_check_dimensions(dct, sym_dct={}):
             if('rank' in dct['attrib'].keys()):
                 if(has_numbers(dct['attrib']['rank'])):
                     rank = int(dct['attrib']['rank'])
+                elif has_expression(dct['attrib']['rank']):
+                    rank = 1
+                    print(
+                        '\t\tNote: rank designation is using an expression, expressions are currently not supported for generation, the value of 1 will be used')
+                    print('\t\t The expression used in the definition is: [%s]' % (dct['attrib']['rank']))
                 else:
                     print(
                         '\t\tError: rank designation is using a symbol that has not been defined in Symbols table or it is a comment')
@@ -399,6 +404,11 @@ def has_numbers(inputString):
     inputString = str(inputString)
     return all([c.isdigit() or c == '.' for c in inputString])
 
+def has_expression(inputString):
+    #make sure it is a string
+    inputString = str(inputString)
+    return inputString.__contains__('+')
+
 def get_symbols(fname):
     '''# print(root.xpath("//article[@type='news']/content/text()"))
     # print(root.xpath("//article"))
@@ -415,6 +425,13 @@ def get_symbols(fname):
         slst.append({'name': symbol.get('name'), 'doc': symbol.get_text(), 'value': 1})
 
     return(slst)
+
+# def contains_docstring(tag_lst):
+#     for t in list(tag_lst.children):
+#         if t.name == 'doc'
+
+
+
 
 def process_symbols(soup, sym_args_dct={}):
     '''
@@ -466,23 +483,24 @@ def process_symbols(soup, sym_args_dct={}):
             dim_lst = dimns.find_all('dim')
             for d in dim_lst:
                 reqd = True
-                #d is a dimensions dict
-                idx = int(d['index'])
+                if(d['index'].isdigit()):
+                    #d is a dimensions dict
+                    idx = int(d['index'])
 
-                if('value' not in d.attrs.keys()):
-                    print('\t\tError, there is no [value] key in dim specification', d.attrs)
-                    continue
-                if(d.attrs['value'] in sym_dct.keys()):
-                    # # dimension is required if not specified or if set to true (will it ever be explicitly?)
-                    # the definition specifies a symbol as the value for this dimension so substitute it
-                    d.attrs['value'] = sym_dct[ d.attrs['value'] ]['value']
-                # dimension is required if not specified or if set to true (will it ever be explicitly?)
-                if 'required' in d.attrs.keys():
-                    if d.attrs['required'] == 'false':
-                        reqd = False
-                #record max_index so we can set 'dataRank' if it is used
-                if reqd and (idx > max_index):
-                    max_index = idx
+                    if('value' not in d.attrs.keys()):
+                        print('\t\tError, there is no [value] key in dim specification', d.attrs)
+                        continue
+                    if(d.attrs['value'] in sym_dct.keys()):
+                        # # dimension is required if not specified or if set to true (will it ever be explicitly?)
+                        # the definition specifies a symbol as the value for this dimension so substitute it
+                        d.attrs['value'] = sym_dct[ d.attrs['value'] ]['value']
+                    # dimension is required if not specified or if set to true (will it ever be explicitly?)
+                    if 'required' in d.attrs.keys():
+                        if d.attrs['required'] == 'false':
+                            reqd = False
+                    #record max_index so we can set 'dataRank' if it is used
+                    if reqd and (idx > max_index):
+                        max_index = idx
 
             #now (if it is specified) substitute max_index for 'dataRank' keyword
             if('rank' in dimns.attrs.keys()):
