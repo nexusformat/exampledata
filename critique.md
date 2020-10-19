@@ -1,6 +1,6 @@
 # Critique of *exampledata* files
 
-* date: 2020-01-22 12:01:28.732098
+* date: 2020-10-19 14:18:18.545035
 * h5py version: 2.10.0
 
 ## path: .
@@ -11,12 +11,12 @@
 | ``.project``      | not HDF5 file |
 | ``.pydevproject`` | not HDF5 file |
 | ``MANIFEST.in``   | not HDF5 file |
-| ``README.rst``    | not HDF5 file |
+| ``README.md``     | not HDF5 file |
 | ``critique.md``   | not HDF5 file |
 | ``critique.py``   | not HDF5 file |
 
 
-## path: ./ANSTO/hdf4
+## path: ./ANSTO/hdf5
 
 | file                  | critique                             |
 | --------------------- | ------------------------------------ |
@@ -170,9 +170,11 @@
 
 ## path: ./DLS/reflections/hdf5
 
-| file                         | critique                             |
-| ---------------------------- | ------------------------------------ |
-| ``thaumatin_integrated.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
+| file                                     | critique                             |
+| ---------------------------------------- | ------------------------------------ |
+| ``DETAILS.rst``                          | not HDF5 file                        |
+| ``thaumatin_integrated.nxs``             | NeXus HDF5 file, 1 **NXentry** group |
+| ``thaumatin_integrated_multisample.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
 
 
 ## path: ./IPNS/LRMECS/hdf4
