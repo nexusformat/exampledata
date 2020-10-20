@@ -1003,7 +1003,7 @@ if __name__ == '__main__':
     for def_subdir in def_subdirs:
         files = sorted(os.listdir(os.path.join(def_dir, def_subdir)))
         dest_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'nxdl', def_subdir)
-        dest_dir = r'G:\tst_nexus\exampledata\nxdl\applications'
+        #dest_dir = r'G:\tst_nexus\exampledata\nxdl\applications'
         for class_path in files:
             if class_path.find('.nxdl.xml') > -1:
                 if(class_nm is None):
