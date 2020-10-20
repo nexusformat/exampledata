@@ -407,7 +407,10 @@ def has_numbers(inputString):
 def has_expression(inputString):
     #make sure it is a string
     inputString = str(inputString)
-    return inputString.__contains__('+')
+    for op in ['+','-','*','/']:
+        if inputString.__contains__(op):
+            return(True)
+    return False
 
 def get_symbols(fname):
     '''# print(root.xpath("//article[@type='news']/content/text()"))
