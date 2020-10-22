@@ -1,273 +1,70 @@
 # Critique of *exampledata* files
 
-* date: 2020-01-22 12:01:28.732098
+* date: 2020-10-22 16:49:19.487790
 * h5py version: 2.10.0
-
-## path: .
-
-| file              | critique      |
-| ----------------- | ------------- |
-| ``.gitignore``    | not HDF5 file |
-| ``.project``      | not HDF5 file |
-| ``.pydevproject`` | not HDF5 file |
-| ``MANIFEST.in``   | not HDF5 file |
-| ``README.rst``    | not HDF5 file |
-| ``critique.md``   | not HDF5 file |
-| ``critique.py``   | not HDF5 file |
-
-
-## path: ./ANSTO/hdf4
-
-| file                  | critique                             |
-| --------------------- | ------------------------------------ |
-| ``PLP0006018.nx.hdf`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./APS/CCDImageServer
-
-| file           | critique      |
-| -------------- | ------------- |
-| ``README.txt`` | not HDF5 file |
-
-
-## path: ./APS/CCDImageServer/hdf4
-
-| file                            | critique      |
-| ------------------------------- | ------------- |
-| ``Smither400.3_apr0300051.hdf`` | not HDF5 file |
-| ``Smither400.3_apr0300052.hdf`` | not HDF5 file |
-| ``Smither400.3_apr0300053.hdf`` | not HDF5 file |
-| ``Smither400.3_apr0300054.hdf`` | not HDF5 file |
-| ``Smither400.3_apr0300055.hdf`` | not HDF5 file |
-| ``recon_0123.hdf``              | not HDF5 file |
-| ``recon_0124.hdf``              | not HDF5 file |
-| ``recon_0125.hdf``              | not HDF5 file |
-
-
-## path: ./APS/EPICSareaDetector/hdf5
-
-| file                    | critique                             |
-| ----------------------- | ------------------------------------ |
-| ``AgBehenate_228.hdf5`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./APS/NXsas
-
-| file                     | critique      |
-| ------------------------ | ------------- |
-| ``create_nexus_data.py`` | not HDF5 file |
-| ``xture.txt``            | not HDF5 file |
-
-
-## path: ./APS/NXsas/hdf5
-
-| file                   | critique                             |
-| ---------------------- | ------------------------------------ |
-| ``nexus-example.hdf5`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./APS/other/hdf5
-
-| file                     | critique                             |
-| ------------------------ | ------------------------------------ |
-| ``ID34_not_complete.h5`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./APS/scan2nexus
-
-| file                | critique      |
-| ------------------- | ------------- |
-| ``14BMC_0015.mda``  | not HDF5 file |
-| ``2iddf_0106.mda``  | not HDF5 file |
-| ``README``          | not HDF5 file |
-| ``mts_0347.mda``    | not HDF5 file |
-| ``mts_0348.mda``    | not HDF5 file |
-| ``sample.mda.text`` | not HDF5 file |
-| ``sample1.mda``     | not HDF5 file |
-
-
-## path: ./APS/scan2nexus/hdf4
-
-| file                 | critique      |
-| -------------------- | ------------- |
-| ``14BMC_0015.nexus`` | not HDF5 file |
-| ``2iddf_0106.nexus`` | not HDF5 file |
-| ``mts_0347.nexus``   | not HDF5 file |
-| ``mts_0348.nexus``   | not HDF5 file |
-| ``sample1.nexus``    | not HDF5 file |
-
-
-## path: ./APS/scan2nexus/xml
-
-| file               | critique      |
-| ------------------ | ------------- |
-| ``14BMC_0015.xml`` | not HDF5 file |
-| ``2iddf_0106.xml`` | not HDF5 file |
-| ``mts_0347.xml``   | not HDF5 file |
-| ``mts_0348.xml``   | not HDF5 file |
-| ``sample1.xml``    | not HDF5 file |
-
-
-## path: ./APS/tomo/hdf4
-
-| file                        | critique      |
-| --------------------------- | ------------- |
-| ``Tomography_metadata.hdf`` | not HDF5 file |
-| ``Tomography_raw.hdf``      | not HDF5 file |
-
-
-## path: ./DLS
-
-| file           | critique      |
-| -------------- | ------------- |
-| ``README.rst`` | not HDF5 file |
-
-
-## path: ./DLS/NXquadric/hdf5
-
-| file                     | critique                             |
-| ------------------------ | ------------------------------------ |
-| ``sample_capillary.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./DLS/i03_i04_NXmx
-
-| file           | critique      |
-| -------------- | ------------- |
-| ``README.txt`` | not HDF5 file |
-
-
-## path: ./DLS/i03_i04_NXmx/hdf5
-
-| file              | critique                             |
-| ----------------- | ------------------------------------ |
-| ``Therm_6_2.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./DLS/i16/hdf5
-
-| file           | critique                             |
-| -------------- | ------------------------------------ |
-| ``538039.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./DLS/i16/hdf5/538039-pilatus100k-files
-
-| file           | critique                             |
-| -------------- | ------------------------------------ |
-| ``538039.hdf`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./DLS/p45/hdf5
-
-| file                  | critique                             |
-| --------------------- | ------------------------------------ |
-| ``p45-1168-mic.hdf5`` | NeXus HDF5 file, 1 **NXentry** group |
-| ``p45-1168.nxs``      | NeXus HDF5 file, 1 **NXentry** group |
-| ``p45-2194.nxs``      | NeXus HDF5 file, 1 **NXentry** group |
-| ``p45-316.nxs``       | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./DLS/reflections/hdf5
-
-| file                         | critique                             |
-| ---------------------------- | ------------------------------------ |
-| ``thaumatin_integrated.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./IPNS/LRMECS/hdf4
-
-| file             | critique      |
-| ---------------- | ------------- |
-| ``lrcs3701.nxs`` | not HDF5 file |
-
-
-## path: ./IPNS/LRMECS/hdf5
-
-| file             | critique                              |
-| ---------------- | ------------------------------------- |
-| ``lrcs3701.nx5`` | NeXus HDF5 file, 2 **NXentry** groups |
-
-
-## path: ./Soleil/hdf5
-
-| file           | critique                             |
-| -------------- | ------------------------------------ |
-| ``file_1.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
-| ``file_2.nxs`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./SwissFEL
-
-| file       | critique      |
-| ---------- | ------------- |
-| ``README`` | not HDF5 file |
-
-
-## path: ./SwissFEL/hdf5
-
-| file                                   | critique                             |
-| -------------------------------------- | ------------------------------------ |
-| ``lyso009a_0087.JF07T32V01_master.h5`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./code/hdf4
-
-| file           | critique      |
-| -------------- | ------------- |
-| ``NXtest.hdf`` | not HDF5 file |
-| ``dmc01.hdf``  | not HDF5 file |
-| ``dmc02.hdf``  | not HDF5 file |
-
-
-## path: ./code/hdf5
-
-| file                     | critique                              |
-| ------------------------ | ------------------------------------- |
-| ``NXtest.h5``            | NeXus HDF5 file, 2 **NXentry** groups |
-| ``dmc01.h5``             | NeXus HDF5 file, 1 **NXentry** group  |
-| ``dmc02.h5``             | NeXus HDF5 file, 1 **NXentry** group  |
-| ``focus2007n001335.hdf`` | NeXus HDF5 file, 1 **NXentry** group  |
-| ``sans2009n012333.hdf``  | NeXus HDF5 file, 1 **NXentry** group  |
-
-
-## path: ./code/xml
-
-| file               | critique      |
-| ------------------ | ------------- |
-| ``NXtest.xml.txt`` | not HDF5 file |
-| ``dmc01.xml.txt``  | not HDF5 file |
-| ``dmc02.xml.txt``  | not HDF5 file |
-
-
-## path: ./hdf5
-
-| file                        | critique                             |
-| --------------------------- | ------------------------------------ |
-| ``simple3D.h5``             | NeXus HDF5 file, 1 **NXentry** group |
-| ``writer_1_3.h5``           | NeXus HDF5 file, 1 **NXentry** group |
-| ``writer_1_3__niac2014.h5`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./nxpdb
-
-| file            | critique      |
-| --------------- | ------------- |
-| ``4n8z.cif``    | not HDF5 file |
-| ``4n8z.h5.cif`` | not HDF5 file |
-| ``README.rst``  | not HDF5 file |
-
-
-## path: ./nxpdb/hdf5
-
-| file        | critique                             |
-| ----------- | ------------------------------------ |
-| ``4n8z.h5`` | NeXus HDF5 file, 1 **NXentry** group |
-
-
-## path: ./xml
-
-| file               | critique      |
-| ------------------ | ------------- |
-| ``verysimple.xml`` | not HDF5 file |
+* unimplemented test cases are marked in the table with an asterisk
+| path                                        | file                                     | File Type    | NXentry Count | Application Def's |
+| ------------------------------------------- | ---------------------------------------- | ------------ | ------------- | ----------------- |
+| ``./ANSTO/hdf4``                            | ``PLP0006018.nx.hdf``                    | HDF5         | 1             | None found        |
+| ``./APS/CCDImageServer/hdf4``               | ``Smither400.3_apr0300051.hdf``          | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``Smither400.3_apr0300052.hdf``          | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``Smither400.3_apr0300053.hdf``          | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``Smither400.3_apr0300054.hdf``          | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``Smither400.3_apr0300055.hdf``          | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``recon_0123.hdf``                       | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``recon_0124.hdf``                       | HDF4         | *             | *                 |
+| ``./APS/CCDImageServer/hdf4``               | ``recon_0125.hdf``                       | HDF4         | *             | *                 |
+| ``./APS/EPICSareaDetector/hdf5``            | ``AgBehenate_228.hdf5``                  | HDF5         | 1             | NXsas             |
+| ``./APS/NXsas/hdf5``                        | ``nexus-example.hdf5``                   | HDF5         | 1             | NXsas             |
+| ``./APS/other/hdf5``                        | ``ID34_not_complete.h5``                 | HDF5         | 1             | None found        |
+| ``./APS/scan2nexus``                        | ``14BMC_0015.mda``                       | unrecognised | -             | -                 |
+| ``./APS/scan2nexus``                        | ``2iddf_0106.mda``                       | unrecognised | -             | -                 |
+| ``./APS/scan2nexus``                        | ``README``                               | unrecognised | -             | -                 |
+| ``./APS/scan2nexus``                        | ``mts_0347.mda``                         | unrecognised | -             | -                 |
+| ``./APS/scan2nexus``                        | ``mts_0348.mda``                         | unrecognised | -             | -                 |
+| ``./APS/scan2nexus``                        | ``sample.mda.text``                      | unrecognised | -             | -                 |
+| ``./APS/scan2nexus``                        | ``sample1.mda``                          | unrecognised | -             | -                 |
+| ``./APS/scan2nexus/hdf4``                   | ``14BMC_0015.nexus``                     | HDF4         | *             | *                 |
+| ``./APS/scan2nexus/hdf4``                   | ``2iddf_0106.nexus``                     | unrecognised | -             | -                 |
+| ``./APS/scan2nexus/hdf4``                   | ``mts_0347.nexus``                       | HDF4         | *             | *                 |
+| ``./APS/scan2nexus/hdf4``                   | ``mts_0348.nexus``                       | HDF4         | *             | *                 |
+| ``./APS/scan2nexus/hdf4``                   | ``sample1.nexus``                        | HDF4         | *             | *                 |
+| ``./APS/scan2nexus/xml``                    | ``14BMC_0015.xml``                       | XML          | *             | *                 |
+| ``./APS/scan2nexus/xml``                    | ``2iddf_0106.xml``                       | XML          | *             | *                 |
+| ``./APS/scan2nexus/xml``                    | ``mts_0347.xml``                         | XML          | *             | *                 |
+| ``./APS/scan2nexus/xml``                    | ``mts_0348.xml``                         | XML          | *             | *                 |
+| ``./APS/scan2nexus/xml``                    | ``sample1.xml``                          | XML          | *             | *                 |
+| ``./APS/tomo/hdf4``                         | ``Tomography_metadata.hdf``              | HDF4         | *             | *                 |
+| ``./APS/tomo/hdf4``                         | ``Tomography_raw.hdf``                   | HDF4         | *             | *                 |
+| ``./DLS/NXquadric/hdf5``                    | ``sample_capillary.nxs``                 | HDF5         | 1             | None found        |
+| ``./DLS/i03_i04_NXmx/hdf5``                 | ``Therm_6_2.nxs``                        | HDF5         | 1             | error             |
+| ``./DLS/i16/hdf5``                          | ``538039.nxs``                           | HDF5         | 1             | NXmx              |
+| ``./DLS/i16/hdf5/538039-pilatus100k-files`` | ``538039.hdf``                           | HDF5         | 1             | None found        |
+| ``./DLS/p45/hdf5``                          | ``p45-1168-mic.hdf5``                    | HDF5         | 1             | None found        |
+| ``./DLS/p45/hdf5``                          | ``p45-1168.nxs``                         | HDF5         | 1             | None found        |
+| ``./DLS/p45/hdf5``                          | ``p45-2194.nxs``                         | HDF5         | 1             | None found        |
+| ``./DLS/p45/hdf5``                          | ``p45-316.nxs``                          | HDF5         | 1             | None found        |
+| ``./DLS/reflections/hdf5``                  | ``thaumatin_integrated.nxs``             | HDF5         | 1             | error             |
+| ``./DLS/reflections/hdf5``                  | ``thaumatin_integrated_multisample.nxs`` | HDF5         | 1             | error             |
+| ``./IPNS/LRMECS/hdf4``                      | ``lrcs3701.nxs``                         | unrecognised | -             | -                 |
+| ``./IPNS/LRMECS/hdf5``                      | ``lrcs3701.nx5``                         | HDF5         | 2             | None found        |
+| ``./Soleil/hdf5``                           | ``file_1.nxs``                           | HDF5         | 1             | NXentry           |
+| ``./Soleil/hdf5``                           | ``file_2.nxs``                           | HDF5         | 1             | NXentry           |
+| ``./SwissFEL``                              | ``README``                               | unrecognised | -             | -                 |
+| ``./SwissFEL/hdf5``                         | ``lyso009a_0087.JF07T32V01_master.h5``   | HDF5         | 1             | error             |
+| ``./code/hdf4``                             | ``NXtest.hdf``                           | HDF4         | *             | *                 |
+| ``./code/hdf4``                             | ``dmc01.hdf``                            | HDF4         | *             | *                 |
+| ``./code/hdf4``                             | ``dmc02.hdf``                            | HDF4         | *             | *                 |
+| ``./code/hdf5``                             | ``NXtest.h5``                            | HDF5         | 2             | None found        |
+| ``./code/hdf5``                             | ``dmc01.h5``                             | HDF5         | 1             | None found        |
+| ``./code/hdf5``                             | ``dmc02.h5``                             | HDF5         | 1             | None found        |
+| ``./code/hdf5``                             | ``focus2007n001335.hdf``                 | HDF5         | 1             | None found        |
+| ``./code/hdf5``                             | ``sans2009n012333.hdf``                  | HDF5         | 1             | None found        |
+| ``./hdf5``                                  | ``simple3D.h5``                          | HDF5         | 1             | None found        |
+| ``./hdf5``                                  | ``writer_1_3.h5``                        | HDF5         | 1             | None found        |
+| ``./hdf5``                                  | ``writer_1_3__niac2014.h5``              | HDF5         | 1             | None found        |
+| ``./nxpdb``                                 | ``4n8z.cif``                             | unrecognised | -             | -                 |
+| ``./nxpdb``                                 | ``4n8z.h5.cif``                          | unrecognised | -             | -                 |
+| ``./nxpdb/hdf5``                            | ``4n8z.h5``                              | HDF5         | 1             | None found        |
+| ``./xml``                                   | ``verysimple.xml``                       | XML          | *             | *                 |
 
