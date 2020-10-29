@@ -388,6 +388,8 @@ def get_entry(nf):
     for k in keys:
         if s1.casefold() == k.casefold():
             return(nf[k], k)
+        elif k.casefold().find(s1.casefold()) > -1:
+            return (nf[k], k)
         else:
             pass
     return(nf[k], s1)
