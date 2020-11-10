@@ -1,6 +1,6 @@
 # Critique of *exampledata* files
 
-* date: 2020-11-10 18:03:43.112348
+* date: 2020-11-10 18:28:34.654081
 * h5py version: 2.10.0
 * unimplemented test cases are marked in the table with an asterisk
 

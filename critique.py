@@ -70,7 +70,7 @@ class Critic(object):
     :param str fname: (absolute or relative path and) name of file
     '''
     
-    def __init__(self, path, fname):
+    def __init__(self, path=None, fname=None):
         self.path = path
         self.fname = fname
         self.NXentry_nodes = []
@@ -95,7 +95,7 @@ class Critic(object):
 ### Each method starting with "test_" will contribute a column to the results table.
 ### The tests are conducted in alphabetical order.
 ### Note that each test can write attributes onto self for later tests to use.
-    def test_01(self, path, fname):
+    def test_01_FileType(self, path, fname):
         if path is None and fname is None:
             return "File Type"
         try:
@@ -119,7 +119,7 @@ class Critic(object):
                 self.filetype = "HDF4"
         return self.filetype
 
-#    def test_01a(self, path, fname):
+#    def test_01a_FileHeader(self, path, fname):
 #        if path is None and fname is None:
 #            return "Header"
 #        with open(os.path.join(self.path, self.fname), "rb") as file:
@@ -127,7 +127,7 @@ class Critic(object):
 #            sig = file.read(8)
 #        return ":".join("{:02x}".format(x) for x in bytearray(sig))
 
-    def test_02(self, path, fname):
+    def test_02_NXentryCount(self, path, fname):
         if path is None and fname is None:
             return "NXentry Count"
         if self.filetype == "HDF5":
@@ -144,7 +144,7 @@ class Critic(object):
             self.nNXentry = "-"
         return self.nNXentry
 
-    def test_03(self, path, fname):
+    def test_03_ApplicationDefinition(self, path, fname):
         if path is None and fname is None:
             return "Application Def's"
         if self.filetype == "HDF5":
@@ -158,10 +158,10 @@ class Critic(object):
                         subentry_list = self.find_NX_class_nodes(entry, "NXsubentry")
                         if len(subentry_list) == 0:
                             if 'definition' in list(entry):
-                                ad_list.add(str(entry['definition'][0], encoding='utf-8'))
+                                ad_list.add(str(entry['definition'][0], encoding='utf-8')) #definition found in NXentry
                         else:
                             for sub in subentry_list:
-                                ad_list.add(str(sub['definition'][0], encoding='utf-8'))
+                                ad_list.add(str(sub['definition'][0], encoding='utf-8')) #definition found in NXsubentry
                 if len(ad_list) == 0:
                     AppDefList = "None found"
                 else:
@@ -183,8 +183,12 @@ class Registrar(object):
 
     def __init__(self):
         self.db = {}
-        self.test_bank = [func for func in dir(Critic) if callable(getattr(Critic, func)) and func.startswith("test_")]
-        self.table_labels = ["path", "file"] + Critic( None, None).test_results
+        self.test_bank = [
+          func
+          for func in dir(Critic)
+          if callable(getattr(Critic, func)) and func.startswith("test_")
+          ]
+        self.table_labels = ["path", "file"] + Critic().test_results
 
 
     def add(self, path, critic):
@@ -200,7 +204,7 @@ class Registrar(object):
         table.labels = self.table_labels
         for path, flist in sorted(self.db.items()):
             for fname, critique in sorted(flist.items()):
-                table.addRow(["`"+path+"`","`"+fname+"`"]+ critique.test_results)
+                table.addRow(["`"+path+"`", "`"+fname+"`"]+ critique.test_results)
             
         print(table.reST(fmt="markdown"))
 
@@ -215,12 +219,13 @@ def walk_function(registrar, path, files):
     '''
     if path.find('.git') > -1:      # skip the Git VCS directory
         return
+    skip_extensions = ['.txt', '.py', '.rst', '.md', '.in']
     for nm in files:
-        if os.path.splitext(nm)[1] not in ['.txt','.py','.rst','.md','.in'] and nm[0] != '.': # skip other types of file
+        if os.path.splitext(nm)[1] not in skip_extensions and nm[0] != '.': # skip other types of file
                 registrar.add(path, Critic(path, nm))
 
 
-def main(path = None):
+def main(path=None):
     '''traverse a directory and describe how each file conforms to NeXus'''
     registrar = Registrar()
     paths = [path or os.path.dirname(__file__) or '.']
