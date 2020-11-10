@@ -26,4 +26,4 @@ HDF5 files that satisfy the structure:
 are automatically identified as *NeXus HDF5 file* at this time.
 
 An analysis by the `critique.py` program (in this repository)
-is available: [*critique*](critique.md]
+is available: [*critique*](critique.md)
