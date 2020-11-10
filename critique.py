@@ -77,47 +77,12 @@ class Critic(object):
         self.filetype = "unrecognised"
         self.test_results = []
 
-        ## can the file be found?
-        #fullname = os.path.join(path, fname)
-        #if not os.path.exists(fullname):
-            #return
-
-        ## Is it really a file?
-        #if not os.path.isfile(fullname):
-            #return
-        
-        ## ok, passes basic qualifications, proceed
-        #self.path = path
-        #self.fname = fname
-
-        #try:
-            #with h5py.File(fullname, mode="r") as root:
-                #self.filetype = "HDF5 file"
-                #self.NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
-                #if len(self.NXentry_nodes) > 0:
-                    #self.filetype = "NeXus HDF5 file"
-        #except IOError:
-            #pass        # cannot open with HDF5
-
-        # now deeper validation of the NeXus data file
         test_bank = [func for func in dir(Critic) if callable(getattr(Critic, func)) and func.startswith("test_")]
         for t in test_bank:
             try:
                 self.test_results += [getattr(self, t)(path, fname)]
             except:
                 self.test_results += ["error"]
-    
-    def describe_file(self):
-        s = self.filetype
-        if len(self.NXentry_nodes) > 0:
-            s += ', %d **NXentry** group' % len(self.NXentry_nodes)
-            if len(self.NXentry_nodes) > 1:
-                s += 's'
-        return s
-
-    def __str__(self, *args, **kwargs):
-        #print(self.test_results)
-        return self.describe_file() 
     
     def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
@@ -133,13 +98,9 @@ class Critic(object):
     def test_01(self, path, fname):
         if path is None and fname is None:
             return "File Type"
-        #self.filetype = "unrecognised"
         try:
             with h5py.File(os.path.join(self.path, self.fname), mode="r") as root:
                 self.filetype = "HDF5"
-                #self.NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
-                #if len(self.NXentry_nodes) > 0:
-                    #self.filetype = "NeXus HDF5"
         except IOError:
             pass        # cannot open with HDF5
         
@@ -153,7 +114,6 @@ class Critic(object):
         if self.filetype == "unrecognised": # try to ID as HDF4
             MAGIC_HDF4 = b'\x0e\x03\x13\x01\x00\xc8\x00\x00'
             with open(os.path.join(self.path, self.fname), "rb") as file:
-                #file.seek(0)
                 sig = file.read(8)
             if sig == MAGIC_HDF4:
                 self.filetype = "HDF4"

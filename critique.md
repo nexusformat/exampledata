@@ -1,7 +1,7 @@
 # Critique of *exampledata* files
 
-* date: 2020-11-10 17:41:04.990698
-* h5py version: 2.7.1
+* date: 2020-11-10 18:03:43.112348
+* h5py version: 2.10.0
 * unimplemented test cases are marked in the table with an asterisk
 
 | path                                      | file                                   | File Type    | NXentry Count | Application Def's |
@@ -15,8 +15,8 @@
 | `./APS/CCDImageServer/hdf4`               | `recon_0123.hdf`                       | HDF4         | *             | *                 |
 | `./APS/CCDImageServer/hdf4`               | `recon_0124.hdf`                       | HDF4         | *             | *                 |
 | `./APS/CCDImageServer/hdf4`               | `recon_0125.hdf`                       | HDF4         | *             | *                 |
-| `./APS/EPICSareaDetector/hdf5`            | `AgBehenate_228.hdf5`                  | HDF5         | 1             | error             |
-| `./APS/NXsas/hdf5`                        | `nexus-example.hdf5`                   | HDF5         | 1             | error             |
+| `./APS/EPICSareaDetector/hdf5`            | `AgBehenate_228.hdf5`                  | HDF5         | 1             | NXsas             |
+| `./APS/NXsas/hdf5`                        | `nexus-example.hdf5`                   | HDF5         | 1             | NXsas             |
 | `./APS/other/hdf5`                        | `ID34_not_complete.h5`                 | HDF5         | 1             | None found        |
 | `./APS/scan2nexus`                        | `14BMC_0015.mda`                       | unrecognised | -             | -                 |
 | `./APS/scan2nexus`                        | `2iddf_0106.mda`                       | unrecognised | -             | -                 |
@@ -39,7 +39,7 @@
 | `./APS/tomo/hdf4`                         | `Tomography_raw.hdf`                   | HDF4         | *             | *                 |
 | `./DLS/NXquadric/hdf5`                    | `sample_capillary.nxs`                 | HDF5         | 1             | None found        |
 | `./DLS/i03_i04_NXmx/hdf5`                 | `Therm_6_2.nxs`                        | HDF5         | 1             | error             |
-| `./DLS/i16/hdf5`                          | `538039.nxs`                           | HDF5         | not NeXus     | -                 |
+| `./DLS/i16/hdf5`                          | `538039.nxs`                           | HDF5         | 1             | NXmx              |
 | `./DLS/i16/hdf5/538039-pilatus100k-files` | `538039.hdf`                           | HDF5         | 1             | None found        |
 | `./DLS/p45/hdf5`                          | `p45-1168-mic.hdf5`                    | HDF5         | 1             | None found        |
 | `./DLS/p45/hdf5`                          | `p45-1168.nxs`                         | HDF5         | 1             | None found        |
@@ -49,8 +49,8 @@
 | `./DLS/reflections/hdf5`                  | `thaumatin_integrated_multisample.nxs` | HDF5         | 1             | error             |
 | `./IPNS/LRMECS/hdf4`                      | `lrcs3701.nxs`                         | unrecognised | -             | -                 |
 | `./IPNS/LRMECS/hdf5`                      | `lrcs3701.nx5`                         | HDF5         | 2             | None found        |
-| `./Soleil/hdf5`                           | `file_1.nxs`                           | HDF5         | 1             | error             |
-| `./Soleil/hdf5`                           | `file_2.nxs`                           | HDF5         | 1             | error             |
+| `./Soleil/hdf5`                           | `file_1.nxs`                           | HDF5         | 1             | NXentry           |
+| `./Soleil/hdf5`                           | `file_2.nxs`                           | HDF5         | 1             | NXentry           |
 | `./SwissFEL`                              | `README`                               | unrecognised | -             | -                 |
 | `./SwissFEL/hdf5`                         | `lyso009a_0087.JF07T32V01_master.h5`   | HDF5         | 1             | error             |
 | `./code/hdf4`                             | `NXtest.hdf`                           | HDF4         | *             | *                 |
