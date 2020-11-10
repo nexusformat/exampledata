@@ -39,6 +39,7 @@ import numpy
 import pyRestTable
 import os
 import sys
+import xml.etree.ElementTree as ET
 
 
 def isNeXusGroup(obj, NXtype):
@@ -62,51 +63,26 @@ def isNeXusGroup(obj, NXtype):
 
 class Critic(object):
     '''
-    describe a file in terms of NeXus compliance
+    describe a file in terms of NeXus compliance.
+    Each method starting with "test_" will contribute a column to the results table.
     
+    :param str path: absolute or relative path to the file directory
     :param str fname: (absolute or relative path and) name of file
     '''
     
-    def __init__(self, path, fname):
-        self.path = None
-        self.fname = None
-        self.NXentry_nodes = []
-        self.filetype = "not HDF5 file"
-
-        # can the file be found?
-        fullname = os.path.join(path, fname)
-        if not os.path.exists(fullname):
-            return
-
-        # Is it really a file?
-        if not os.path.isfile(fullname):
-            return
-        
-        # ok, passes basic qualifications, proceed
+    def __init__(self, path=None, fname=None):
         self.path = path
         self.fname = fname
+        self.NXentry_nodes = []
+        self.filetype = "unrecognised"
+        self.test_results = []
 
-        try:
-            with h5py.File(fullname, mode="r") as root:
-                self.filetype = "HDF5 file"
-                self.NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
-                if len(self.NXentry_nodes) > 0:
-                    self.filetype = "NeXus HDF5 file"
-        except IOError:
-            pass        # cannot open with HDF5
-
-        # no deeper validation of the NeXus data file
-    
-    def describe_file(self):
-        s = self.filetype
-        if len(self.NXentry_nodes) > 0:
-            s += ', %d **NXentry** group' % len(self.NXentry_nodes)
-            if len(self.NXentry_nodes) > 1:
-                s += 's'
-        return s
-
-    def __str__(self, *args, **kwargs):
-        return self.describe_file() 
+        test_bank = [func for func in dir(Critic) if callable(getattr(Critic, func)) and func.startswith("test_")]
+        for t in test_bank:
+            try:
+                self.test_results += [getattr(self, t)(path, fname)]
+            except:
+                self.test_results += ["error"]
     
     def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
@@ -115,6 +91,91 @@ class Critic(object):
             if isNeXusGroup(node, nx_class):
                 node_list.append(node)
         return node_list
+    
+### Each method starting with "test_" will contribute a column to the results table.
+### The tests are conducted in alphabetical order.
+### Note that each test can write attributes onto self for later tests to use.
+    def test_01_FileType(self, path, fname):
+        if path is None and fname is None:
+            return "File Type"
+        try:
+            with h5py.File(os.path.join(self.path, self.fname), mode="r") as root:
+                self.filetype = "HDF5"
+        except IOError:
+            pass        # cannot open with HDF5
+        
+        if self.filetype == "unrecognised": # try to ID as XML
+            try:
+                tree = ET.parse(os.path.join(self.path, self.fname))
+                self.filetype = "XML"
+            except ET.ParseError:
+                pass        # cannot open as XML
+        
+        if self.filetype == "unrecognised": # try to ID as HDF4
+            MAGIC_HDF4 = b'\x0e\x03\x13\x01\x00\xc8\x00\x00'
+            with open(os.path.join(self.path, self.fname), "rb") as file:
+                sig = file.read(8)
+            if sig == MAGIC_HDF4:
+                self.filetype = "HDF4"
+        return self.filetype
+
+#    def test_01a_FileHeader(self, path, fname):
+#        if path is None and fname is None:
+#            return "Header"
+#        with open(os.path.join(self.path, self.fname), "rb") as file:
+#            file.seek(0)
+#            sig = file.read(8)
+#        return ":".join("{:02x}".format(x) for x in bytearray(sig))
+
+    def test_02_NXentryCount(self, path, fname):
+        if path is None and fname is None:
+            return "NXentry Count"
+        if self.filetype == "HDF5":
+            with h5py.File(os.path.join(self.path, self.fname), mode="r") as root:
+                NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
+                self.nNXentry = len(NXentry_nodes)
+            if self.nNXentry == 0:
+                return "not NeXus"
+        elif self.filetype == "XML":
+            self.nNXentry = "*"
+        elif self.filetype == "HDF4":
+            self.nNXentry = "*"
+        else:
+            self.nNXentry = "-"
+        return self.nNXentry
+
+    def test_03_ApplicationDefinition(self, path, fname):
+        if path is None and fname is None:
+            return "Application Def's"
+        if self.filetype == "HDF5":
+            if self.nNXentry < 1:
+                AppDefList = "-"
+            else:
+                ad_list = set() # like a list, but only keep unique strings
+                with h5py.File(os.path.join(self.path, self.fname), mode="r") as root:
+                    NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
+                    for entry in NXentry_nodes:
+                        subentry_list = self.find_NX_class_nodes(entry, "NXsubentry")
+                        if len(subentry_list) == 0:
+                            if 'definition' in list(entry):
+                                ad_list.add(str(entry['definition'][0], encoding='utf-8')) #definition found in NXentry
+                        else:
+                            for sub in subentry_list:
+                                ad_list.add(str(sub['definition'][0], encoding='utf-8')) #definition found in NXsubentry
+                if len(ad_list) == 0:
+                    AppDefList = "None found"
+                else:
+                    AppDefList = ",".join(ad_list)
+        elif self.filetype == "XML":
+            AppDefList = "*"
+            
+        elif self.filetype == "HDF4":
+            AppDefList = "*"
+            
+        else:
+            AppDefList = "-"
+            
+        return AppDefList
 
 
 class Registrar(object):
@@ -122,6 +183,13 @@ class Registrar(object):
 
     def __init__(self):
         self.db = {}
+        self.test_bank = [
+          func
+          for func in dir(Critic)
+          if callable(getattr(Critic, func)) and func.startswith("test_")
+          ]
+        self.table_labels = ["path", "file"] + Critic().test_results
+
 
     def add(self, path, critic):
         '''add new critique to the database'''
@@ -132,14 +200,13 @@ class Registrar(object):
         self.db[path][critic.fname] = critic
     
     def report(self):
+        table = pyRestTable.Table()
+        table.labels = self.table_labels
         for path, flist in sorted(self.db.items()):
-            table = pyRestTable.Table()
-            table.labels = ["file", "critique"]
             for fname, critique in sorted(flist.items()):
-                table.addRow(("``"+fname+"``", critique))
+                table.addRow(["`"+path+"`", "`"+fname+"`"]+ critique.test_results)
             
-            print("\n## path: " + path + "\n")
-            print(table.reST(fmt="markdown"))
+        print(table.reST(fmt="markdown"))
 
 
 def walk_function(registrar, path, files):
@@ -152,14 +219,16 @@ def walk_function(registrar, path, files):
     '''
     if path.find('.git') > -1:      # skip the Git VCS directory
         return
+    skip_extensions = ['.txt', '.py', '.rst', '.md', '.in']
     for nm in files:
-        registrar.add(path, Critic(path, nm))
+        if os.path.splitext(nm)[1] not in skip_extensions and nm[0] != '.': # skip other types of file
+                registrar.add(path, Critic(path, nm))
 
 
-def main(path = None):
+def main(path=None):
     '''traverse a directory and describe how each file conforms to NeXus'''
     registrar = Registrar()
-    paths = [path or os.path.dirname(__file__)]
+    paths = [path or os.path.dirname(__file__) or '.']
     while len(paths) > 0:
         path = paths.pop()
         for subdir, dir_list, file_list in os.walk(path):
@@ -174,6 +243,8 @@ def main(path = None):
     print("")
     print("* date: %s" % datetime.datetime.now())
     print("* h5py version: %s" % h5py.__version__)
+    print("* unimplemented test cases are marked in the table with an asterisk")
+    print("")
     registrar.report()
 
 
