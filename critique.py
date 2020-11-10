@@ -240,7 +240,7 @@ class Registrar(object):
         table.labels = self.table_labels
         for path, flist in sorted(self.db.items()):
             for fname, critique in sorted(flist.items()):
-                table.addRow(["``"+path+"``","``"+fname+"``"]+ critique.test_results)
+                table.addRow(["`"+path+"`","`"+fname+"`"]+ critique.test_results)
             
         print(table.reST(fmt="markdown"))
 
@@ -279,6 +279,7 @@ def main(path = None):
     print("* date: %s" % datetime.datetime.now())
     print("* h5py version: %s" % h5py.__version__)
     print("* unimplemented test cases are marked in the table with an asterisk")
+    print("")
     registrar.report()
 
 
