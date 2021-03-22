@@ -36,7 +36,84 @@ as a string attribute for that field or group called EX_doc.
  
  """
 
-def _string_attr(nxgrp, name, sdata):
+# EXAMPLE_CODE = ['import numpy as np',
+#     'import datetime',
+#     'import h5py as h5',
+#     'import os',
+#     'root.attrs["'file_name'"] = os.path.abspath(''example.h5'')',
+# root.attrs['file_time'] = datetime.datetime.now().isoformat(),
+# root.attrs['h5py_version'] = h5.version.version,
+# root.attrs['HDF5_Version'] = h5.version.hdf5_version,
+#     ]
+
+"""
+nexusformat example
+from nexusformat.nexus import *
+
+Qh = NXfield(np.linspace(0, 5.0, 51), name='Qh')
+Qk = NXfield(np.linspace(0, 4.0, 41), name='Qk')
+H, K = np.meshgrid(Qh, Qk)
+data = NXfield(np.exp(-((H-2.5)**2 + (K-2)**2)), name='data')
+
+root = NXroot()
+root['entry'] = NXentry()
+
+root['entry/sample'] = NXsample()
+root['entry/sample/temperature'] = NXfield(40.0, units='K')
+root['entry/sample/mass'] = NXfield(10.0, units='g')
+
+root['instrument'] = NXinstrument(NXmonochromator())
+root['instrument/monochromator/energy'] = NXfield(87.1, units='keV')
+
+root['entry/data'] = NXdata(data, (Qk, Qh))
+root['entry/data'].set_default()
+
+root['entry/title'] = 'Example NeXus Data (nexusformat)'
+
+root.save('example.nxs', 'w')
+
+"""
+# a dict of nx types, their default values and doc strings
+nx_unit_types = {
+ 'NX_ANGLE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of angle, example(s): m'},
+ 'NX_ANY' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units for things like logs that aren’t picky on units'},
+ 'NX_AREA' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of area, example(s): m^2 | barns'},
+ 'NX_CHARGE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of electrical charge, example(s): c'},
+ 'NX_CROSS_SECTION' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of area (alias of NX_AREA, example(s): barn'},
+ 'NX_CURRENT' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of electrical current, example(s): A'},
+ 'NX_DIMENSIONLESS' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units for fields where the units cancel out. NOTE: not the same as NX_UNITLESS, example(s): m/m'},
+ 'NX_EMITTANCE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of emittance (length * angle) of a radiation source, example(s): nm*rad'},
+ 'NX_ENERGY' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of energy, example(s): J | keV'},
+ 'NX_FLUX' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of flux, example(s): 1/s/cm^2'},
+ 'NX_FREQUENCY' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of frequency, example(s): Hz'},
+ 'NX_LENGTH' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of length, example(s): m'},
+ 'NX_MASS' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of mass, example(s): g'},
+ 'NX_MASS_DENSITY' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of mass density, example(s): g/cm^3'},
+ 'NX_MOLECULAR_WEIGHT' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of molecular weight, example(s): g/mol'},
+ 'NX_PERIOD' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of time, period of pulsed source alias to NX_TIME, example(s): us'},
+ 'NX_PER_AREA' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of 1/length^2, example(s): 1/m^2'},
+ 'NX_PER_LENGTH' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of 1/length, example(s): 1/m'},
+ 'NX_POWER' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of power, example(s): W'},
+ 'NX_PRESSURE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of pressure, example(s): Pa'},
+ 'NX_PULSES' : {'val': 1, 'type': 'NX_INT', 'doc':'units of clock pulses (alias to NX_NUMBER'},
+ 'NX_SCATTERING_LENGTH_DENSITY' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of scattering length density, example(s): m/m^3'},
+ 'NX_SOLID_ANGLE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of solid angle, example(s): sr | steradian'},
+ 'NX_TEMPERATURE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of temperature, example(s): K'},
+ 'NX_TIME' : {'val': '1.0', 'type': 'NX_FLOAT', 'doc':'units of time, example(seconds): 12.5'},
+ 'NX_TIME_OF_FLIGHT' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of (neutron) time of flight alias to NX_TIME, example(s): s'},
+ 'NX_TRANSFORMATION' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of the specified transformation could be any of these: NX_LENGTH, NX_ANGLE, or NX_UNITLESS. There will be one or more transformations defined by one or more fields for each transformation. The units type NX_TRANSFORMATION designates the particular axis generating a transformation (e.g. a rotation axis or a translation axis or a general axis. NX_TRANSFORMATION designates the units will be appropriate to the type of transformation, indicated in the NXtransformations base class by the transformation_type value: NX_LENGTH for translation, NX_ANGLE for rotation, NX_UNITLESS for axes for which no transformation type is specified.'},
+ 'NX_UNITLESS' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'for fields that don’t have a unit (e.g. hkl) so that they don’t inherit the wrong units (NOTE: not the same as NX_DIMENSIONLESS, example(s): '},
+ 'NX_VOLTAGE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of voltage, example(s): V'},
+ 'NX_VOLUME' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of volume, example(s): m3'},
+ 'NX_WAVELENGTH' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of wavelength, example(s): angstrom'},
+ 'NX_WAVENUMBER' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of wavenumber or Q, example(s): 1/nm | 1/angstrom'}
+}
+
+h5py_script_lst = []
+nxsfrmt_script_lst = []
+CUR_GRP_DTYPE = ''
+
+def _string_attr(nxgrp, name, sdata, do_print=True):
     '''
     used to create string attributes
     '''
@@ -46,8 +123,29 @@ def _string_attr(nxgrp, name, sdata):
         return
     nxgrp.attrs[name] = sdata
 
+    if do_print:
+        sdata = sdata.replace(__file__.replace('/nxdl_to_hdf5.py', ''), '')
+        sdata = sdata.replace('/..', '..')
+        if sdata.find('.hdf5') > -1:
+            #just use the file name
+            h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, sdata.split('/')[-1]))
+        else:
+            h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, sdata))
+        #print('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, sdata.replace('\'', '"')))
 
-def _list_attr(nxgrp, name, lstdata):
+def _num_attr(nxgrp, name, data, do_print=True):
+    '''
+    used to create string attributes
+    '''
+    if (nxgrp is None):
+        return
+    nxgrp.attrs[name] = data
+
+    if do_print:
+        h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, str(data)))
+        #print('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, sdata.replace('\'', '"')))
+
+def _list_attr(nxgrp, name, lstdata, do_print=True):
     '''
     used to create list attributes
     '''
@@ -60,46 +158,132 @@ def _list_attr(nxgrp, name, lstdata):
         nxgrp.attrs[name] = lstdata
 
 
-def _group(nxgrp, name, nxdata_type):
-    '''
-    create a group
-    '''
-    if (name == ''):
-        return
-    #if name of group already exists then increment name by one until it is unique
+def print_list_attr(nxgrp, name, lstdata, do_print=True):
+    if do_print:
+        h5py_script_lst.append(' ')
+        #h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, str(lstdata)))
+        #h5py_script_lst.append('# the allowable values for root[\'%s\'].attrs[\'%s\'] are: \'%s\'' % (nxgrp.name, name, str(lstdata)))
+        h5py_script_lst.append(
+            '# Valid enumeration values for root[\'%s\'][\'%s\'] are: ' % (nxgrp.name, name))
+        for i in lstdata:
+            h5py_script_lst.append('#\t %s' % i)
+
+
+def check_for_duplicate_grp_names(nxgrp, name, nxdata_type):
+    # if name of group already exists then increment name by one until it is unique
     i = 1
     _name = name
     while name in nxgrp.keys() and i < 100:
         name = _name + '_%d' % i
         i += 1
+        break
+    return(name)
 
+
+def _group(nxgrp, name, nxdata_type, dct={}):
+    '''
+    create a group
+    '''
+    if (name == ''):
+        return
+    # #if name of group already exists then increment name by one until it is unique
+    # i = 1
+    # _name = name
+    # while name in nxgrp.keys() and i < 100:
+    #     name = _name + '_%d' % i
+    #     i += 1
+    name = check_for_duplicate_grp_names(nxgrp, name, nxdata_type)
     grp = nxgrp.create_group(name)
+
+    # #update the group name if it changed as NX canSAS specifies 2 NXdata groups at same level but only one is required
+    dct['abspath'] = grp.name
+    print_script_group(dct)
+
     _string_attr(grp, 'NX_class', nxdata_type)
     return (grp)
 
-def _dataset(nxgrp, name, data, nxdata_type, nx_units='NX_ANY', dset={}):
+def _dataset(nxgrp, name, data, nxdata_type, nx_units='NX_ANY', dset={}, do_print=True):
     '''
     create a dataset, apply compression if the data is an array
     '''
     # grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
-    if (type(data) == np.ndarray):
+    #strip any units off of nxdata_type
+    _dt = nxdata_type.split('-')
+    nxdata_type = _dt[0]
+
+    if type(data) == np.chararray:
+        grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
+
+        data = str(data.astype(str))
+        if data.find('\' ') > -1:
+            data = data.replace('\' ', '\' , ')
+        data = data.encode("ascii", "ignore")
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root[\'{}\'][\'{}\'] = {}'.format(nxgrp.name, name, data))
+
+    elif (type(data) == np.ndarray):
         #print('creating np.ndarray dataset [%s]' % name)
         grp = nxgrp.create_dataset(name=name, data=data, maxshape=None, compression="gzip")
+
+        if nxdata_type == 'NX_FLOAT':
+            #s = str(data.astype(float))
+            s = str(data.astype(float)).replace('\n', ',')
+        elif nxdata_type in ['NX_INT', 'NX_NUMBER', 'NX_POSINT', 'NX_UINT']:
+            s = str(data.astype(int)).replace('\n', ',')
+        else:
+            print('_dataset: UNSUPPORTED ndarray TYPE %s' % nxdata_type)
+
+        if s.find('. ') > -1:
+            data = s.replace('. ', '. , ').replace('\n', ',')
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None, compression="gzip")' % (nxgrp.name, name, str(data)))
+
+            #h5py_script_lst.append('root[\'{}\'][\'{}\'] = {}'.format(nxgrp.name, name, data))
+
     else:
         #print('name[%s] data[%s]' % (name, data))
         if(data is None):
             data = ''
         #print('creating dataset [%s]' % name)
         grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
+        s_data = str(data)
+        if type(data) is str:
+            if do_print:
+                h5py_script_lst.append(' ')
+                h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=\'%s\', maxshape=None)' % (nxgrp.name, name, s_data))
+                #h5py_script_lst.append('root[\'%s\'][\'%s\'] = \'%s\'' % (nxgrp.name, name, str(data)))
+                #h5py_script_lst.append('root[\'{}\'][\'{}\'] = \'{}\''.format(nxgrp.name, name, data))
 
-    _string_attr(grp, 'type', nxdata_type)
+                #print('root[\'%s\'].create_dataset(name=\'%s\', data=\'%s\', maxshape=None)' % (nxgrp.name, name, str(data)))
+                #nxsfrmt_script_lst.append('root[\'%s\'] = NXfield(\'%s\', \'%s\')' % (nxgrp.name, name, data))
+                nxsfrmt_script_lst.append('root[\'{}\'] = NXfield(\'{}\', \'{}\')'.format(nxgrp.name, name, data))
+        else:
+            if do_print:
+                h5py_script_lst.append(' ')
+                if s_data.find('array') > -1:
+                    # make sure it reads correctly as a numpy array
+                    s_data = s_data.replace('array', 'np.array')
+                h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None)' % (nxgrp.name, name, s_data))
+                #h5py_script_lst.append('root[\'%s\'][\'%s\'] = %s' % (nxgrp.name, name, str(data)))
+                #h5py_script_lst.append('root[\'{}\'][\'{}\'] = {}'.format(nxgrp.name, name, data))
+
+                #print(
+                #    'root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None)' % (nxgrp.name, name, str(data)))
+                nxsfrmt_script_lst.append('root[\'%s\'] = NXfield(\'%s\', \'%s\')' % (nxgrp.name, name, s_data))
+
+    # grp_name = get_last_name_from_abspath(dct['abspath'])
+    # print('root[\'%s\'] = h5py.create_group(\'%s\')' % (get_parent_path(dct['abspath']), grp_name))
+
+    _string_attr(grp, 'type', nxdata_type, do_print)
 
     if (type(nx_units) is dict):
-        _string_attr(grp, 'units', nx_units['units'])
+        _string_attr(grp, 'units', nx_units['units'], do_print)
     else:
-        _string_attr(grp, 'units', nx_units)
+        _string_attr(grp, 'units', nx_units, do_print)
     if ('doc' in list(dset.keys())):
-        _string_attr(grp, 'doc', dset['doc'])
+        _string_attr(grp, 'doc', dset['doc'], do_print)
+
+
     return (grp)
 
 def get_abspath(a):
@@ -140,7 +324,9 @@ def abspath_lst_to_str(l):
     return(s)
 
 def get_children_list_of_lists(e):
-    #print(str(e) + str(e.attrib))
+    '''
+    create a list of dicts for each item
+    '''
     pth_lst = get_abspath(e)
     abspath = abspath_lst_to_str(pth_lst)
     t = e.getroottree()
@@ -166,6 +352,9 @@ def get_children_list_of_lists(e):
     return(lst)
 
 def get_children(e):
+    '''
+    get the children of an element return as a list
+    '''
     lists = get_children_list_of_lists(e)
     l = list(flatten(lists))
     return(l)
@@ -180,8 +369,17 @@ def flatten(lst):
             yield el
 
 def get_type(d):
-    if('type' not in d['attrib'].keys()):
-        return('NX_CHAR')
+    known_int_types = []
+    known_char_types = []
+    if 'type' not in d['attrib'].keys():
+        if d['attrib']['name'] in known_int_types:
+            return('NX_INT')
+
+        if 'units' in d['attrib'].keys():
+            #return a concatenation of the default for no specified type 'NX_CHAR' and '-<units>
+            return ('NX_CHAR-%s' % d['attrib']['units'])
+        #return ('NX_CHAR')
+        return ('')
     else:
         return(d['attrib']['type'])
 
@@ -192,6 +390,14 @@ def get_parent_path(pth):
             pth2.remove(p)
     p = abspath_lst_to_str(pth2[0:-1])
     return(p)
+
+def get_last_name_from_abspath(pth):
+    pth2 = pth.split('/')
+    for p in pth2:
+        if(p == ''):
+            pth2.remove(p)
+    return(pth2[-1])
+
 
 def get_min_occurs(d, category):
     '''
@@ -228,7 +434,7 @@ def get_doc(d):
                 doc = d['doc']
     return(doc)
 
-def sanity_check_dimensions(dct, sym_dct={}):
+def sanity_check_dimensions(dct, sym_dct={}, show_warnings=True):
     '''
      for every dimensions spec there should be a 'rank' specified and there should be at least the same number
      of accompnying dim sections as the value specified in 'rank'
@@ -241,20 +447,23 @@ def sanity_check_dimensions(dct, sym_dct={}):
                     rank = int(dct['attrib']['rank'])
                 elif has_expression(dct['attrib']['rank']):
                     rank = 1
-                    print(
-                        '\t\tNote: rank designation is using an expression, expressions are currently not supported for generation, the value of 1 will be used')
-                    print('\t\t The expression used in the definition is: [%s]' % (dct['attrib']['rank']))
+                    if show_warnings:
+                        print(
+                            '\t\tNote: rank designation is using an expression, expressions are currently not supported for generation, the value of 1 will be used')
+                        print('\t\t The expression used in the definition is: [%s]' % (dct['attrib']['rank']))
                 else:
-                    print(
-                        '\t\tError: rank designation is using a symbol that has not been defined in Symbols table or it is a comment')
-                    print('\t\t [%s]' % (dct['attrib']['rank']))
+                    if show_warnings:
+                        print(
+                            '\t\tError: rank designation is using a symbol that has not been defined in Symbols table or it is a comment')
+                        print('\t\t [%s]' % (dct['attrib']['rank']))
                     return(False)
 
                 if(rank <= len(dct['attrib']['dim'])):
                     return(True)
                 else:
-                    print('\t\tError: Incorrect number of dim sections for this dimensions specification, should be at least [%d] found [%d]' %  (rank, len(dct['attrib']['dim'])))
-                    print('\t\t[%s]' % dct['abspath'])
+                    if show_warnings:
+                        print('\t\tError: Incorrect number of dim sections for this dimensions specification, should be at least [%d] found [%d]' %  (rank, len(dct['attrib']['dim'])))
+                        print('\t\t[%s]' % dct['abspath'])
                     return (False)
             else:
                 #print('\t\tError: dimensions must specify a rank, this does not >', dct)
@@ -271,7 +480,7 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
     errors = False
     data = None
     use_dims = False
-    if( sanity_check_dimensions(dimensions, sym_dct)):
+    if( sanity_check_dimensions(dimensions, sym_dct, show_warnings=False)):
         if (dimensions and 'attrib' in dimensions.keys() and len(dimensions['attrib']['dim']) > 0):
             dimensions = dimensions['attrib']
             arr = []
@@ -303,7 +512,9 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
                             errors = True
                             return(None)
                         # check if symbol was used in defining a dim value
-                        if('value' not in dimensions['dim'][r].keys()):
+                        _keys = dimensions['dim'][r].keys()
+                        #if('value' not in dimensions['dim'][r].keys()):
+                        if 'value' not in _keys:
                             print('\t\tError, there is no [value] key in dim specification' , dimensions['dim'][r])
                             errors = True
                             return (None)
@@ -334,8 +545,16 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
                     data = np.chararray(tuple(arr))
                     data[:] = '!some char data!'
 
-
-    if(nx_type.find('NX_CHAR') > -1):
+    units = get_units(nx_type)
+    if units in nx_unit_types.keys():
+        unit_dct = nx_unit_types[units]
+    #if there are units specified return a data suitable
+    if units.find('NX_WAVENUMBER') > -1:
+        if (use_dims):
+            return (1.0)
+        else:
+            return (1.0)
+    elif(nx_type.find('NX_CHAR') > -1):
         if(data is None):
             return('!some char data!')
         else:
@@ -347,6 +566,9 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
             return(1.0)
     elif (nx_type.find('NX_INT') > -1):
         if (use_dims):
+            if(type(data) is np.ndarray):
+                #convert this array into a list
+                data = list(data)
             return (data)
         else:
             return (1)
@@ -371,6 +593,16 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
             return (data)
         else:
             return (1)
+
+
+def get_units(nx_type):
+    # check to see if this nx_type contains the units as well
+    # ex: NX_CHAR-NX_WAVENUMBER
+    units = nx_type.split('-')
+    if len(units) == 2:
+        return(units[1])
+    else:
+        return('')
 
 def make_timestamp_now():
     """
@@ -659,11 +891,34 @@ def fix_nx_path(path_str):
             s += fix_nx_name(ss) + '/'
     return(s)
 
+def print_script_group(dct):
+    '''
+    '''
+    #grp_name = dct['abspath'].replace('/','')
+    parent_grp = get_parent_path(dct['abspath'])
+    grp_name = get_last_name_from_abspath(dct['abspath'])
+    #print('root[\'%s\'] = root.create_group(\'%s\')' % (get_parent_path(dct['abspath']), grp_name))
+    if len(parent_grp) > 1:
+        #print('root[\'%s\'].create_group(\'%s\')' % (parent_grp, grp_name))
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root[\'%s\'].create_group(\'%s\')' % (parent_grp, grp_name))
+
+        nxsfrmt_script_lst.append('root[\'%s\'] = %s()' % (dct['abspath'], dct['attrib']['type']))
+
+    else:
+        #print('root.create_group(\'%s\')' % (grp_name))
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root.create_group(\'%s\')' % (grp_name))
+        #h5py_script_lst.append('root[\'%s%s\'] = [()]' % (parent_grp, grp_name))
+
+
+        nxsfrmt_script_lst.append('root[\'%s\'] = %s()' % (dct['abspath'], dct['attrib']['type']))
 
 def create_groups(nf, dct):
     '''
     walk all dicts of type GROUP creating them as it goes
     '''
+
     for d in dct['group']:
         _type = get_type(d)
         if('name' in d['attrib'].keys()):
@@ -682,7 +937,7 @@ def create_groups(nf, dct):
         else:
             pgrp = nf[ppath]
         min_occurs_str = get_min_occurs(d, dct['category'])
-        _grp = _group(pgrp, name, nxdata_type=_type)
+        _grp = _group(pgrp, name, nxdata_type=_type, dct=d)
         _string_attr(_grp, 'EX_required', min_occurs_str)
         doc = get_doc(d)
         if (doc):
@@ -715,14 +970,30 @@ def create_fields(nf, dct, sym_dct={}, category=''):
            'type': 'NX_INT'},
           'doc': '\n     '},
     '''
+    global CUR_GRP_DTYPE
+    unit_dct = {}
     valid_fld_attr_nms_lst = ['axes','axis','data_offset','interpretation','long_name','maxOccurs','minOccurs','nameType','primary','signal','stride','units'] #type was removed because I think it is handled when dataset is created
     # create FIELDs
     for d in dct['field']:
         name = fix_nx_name(d['attrib']['name'])
         _type = get_type(d)
-
+        units = get_units(_type)
+        if len(units) > 0:
+            _type = nx_unit_types[units]['type']
+            unit_dct = nx_unit_types[units]
         #get teh parent path to this field
         ppath = fix_nx_path(get_parent_path(d['abspath']))
+
+        if len(_type) == 0:
+            #there has been no declaration for this item so try to use type of the parent group
+            if len(CUR_GRP_DTYPE) == 0:
+                #default
+                _type = 'NX_CHAR'
+            else:
+                _type = CUR_GRP_DTYPE
+        else:
+            #record the type change
+            CUR_GRP_DTYPE = _type
 
         #get all enumerations if any exist for this parent path
         enums = get_enums(d['abspath'], dct)
@@ -735,12 +1006,14 @@ def create_fields(nf, dct, sym_dct={}, category=''):
         if len(enums) > 0:
             #if this is an enumerated data type just use teh first enumeration as the data
             data = enums[0]
+            # and include a comment in teh script
+            print_list_attr(pgrp, name, enums)
         else:
             data = get_nx_data_by_type(_type, use_dim_dct_lst, sym_dct)
             if(data is None):
                 print('\t\tError: There is an issue with a non standard field for fieldname [%s]' % name)
                 return(False)
-        _dset = _dataset(pgrp, name, data, _type)
+        _dset = _dataset(pgrp, name, data, _type, nx_units=units)
         #print('created: FIELD [%s]' % fix_nx_path(d['abspath']))
         _string_attr(_dset, 'EX_required', get_min_occurs(d, category))
         doc = get_doc(d)
@@ -837,8 +1110,11 @@ def create_attributes(nf, dct):
         else:
             data = get_nx_data_by_type('NX_CHAR')
 
-        pgrp.attrs[d['attrib']['name']] = data
-        #_string_attr(pgrp, d['attrib']['name'], data)
+        #pgrp.attrs[d['attrib']['name']] = data
+        if type(data) is str:
+            _string_attr(pgrp, d['attrib']['name'], data)
+        else:
+            _num_attr(pgrp, d['attrib']['name'], data)
 
 def get_last_name_in_path(pth):
     p2 = pth.split('/')
@@ -864,11 +1140,51 @@ def add_docs(nf, docs):
         else:
             pgrp = nf[ppath]
 
-        _string_attr(pgrp, 'EX_doc', d['doc'])
+        _string_attr(pgrp, 'EX_doc', d['doc'].replace('\'', '"'))
+
+def print_script_start(fname):
+    print_h5py_ex_start(fname)
+    print_nxsfrmt_ex_start(fname)
+
+def print_nxsfrmt_ex_start(fname):
+    global nxsfrmt_script_lst
+    nxsfrmt_script_lst = []
+    nxsfrmt_script_lst.append('from nexusformat.nexus import *')
+    nxsfrmt_script_lst.append('# Note this example script was generated by nxdl_to_hdf5.py using the current \n# installed version of the NEXUS definitions ver[%s] ' % rel_ver)
+    nxsfrmt_script_lst.append(' ')
+    nxsfrmt_script_lst.append('root = NXroot()')
+
+
+def print_h5py_ex_start(fname):
+    global h5py_script_lst
+    h5py_script_lst = []
+    #fpath = __file__.replace('nxdl_to_hdf5.py','')
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append('import numpy as np')
+    h5py_script_lst.append('import datetime')
+    h5py_script_lst.append('import h5py')
+    h5py_script_lst.append('import os')
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append(
+        '# Note this example script was generated by nxdl_to_hdf5.py using the current \n# installed version of the NEXUS definitions ver[%s] ' % rel_ver)
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append('root = h5py.File(\'h5py_%s.h5\', \'w\')' % (fname))
+
+def print_script_close(class_nm):
+    print_h5py_close()
+    print_nxsfrmt_close(class_nm)
+
+def print_h5py_close():
+    #print('root.close()\n\n')
+    h5py_script_lst.append('root.close()\n\n')
+
+def print_nxsfrmt_close(class_nm):
+    nxsfrmt_script_lst.append('root.save(\'nexusformat_%s.h5\', \'w\')\n\n' % class_nm)
 
 def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
     print('\texporting: [%s]' % clss_nm)
     res = True
+    CUR_GRP_DTYPE = ''
     category = def_dir = path_dct[clss_nm]['category']
 
     if (not os.path.exists(dest_dir)):
@@ -921,6 +1237,7 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
                             sym_dct[val] = 1
                             l['attrib']['value'] = 1
 
+    print_script_start(class_nm)
 
     # create GROUPs
     create_groups(nf, path_dct[clss_nm])
@@ -937,8 +1254,8 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
         # create Attributes
         create_attributes(nf, path_dct[clss_nm])
 
-        _string_attr(nf, 'file_name', fpath)
-        _string_attr(nf, 'file_time', make_timestamp_now())
+        _string_attr(nf, 'file_name', fpath.replace('\\', '/'), do_print=False)
+        _string_attr(nf, 'file_time', make_timestamp_now(), do_print=False)
         #_string_attr(nf, 'NEXUS_release_ver', rel_ver)
         entry_grp, entry_nm = get_entry(nf)
         #ensure the definition is correct
@@ -952,15 +1269,56 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
                 _string_attr(nx_data_grp, 'signal', dset_nm)
                 _string_attr(nx_data_grp[dset_nm], 'signal', '1')
 
-        _dataset(nf, 'README', readme_string % (rel_ver, clss_nm), 'NX_CHAR', nx_units='NX_ANY', dset={})
+        _dataset(nf, 'README', readme_string % (rel_ver, clss_nm), 'NX_CHAR', nx_units='NX_ANY', dset={}, do_print=False)
         nf.close()
-        print('finished exporting to [%s]' % fpath)
+        #print('finished exporting to [%s]' % fpath)
     else:
         print('Failed exporting [%s]' % fpath)
         nf.close()
+
+    print_script_versions(class_nm)
+    print_script_close(class_nm)
+
+    write_script_file(class_nm)
     return(res)
 
+def print_script_versions(fname):
+    print_h5py_versions(fname)
+    print_nxsfrmt_versions(fname)
 
+def print_h5py_versions(class_nm):
+    h5py_script_lst.append('root.attrs[\'file_name\'] = os.path.abspath(\'%s\')' % class_nm)
+    h5py_script_lst.append('root.attrs[\'file_time\'] = datetime.datetime.now().isoformat()')
+    h5py_script_lst.append('root.attrs[\'h5py_version\'] = h5py.version.version')
+    h5py_script_lst.append('root.attrs[\'HDF5_Version\'] = h5py.version.hdf5_version')
+
+
+def print_nxsfrmt_versions(class_nm):
+    nxsfrmt_script_lst.append('root.attrs[\'file_name\'] = os.path.abspath(\'%s\')' % class_nm)
+    nxsfrmt_script_lst.append('root.attrs[\'file_time\'] = datetime.datetime.now().isoformat()')
+    #nxsfrmt_script_lst.append('root.attrs[\'h5py_version\'] = h5.version.version')
+    #nxsfrmt_script_lst.append('root.attrs[\'HDF5_Version\'] = h5.version.hdf5_version')
+
+def write_script_file(class_nm):
+    write_h5py_script(os.path.join(os.getcwd(), '..', 'autogenerated_examples','nxdl', 'python_scripts','h5py'), class_nm, h5py_script_lst)
+    write_nxsfrmt_script(os.path.join(os.getcwd(), '..', 'autogenerated_examples','nxdl', 'python_scripts', 'nexusformat'), class_nm, nxsfrmt_script_lst)
+
+def write_h5py_script(path, class_nm, script_lst):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        f = open(os.path.join(path, 'ex_h5py_%s.py' % class_nm), 'w')
+        for l in script_lst:
+            f.write(l + '\n')
+        f.close()
+
+def write_nxsfrmt_script(path, class_nm, script_lst):
+    if not os.path.exists(path):
+        os.mkdir(path)
+
+    f = open(os.path.join(path, 'ex_nexusformat_%s.py' % class_nm), 'w')
+    for l in script_lst:
+        f.write(l + '\n')
+    f.close()
 
 def build_class_dict(class_dir='base_classes', desired_class=None, defdir=None, sym_args_dct={},report_symbols_only=False):
     '''
