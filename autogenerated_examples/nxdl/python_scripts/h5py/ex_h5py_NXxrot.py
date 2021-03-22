@@ -37,41 +37,40 @@ root['/entry/name'].attrs['EX_required'] = 'true'
 #	 NXxrot
  
 root['/entry'].create_dataset(name='definition', data='NXxrot', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_FLOAT'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=1.0, maxshape=None)
 root['/entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/polar_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/instrument/detector'].create_dataset(name='beam_center_x', data=1.0, maxshape=None)
 root['/entry/instrument/detector/beam_center_x'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/beam_center_x'].attrs['units'] = ''
 root['/entry/instrument/detector/beam_center_x'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/beam_center_x'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='beam_center_y', data=1.0, maxshape=None)
 root['/entry/instrument/detector/beam_center_y'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/beam_center_y'].attrs['units'] = ''
 root['/entry/instrument/detector/beam_center_y'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/beam_center_y'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/attenuator'].create_dataset(name='attenuator_transmission', data=1.0, maxshape=None)
 root['/entry/instrument/attenuator/attenuator_transmission'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/attenuator/attenuator_transmission'].attrs['units'] = ''
 root['/entry/instrument/attenuator/attenuator_transmission'].attrs['EX_required'] = 'true'
+root['/entry/instrument/attenuator/attenuator_transmission'].attrs['units'] = 'NX_ANY'
  
 root['/entry/sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/rotation_angle'].attrs['units'] = ''
 root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
 root['/entry/sample/rotation_angle'].attrs['axis'] = '1'
+root['/entry/sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/sample'].create_dataset(name='rotation_angle_step', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/rotation_angle_step'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/rotation_angle_step'].attrs['units'] = ''
 root['/entry/sample/rotation_angle_step'].attrs['EX_required'] = 'true'
 root['/entry/sample/rotation_angle_step'].attrs['axis'] = '1'
+root['/entry/sample/rotation_angle_step'].attrs['units'] = 'NX_ANGLE'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms.    '
 root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = '       The polar_angle (two theta) where the detector is placed.      '
 root['/entry/instrument/detector/beam_center_x'].attrs['EX_doc'] = '       This is the x position where the direct beam would hit the detector. This is a               length, not a pixel position, and can be outside of the actual detector.      '

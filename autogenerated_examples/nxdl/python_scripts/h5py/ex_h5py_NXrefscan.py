@@ -43,35 +43,29 @@ root['/entry/data'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T14:00:27.645857', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:15.867702', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/start_time'].attrs['units'] = ''
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-22T14:00:27.647856', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-22T16:42:15.869721', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/end_time'].attrs['units'] = ''
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXrefscan
  
 root['/entry'].create_dataset(name='definition', data='NXrefscan', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/untitled_source'].create_dataset(name='type', data='!some char data!', maxshape=None)
-root['/entry/instrument/untitled_source/type'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/untitled_source/type'].attrs['units'] = ''
+root['/entry/instrument/untitled_source'].create_dataset(name='type', data='2021-03-22T16:42:15.871720', maxshape=None)
+root['/entry/instrument/untitled_source/type'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/untitled_source/type'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/untitled_source'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/instrument/untitled_source/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/untitled_source/name'].attrs['units'] = ''
+root['/entry/instrument/untitled_source'].create_dataset(name='name', data='2021-03-22T16:42:15.872720', maxshape=None)
+root['/entry/instrument/untitled_source/name'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/instrument/untitled_source']['probe'] are: 
@@ -80,55 +74,50 @@ root['/entry/instrument/untitled_source/name'].attrs['EX_required'] = 'true'
 #	 electron
  
 root['/entry/instrument/untitled_source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/entry/instrument/untitled_source/probe'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/untitled_source/probe'].attrs['units'] = ''
+root['/entry/instrument/untitled_source/probe'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/monochromator'].create_dataset(name='wavelength', data=1.0, maxshape=None)
 root['/entry/instrument/monochromator/wavelength'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/monochromator/wavelength'].attrs['units'] = ''
 root['/entry/instrument/monochromator/wavelength'].attrs['EX_required'] = 'true'
+root['/entry/instrument/monochromator/wavelength'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/entry/instrument/untitled_detector'].create_dataset(name='data', data=[1], maxshape=None)
 root['/entry/instrument/untitled_detector/data'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/untitled_detector/data'].attrs['units'] = ''
 root['/entry/instrument/untitled_detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/untitled_detector/data'].attrs['signal'] = '1'
  
 root['/entry/instrument/untitled_detector'].create_dataset(name='polar_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/untitled_detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/untitled_detector/polar_angle'].attrs['units'] = ''
 root['/entry/instrument/untitled_detector/polar_angle'].attrs['EX_required'] = 'true'
 root['/entry/instrument/untitled_detector/polar_angle'].attrs['axis'] = '1'
+root['/entry/instrument/untitled_detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
-root['/entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/name'].attrs['units'] = ''
+root['/entry/sample'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/entry/sample/name'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/rotation_angle'].attrs['units'] = ''
 root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
+root['/entry/sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
 # Valid enumeration values for root['/entry/control']['mode'] are: 
 #	 monitor
 #	 timer
  
 root['/entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/entry/control/mode'].attrs['type'] = 'NX_CHAR'
-root['/entry/control/mode'].attrs['units'] = ''
+root['/entry/control/mode'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/mode'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/entry/control/preset'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/preset'].attrs['units'] = ''
 root['/entry/control/preset'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
 root['/entry/control/data'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/data'].attrs['units'] = ''
 root['/entry/control/data'].attrs['EX_required'] = 'true'
+root['/entry/control/data'].attrs['units'] = 'NX_ANY'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/sample/name'].attrs['EX_doc'] = '      Descriptive name of sample     '
 root['/entry/control/mode'].attrs['EX_doc'] = '      Count to a preset value based on either clock time (timer)             or received monitor counts (monitor).     '

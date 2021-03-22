@@ -65,145 +65,138 @@ root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['EX_required'] = 'false'
 #	 NXcanSAS
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXcanSAS', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
+root['/untitled_entry/definition'].attrs['type'] = 'NX_NUMBER'
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='Q', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/Q'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/Q'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/Q'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_data/Q'].attrs['units'] = 'NX_PER_LENGTH'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='I', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/I'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/I'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/I'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='Idev', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/Idev'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/Idev'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/Idev'].attrs['EX_required'] = 'false'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='Qdev', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/Qdev'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/Qdev'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/Qdev'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_data/Qdev'].attrs['units'] = 'NX_PER_LENGTH'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='dQw', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/dQw'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/dQw'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/dQw'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_data/dQw'].attrs['units'] = 'NX_PER_LENGTH'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='dQl', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/dQl'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/dQl'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/dQl'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_data/dQl'].attrs['units'] = 'NX_PER_LENGTH'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='Qmean', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/Qmean'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/Qmean'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/Qmean'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_data/Qmean'].attrs['units'] = 'NX_PER_LENGTH'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='ShadowFactor', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/ShadowFactor'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/untitled_data/ShadowFactor'].attrs['units'] = 'NX_DIMENSIONLESS'
 root['/untitled_entry/untitled_data/ShadowFactor'].attrs['EX_required'] = 'false'
  
-root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/untitled_entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='run', data='!some char data!', maxshape=None)
-root['/untitled_entry/run'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/run'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='run', data=1.0, maxshape=None)
+root['/untitled_entry/run'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/run'].attrs['EX_required'] = 'true'
 root['/untitled_entry/run'].attrs['nameType'] = 'any'
  
-root['/untitled_entry/untitled_instrument/untitled_aperture'].create_dataset(name='shape', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_aperture/shape'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_aperture/shape'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_aperture'].create_dataset(name='shape', data=1.0, maxshape=None)
+root['/untitled_entry/untitled_instrument/untitled_aperture/shape'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/untitled_instrument/untitled_aperture/shape'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_aperture'].create_dataset(name='x_gap', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_aperture/x_gap'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_aperture/x_gap'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_aperture/x_gap'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_aperture/x_gap'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_aperture'].create_dataset(name='y_gap', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_aperture/y_gap'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_aperture/y_gap'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_aperture/y_gap'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_aperture/y_gap'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_collimator'].create_dataset(name='length', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_collimator/length'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_collimator/length'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_collimator/length'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_collimator/length'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_collimator'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_collimator/distance'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_collimator/distance'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_collimator/distance'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_collimator/distance'].attrs['units'] = 'NX_LENGTH'
  
-root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_detector/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_detector/name'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/untitled_entry/untitled_instrument/untitled_detector/name'].attrs['type'] = 'NX_NUMBER'
 root['/untitled_entry/untitled_instrument/untitled_detector/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='SDD', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/SDD'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/SDD'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/SDD'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/SDD'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='slit_length', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/slit_length'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/slit_length'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/slit_length'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/slit_length'].attrs['units'] = 'NX_PER_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='x_position', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/x_position'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/x_position'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/x_position'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/x_position'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='y_position', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/y_position'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/y_position'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/y_position'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/y_position'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='roll', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/roll'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/roll'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/roll'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/roll'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='pitch', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/pitch'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/pitch'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/pitch'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/pitch'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='yaw', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/yaw'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/yaw'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/yaw'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/yaw'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='beam_center_x', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_x'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_x'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_x'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_x'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='beam_center_y', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_y'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_y'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_y'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/beam_center_y'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='x_pixel_size', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/x_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/untitled_detector/x_pixel_size'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/x_pixel_size'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/x_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='y_pixel_size', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/y_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/untitled_detector/y_pixel_size'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/y_pixel_size'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_detector/y_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 # Valid enumeration values for root['/untitled_entry/untitled_instrument/untitled_source']['radiation'] are: 
 #	 Spallation Neutron Source
@@ -228,131 +221,123 @@ root['/untitled_entry/untitled_instrument/untitled_detector/y_pixel_size'].attrs
 #	 proton
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='radiation', data='Spallation Neutron Source', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_source/radiation'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/radiation'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_source/radiation'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/untitled_instrument/untitled_source/radiation'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='beam_shape', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_source/beam_shape'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/beam_shape'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='beam_shape', data=1.0, maxshape=None)
+root['/untitled_entry/untitled_instrument/untitled_source/beam_shape'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/untitled_instrument/untitled_source/beam_shape'].attrs['EX_required'] = 'false'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='incident_wavelength', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='wavelength_min', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/wavelength_min'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_source/wavelength_min'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/wavelength_min'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_source/wavelength_min'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='wavelength_max', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/wavelength_max'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_source/wavelength_max'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/wavelength_max'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_source/wavelength_max'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='incident_wavelength_spread', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength_spread'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength_spread'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength_spread'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_source/incident_wavelength_spread'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='beam_size_x', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/beam_size_x'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_source/beam_size_x'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/beam_size_x'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_source/beam_size_x'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='beam_size_y', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/beam_size_y'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_source/beam_size_y'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/beam_size_y'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_instrument/untitled_source/beam_size_y'].attrs['units'] = 'NX_LENGTH'
  
-root['/untitled_entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/name'].attrs['units'] = ''
+root['/untitled_entry/untitled_sample'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_NUMBER'
 root['/untitled_entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='thickness', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/thickness'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_sample/thickness'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/thickness'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/thickness'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='transmission', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/transmission'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/transmission'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/transmission'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/transmission'].attrs['units'] = 'NX_DIMENSIONLESS'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='temperature', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/temperature'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/temperature'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/temperature'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/temperature'].attrs['units'] = 'NX_TEMPERATURE'
  
-root['/untitled_entry/untitled_sample'].create_dataset(name='details', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_sample/details'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/details'].attrs['units'] = ''
+root['/untitled_entry/untitled_sample'].create_dataset(name='details', data=1.0, maxshape=None)
+root['/untitled_entry/untitled_sample/details'].attrs['type'] = 'NX_NUMBER'
 root['/untitled_entry/untitled_sample/details'].attrs['EX_required'] = 'false'
 root['/untitled_entry/untitled_sample/details'].attrs['nameType'] = 'any'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='x_position', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/x_position'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/x_position'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/x_position'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/x_position'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='y_position', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/y_position'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/y_position'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/y_position'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/y_position'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='roll', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/roll'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/roll'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/roll'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/roll'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='pitch', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/pitch'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/pitch'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/pitch'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/pitch'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='yaw', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/yaw'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/yaw'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/yaw'].attrs['EX_required'] = 'false'
+root['/untitled_entry/untitled_sample/yaw'].attrs['units'] = 'NX_ANGLE'
  
-root['/untitled_entry/untitled_process'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_process/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_process/name'].attrs['units'] = ''
+root['/untitled_entry/untitled_process'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/untitled_entry/untitled_process/name'].attrs['type'] = 'NX_NUMBER'
 root['/untitled_entry/untitled_process/name'].attrs['EX_required'] = 'false'
  
-root['/untitled_entry/untitled_process'].create_dataset(name='date', data='2021-03-22T14:00:26.836554', maxshape=None)
+root['/untitled_entry/untitled_process'].create_dataset(name='date', data='2021-03-22T16:42:15.479363', maxshape=None)
 root['/untitled_entry/untitled_process/date'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/untitled_process/date'].attrs['units'] = ''
 root['/untitled_entry/untitled_process/date'].attrs['EX_required'] = 'false'
  
-root['/untitled_entry/untitled_process'].create_dataset(name='description', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_process/description'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_process/description'].attrs['units'] = ''
+root['/untitled_entry/untitled_process'].create_dataset(name='description', data='2021-03-22T16:42:15.480363', maxshape=None)
+root['/untitled_entry/untitled_process/description'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/untitled_process/description'].attrs['EX_required'] = 'false'
  
-root['/untitled_entry/untitled_process'].create_dataset(name='term', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_process/term'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_process/term'].attrs['units'] = ''
+root['/untitled_entry/untitled_process'].create_dataset(name='term', data='2021-03-22T16:42:15.481362', maxshape=None)
+root['/untitled_entry/untitled_process/term'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/untitled_process/term'].attrs['EX_required'] = 'false'
 root['/untitled_entry/untitled_process/term'].attrs['nameType'] = 'any'
  
 root['/untitled_entry/TRANSMISSION_SPECTRUM'].create_dataset(name='lambda', data=1.0, maxshape=None)
 root['/untitled_entry/TRANSMISSION_SPECTRUM/lambda'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/TRANSMISSION_SPECTRUM/lambda'].attrs['units'] = ''
 root['/untitled_entry/TRANSMISSION_SPECTRUM/lambda'].attrs['EX_required'] = 'true'
+root['/untitled_entry/TRANSMISSION_SPECTRUM/lambda'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/untitled_entry/TRANSMISSION_SPECTRUM'].create_dataset(name='T', data=1.0, maxshape=None)
 root['/untitled_entry/TRANSMISSION_SPECTRUM/T'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/TRANSMISSION_SPECTRUM/T'].attrs['units'] = ''
 root['/untitled_entry/TRANSMISSION_SPECTRUM/T'].attrs['EX_required'] = 'true'
+root['/untitled_entry/TRANSMISSION_SPECTRUM/T'].attrs['units'] = 'NX_DIMENSIONLESS'
  
 root['/untitled_entry/TRANSMISSION_SPECTRUM'].create_dataset(name='Tdev', data=1.0, maxshape=None)
 root['/untitled_entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['units'] = ''
 root['/untitled_entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['EX_required'] = 'true'
+root['/untitled_entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['units'] = 'NX_DIMENSIONLESS'
 root['/untitled_entry'].attrs['EX_doc'] = '    .. index:: NXcanSAS (applications); SASentry              Place the canSAS ``SASentry`` group as a child of a NeXus ``NXentry`` group       (when data from multiple techniques are being stored)       or as a replacement for the ``NXentry`` group.         Note: It is required for all numerical objects to provide       a *units* attribute that describes the engineering units.        Use the Unidata UDunits [#]_ specification        as this is compatible with various community standards.              .. [#] The UDunits specification also includes instructions for derived units.   '
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this subentry conforms.    '
 root['/untitled_entry/untitled_data'].attrs['EX_doc'] = '     A *SASData* group contains a single reduced small-angle scattering data set          that can be represented as :math:`I(\vec{Q})` or :math:`I(|\vec{Q}|)`.                  *Q* can be either a vector (:math:`\vec{Q}`) or a vector magnitude (:math:`|\vec{Q}|`)                  The name of each *SASdata* group must be unique within a SASentry group.           Suggest using names such as ``sasdata01``.                  NOTE:  For the first *SASdata* group, be sure to write the chosen name          into the `SASentry/@default` attribute, as in::                      SASentry/@default="sasdata01"                  A *SASdata* group has several attributes:                  * I_axes         * Q_indices         * Mask_indices                  To indicate the dependency relationships of other varied parameters,          use attributes similar to ``@Mask_indices`` (such as ``@Temperature_indices``         or ``@Pressure_indices``).    '
@@ -428,7 +413,7 @@ root['/untitled_entry/untitled_data'].attrs['I_axes'] = '!some char data!'
 root['/untitled_entry/untitled_data'].attrs['Q_indices'] = '1'
 root['/untitled_entry/untitled_data'].attrs['mask'] = '!some char data!'
 root['/untitled_entry/untitled_data'].attrs['Mask_indices'] = '!some char data!'
-root['/untitled_entry/untitled_data'].attrs['timestamp'] = '2021-03-22T14:00:26.926501'
+root['/untitled_entry/untitled_data'].attrs['timestamp'] = '2021-03-22T16:42:15.513345'
 root['/untitled_entry/untitled_data/Q'].attrs['units'] = '!some char data!'
 root['/untitled_entry/untitled_data/Q'].attrs['uncertainties'] = '!some char data!'
 root['/untitled_entry/untitled_data/Q'].attrs['resolutions'] = '!some char data!'
@@ -455,7 +440,7 @@ root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['canSAS_class'] = '!some cha
 root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['signal'] = '!some char data!'
 root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['T_axes'] = '!some char data!'
 root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['name'] = '!some char data!'
-root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2021-03-22T14:00:26.946490'
+root['/untitled_entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2021-03-22T16:42:15.521339'
 root['/untitled_entry/TRANSMISSION_SPECTRUM/T'].attrs['uncertainties'] = '!some char data!'
 root['/'].attrs['default'] = 'untitled_entry'
 root['/untitled_entry'].attrs['default'] = 'TRANSMISSION_SPECTRUM'

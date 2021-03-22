@@ -37,109 +37,99 @@ root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
+root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T14:00:27.721731', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:15.904741', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/start_time'].attrs['units'] = ''
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-22T14:00:27.723730', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-22T16:42:15.906304', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/end_time'].attrs['units'] = ''
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXreftof
  
 root['/entry'].create_dataset(name='definition', data='NXreftof', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/name'].attrs['units'] = ''
 root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/chopper'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/entry/instrument/chopper/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/chopper/distance'].attrs['units'] = ''
 root['/entry/instrument/chopper/distance'].attrs['EX_required'] = 'true'
+root['/entry/instrument/chopper/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
 root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/detector/data'].attrs['units'] = ''
 root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
  
 root['/entry/instrument/detector'].create_dataset(name='time_of_flight', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/time_of_flight'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/time_of_flight'].attrs['units'] = ''
 root['/entry/instrument/detector/time_of_flight'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/time_of_flight'].attrs['axis'] = '3'
+root['/entry/instrument/detector/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
  
 root['/entry/instrument/detector'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/entry/instrument/detector/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/distance'].attrs['units'] = ''
 root['/entry/instrument/detector/distance'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=1.0, maxshape=None)
 root['/entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/polar_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/instrument/detector'].create_dataset(name='x_pixel_size', data=1.0, maxshape=None)
 root['/entry/instrument/detector/x_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = ''
 root['/entry/instrument/detector/x_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='y_pixel_size', data=1.0, maxshape=None)
 root['/entry/instrument/detector/y_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = ''
 root['/entry/instrument/detector/y_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
-root['/entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/name'].attrs['units'] = ''
+root['/entry/sample'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/entry/sample/name'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
 root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/rotation_angle'].attrs['units'] = ''
 root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
+root['/entry/sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
 # Valid enumeration values for root['/entry/control']['mode'] are: 
 #	 monitor
 #	 timer
  
 root['/entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/entry/control/mode'].attrs['type'] = 'NX_CHAR'
-root['/entry/control/mode'].attrs['units'] = ''
+root['/entry/control/mode'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/mode'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/entry/control/preset'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/preset'].attrs['units'] = ''
 root['/entry/control/preset'].attrs['EX_required'] = 'true'
+root['/entry/control/preset'].attrs['units'] = 'NX_ANY'
  
 root['/entry/control'].create_dataset(name='integral', data=1, maxshape=None)
 root['/entry/control/integral'].attrs['type'] = 'NX_INT'
-root['/entry/control/integral'].attrs['units'] = ''
 root['/entry/control/integral'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='time_of_flight', data=1.0, maxshape=None)
 root['/entry/control/time_of_flight'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/time_of_flight'].attrs['units'] = ''
 root['/entry/control/time_of_flight'].attrs['EX_required'] = 'true'
 root['/entry/control/time_of_flight'].attrs['axis'] = '1'
+root['/entry/control/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
  
 root['/entry/control'].create_dataset(name='data', data=1, maxshape=None)
 root['/entry/control/data'].attrs['type'] = 'NX_INT'
-root['/entry/control/data'].attrs['units'] = ''
 root['/entry/control/data'].attrs['EX_required'] = 'true'
 root['/entry/control/data'].attrs['signal'] = '1'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '

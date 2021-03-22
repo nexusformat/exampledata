@@ -25,14 +25,13 @@ root['/entry/instrument/detector'].attrs['EX_required'] = 'true'
 #	 NXxlaueplate
  
 root['/entry'].create_dataset(name='definition', data='NXxlaueplate', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_FLOAT'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/detector'].create_dataset(name='diameter', data=1.0, maxshape=None)
 root['/entry/instrument/detector/diameter'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/diameter'].attrs['units'] = ''
 root['/entry/instrument/detector/diameter'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/diameter'].attrs['units'] = 'NX_LENGTH'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/instrument/detector/diameter'].attrs['EX_doc'] = '       The diameter of a cylindrical detector      '
 root['/'].attrs['default'] = 'entry'

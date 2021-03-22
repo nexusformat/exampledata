@@ -41,32 +41,27 @@ root['/entry/'].create_group('untitled_data')
 root['/entry/untitled_data'].attrs['NX_class'] = 'NXdata'
 root['/entry/untitled_data'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
+root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T14:00:29.059019', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.589708', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/start_time'].attrs['units'] = ''
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXxbase
  
 root['/entry'].create_dataset(name='definition', data='NXxbase', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/source'].create_dataset(name='type', data='!some char data!', maxshape=None)
-root['/entry/instrument/source/type'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/source/type'].attrs['units'] = ''
+root['/entry/instrument/source'].create_dataset(name='type', data='2021-03-22T16:42:16.591856', maxshape=None)
+root['/entry/instrument/source/type'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/source/type'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/source'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/instrument/source/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/source/name'].attrs['units'] = ''
+root['/entry/instrument/source'].create_dataset(name='name', data='2021-03-22T16:42:16.593850', maxshape=None)
+root['/entry/instrument/source/name'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/instrument/source']['probe'] are: 
@@ -75,94 +70,85 @@ root['/entry/instrument/source/name'].attrs['EX_required'] = 'true'
 #	 electron
  
 root['/entry/instrument/source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/entry/instrument/source/probe'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/source/probe'].attrs['units'] = ''
+root['/entry/instrument/source/probe'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/source/probe'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/monochromator'].create_dataset(name='wavelength', data=1.0, maxshape=None)
 root['/entry/instrument/monochromator/wavelength'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/monochromator/wavelength'].attrs['units'] = ''
 root['/entry/instrument/monochromator/wavelength'].attrs['EX_required'] = 'true'
+root['/entry/instrument/monochromator/wavelength'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
 root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/detector/data'].attrs['units'] = ''
 root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
  
 root['/entry/instrument/detector'].create_dataset(name='x_pixel_size', data=1.0, maxshape=None)
 root['/entry/instrument/detector/x_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = ''
 root['/entry/instrument/detector/x_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='y_pixel_size', data=1.0, maxshape=None)
 root['/entry/instrument/detector/y_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = ''
 root['/entry/instrument/detector/y_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/entry/instrument/detector/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/distance'].attrs['units'] = ''
 root['/entry/instrument/detector/distance'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='frame_start_number', data=1, maxshape=None)
 root['/entry/instrument/detector/frame_start_number'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/detector/frame_start_number'].attrs['units'] = ''
 root['/entry/instrument/detector/frame_start_number'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/name'].attrs['units'] = ''
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='orientation_matrix', data=[[1. , 1. , 1.], [1. , 1. , 1.], [1. , 1. , 1.]], maxshape=None, compression="gzip")
 root['/entry/sample/orientation_matrix'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/orientation_matrix'].attrs['units'] = ''
 root['/entry/sample/orientation_matrix'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='unit_cell', data=[1. , 1. , 1. , 1. , 1. , 1.], maxshape=None, compression="gzip")
 root['/entry/sample/unit_cell'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/unit_cell'].attrs['units'] = ''
 root['/entry/sample/unit_cell'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='temperature', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/temperature'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/temperature'].attrs['units'] = ''
 root['/entry/sample/temperature'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='x_translation', data=1.0, maxshape=None)
 root['/entry/sample/x_translation'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/x_translation'].attrs['units'] = ''
 root['/entry/sample/x_translation'].attrs['EX_required'] = 'true'
+root['/entry/sample/x_translation'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/sample'].create_dataset(name='y_translation', data=1.0, maxshape=None)
 root['/entry/sample/y_translation'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/y_translation'].attrs['units'] = ''
 root['/entry/sample/y_translation'].attrs['EX_required'] = 'true'
+root['/entry/sample/y_translation'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/sample'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/entry/sample/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/distance'].attrs['units'] = ''
 root['/entry/sample/distance'].attrs['EX_required'] = 'true'
+root['/entry/sample/distance'].attrs['units'] = 'NX_LENGTH'
  
 # Valid enumeration values for root['/entry/control']['mode'] are: 
 #	 monitor
 #	 timer
  
 root['/entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/entry/control/mode'].attrs['type'] = 'NX_CHAR'
-root['/entry/control/mode'].attrs['units'] = ''
+root['/entry/control/mode'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/mode'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/entry/control/preset'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/preset'].attrs['units'] = ''
 root['/entry/control/preset'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='integral', data=1.0, maxshape=None)
 root['/entry/control/integral'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/integral'].attrs['units'] = ''
 root['/entry/control/integral'].attrs['EX_required'] = 'true'
+root['/entry/control/integral'].attrs['units'] = 'NX_ANY'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/instrument/detector/data'].attrs['EX_doc'] = '       The area detector data, the first dimension is always the               number of scan points, the second and third are the number               of pixels in x and y. The origin is always assumed to be               in the center of the detector. maxOccurs is limited to the               the number of detectors on your instrument.      '
 root['/entry/instrument/detector'].attrs['EX_doc'] = '      The name of the group is detector if there is only one detector,              if there are several,  names have to be detector1,              detector2, ...detectorn.     '

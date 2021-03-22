@@ -31,62 +31,52 @@ root['/entry/sample'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
 root['/entry/title'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='experiment_identifier', data='!some char data!', maxshape=None)
 root['/entry/experiment_identifier'].attrs['type'] = 'NX_CHAR'
-root['/entry/experiment_identifier'].attrs['units'] = ''
 root['/entry/experiment_identifier'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='experiment_description', data='!some char data!', maxshape=None)
 root['/entry/experiment_description'].attrs['type'] = 'NX_CHAR'
-root['/entry/experiment_description'].attrs['units'] = ''
 root['/entry/experiment_description'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='collection_identifier', data='!some char data!', maxshape=None)
 root['/entry/collection_identifier'].attrs['type'] = 'NX_CHAR'
-root['/entry/collection_identifier'].attrs['units'] = ''
 root['/entry/collection_identifier'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='collection_description', data='!some char data!', maxshape=None)
 root['/entry/collection_description'].attrs['type'] = 'NX_CHAR'
-root['/entry/collection_description'].attrs['units'] = ''
 root['/entry/collection_description'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='entry_identifier', data='!some char data!', maxshape=None)
 root['/entry/entry_identifier'].attrs['type'] = 'NX_CHAR'
-root['/entry/entry_identifier'].attrs['units'] = ''
 root['/entry/entry_identifier'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T14:00:18.816515', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:15.218447', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/start_time'].attrs['units'] = ''
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-22T14:00:18.818514', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-22T16:42:15.219447', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/end_time'].attrs['units'] = ''
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='duration', data=1.0, maxshape=None)
 root['/entry/duration'].attrs['type'] = 'NX_FLOAT'
-root['/entry/duration'].attrs['units'] = ''
 root['/entry/duration'].attrs['EX_required'] = 'true'
+root['/entry/duration'].attrs['units'] = 'NX_TIME'
  
 root['/entry'].create_dataset(name='collection_time', data=1.0, maxshape=None)
 root['/entry/collection_time'].attrs['type'] = 'NX_FLOAT'
-root['/entry/collection_time'].attrs['units'] = ''
 root['/entry/collection_time'].attrs['EX_required'] = 'true'
+root['/entry/collection_time'].attrs['units'] = 'NX_TIME'
  
 root['/entry'].create_dataset(name='run_cycle', data='!some char data!', maxshape=None)
 root['/entry/run_cycle'].attrs['type'] = 'NX_CHAR'
-root['/entry/run_cycle'].attrs['units'] = ''
 root['/entry/run_cycle'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='revision', data='!some char data!', maxshape=None)
 root['/entry/revision'].attrs['type'] = 'NX_CHAR'
-root['/entry/revision'].attrs['units'] = ''
 root['/entry/revision'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
@@ -94,32 +84,27 @@ root['/entry/revision'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='definition', data='NXarchive', maxshape=None)
 root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='program', data='!some char data!', maxshape=None)
 root['/entry/program'].attrs['type'] = 'NX_CHAR'
-root['/entry/program'].attrs['units'] = ''
 root['/entry/program'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='release_date', data='!some char data!', maxshape=None)
 root['/entry/release_date'].attrs['type'] = 'NX_CHAR'
-root['/entry/release_date'].attrs['units'] = ''
 root['/entry/release_date'].attrs['EX_required'] = 'true'
+root['/entry/release_date'].attrs['units'] = 'NX_TIME'
  
 root['/entry/user'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/user/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/user/name'].attrs['units'] = ''
 root['/entry/user/name'].attrs['EX_required'] = 'true'
  
 root['/entry/user'].create_dataset(name='role', data='!some char data!', maxshape=None)
 root['/entry/user/role'].attrs['type'] = 'NX_CHAR'
-root['/entry/user/role'].attrs['units'] = ''
 root['/entry/user/role'].attrs['EX_required'] = 'true'
  
 root['/entry/user'].create_dataset(name='facility_user_id', data='!some char data!', maxshape=None)
 root['/entry/user/facility_user_id'].attrs['type'] = 'NX_CHAR'
-root['/entry/user/facility_user_id'].attrs['units'] = ''
 root['/entry/user/facility_user_id'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/instrument/untitled_source']['type'] are: 
@@ -133,12 +118,10 @@ root['/entry/user/facility_user_id'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/untitled_source'].create_dataset(name='type', data='Spallation Neutron Source', maxshape=None)
 root['/entry/instrument/untitled_source/type'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/untitled_source/type'].attrs['units'] = ''
 root['/entry/instrument/untitled_source/type'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/untitled_source'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/instrument/untitled_source/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/untitled_source/name'].attrs['units'] = ''
 root['/entry/instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/instrument/untitled_source']['probe'] are: 
@@ -148,32 +131,26 @@ root['/entry/instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/untitled_source'].create_dataset(name='probe', data='neutron', maxshape=None)
 root['/entry/instrument/untitled_source/probe'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/untitled_source/probe'].attrs['units'] = ''
 root['/entry/instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/name'].attrs['units'] = ''
 root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument'].create_dataset(name='description', data='!some char data!', maxshape=None)
 root['/entry/instrument/description'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/description'].attrs['units'] = ''
 root['/entry/instrument/description'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/name'].attrs['units'] = ''
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='sample_id', data='!some char data!', maxshape=None)
 root['/entry/sample/sample_id'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/sample_id'].attrs['units'] = ''
 root['/entry/sample/sample_id'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='description', data='!some char data!', maxshape=None)
 root['/entry/sample/description'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/description'].attrs['units'] = ''
 root['/entry/sample/description'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/sample']['type'] are: 
@@ -187,48 +164,45 @@ root['/entry/sample/description'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='type', data='sample', maxshape=None)
 root['/entry/sample/type'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/type'].attrs['units'] = ''
 root['/entry/sample/type'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='chemical_formula', data='!some char data!', maxshape=None)
 root['/entry/sample/chemical_formula'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/chemical_formula'].attrs['units'] = ''
 root['/entry/sample/chemical_formula'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='preparation_date', data='!some char data!', maxshape=None)
 root['/entry/sample/preparation_date'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/preparation_date'].attrs['units'] = ''
 root['/entry/sample/preparation_date'].attrs['EX_required'] = 'true'
+root['/entry/sample/preparation_date'].attrs['units'] = 'NX_TIME'
  
 root['/entry/sample'].create_dataset(name='situation', data='!some char data!', maxshape=None)
 root['/entry/sample/situation'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/situation'].attrs['units'] = ''
 root['/entry/sample/situation'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='temperature', data=1.0, maxshape=None)
 root['/entry/sample/temperature'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/temperature'].attrs['units'] = ''
 root['/entry/sample/temperature'].attrs['EX_required'] = 'true'
+root['/entry/sample/temperature'].attrs['units'] = 'NX_TEMPERATURE'
  
 root['/entry/sample'].create_dataset(name='magnetic_field', data=1.0, maxshape=None)
 root['/entry/sample/magnetic_field'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/magnetic_field'].attrs['units'] = ''
 root['/entry/sample/magnetic_field'].attrs['EX_required'] = 'true'
+root['/entry/sample/magnetic_field'].attrs['units'] = 'NX_CURRENT'
  
 root['/entry/sample'].create_dataset(name='electric_field', data=1.0, maxshape=None)
 root['/entry/sample/electric_field'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/electric_field'].attrs['units'] = ''
 root['/entry/sample/electric_field'].attrs['EX_required'] = 'true'
+root['/entry/sample/electric_field'].attrs['units'] = 'NX_VOLTAGE'
  
 root['/entry/sample'].create_dataset(name='stress_field', data=1.0, maxshape=None)
 root['/entry/sample/stress_field'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/stress_field'].attrs['units'] = ''
 root['/entry/sample/stress_field'].attrs['EX_required'] = 'true'
+root['/entry/sample/stress_field'].attrs['units'] = 'NX_UNITLESS'
  
 root['/entry/sample'].create_dataset(name='pressure', data=1.0, maxshape=None)
 root['/entry/sample/pressure'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/pressure'].attrs['units'] = ''
 root['/entry/sample/pressure'].attrs['EX_required'] = 'true'
+root['/entry/sample/pressure'].attrs['units'] = 'NX_PRESSURE'
 root['/entry/experiment_identifier'].attrs['EX_doc'] = '     unique identifier for the experiment    '
 root['/entry/experiment_description'].attrs['EX_doc'] = '     Brief description of the experiment and its objectives    '
 root['/entry/collection_identifier'].attrs['EX_doc'] = '     ID of user or DAQ define group of data files    '

@@ -53,19 +53,16 @@ root['/untitled_entry/'].create_group('control')
 root['/untitled_entry/control'].attrs['NX_class'] = 'NXmonitor'
 root['/untitled_entry/control'].attrs['EX_required'] = 'false'
  
-root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/untitled_entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T14:00:28.221954', maxshape=None)
+root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.150467', maxshape=None)
 root['/untitled_entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/start_time'].attrs['units'] = ''
 root['/untitled_entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T14:00:28.224249', maxshape=None)
+root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T16:42:16.151464', maxshape=None)
 root['/untitled_entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/end_time'].attrs['units'] = ''
 root['/untitled_entry/end_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
@@ -73,52 +70,42 @@ root['/untitled_entry/end_time'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXstxm', maxshape=None)
 root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='type', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='probe', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/monochromator'].create_dataset(name='energy', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/sample_x'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_instrument/sample_x/data'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/sample_x/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/sample_x/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/sample_y'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_instrument/sample_y/data'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/sample_y/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/sample_y/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/sample_z'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_instrument/sample_z/data'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/sample_z/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/sample_z/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_sample/rotation_angle'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/untitled_data']['stxm_scan_type'] are: 
@@ -133,34 +120,28 @@ root['/untitled_entry/untitled_sample/rotation_angle'].attrs['EX_required'] = 't
 #	 generic scan
  
 root['/untitled_entry/untitled_data'].create_dataset(name='stxm_scan_type', data='sample point spectrum', maxshape=None)
-root['/untitled_entry/untitled_data/stxm_scan_type'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_data/stxm_scan_type'].attrs['units'] = ''
+root['/untitled_entry/untitled_data/stxm_scan_type'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/untitled_data/stxm_scan_type'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_data/data'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/untitled_data/data'].attrs['signal'] = '1'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='energy', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_data/energy'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_data/energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/energy'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='sample_y', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_data/sample_y'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_data/sample_y'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/sample_y'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='sample_x', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_data/sample_x'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_data/sample_x'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/sample_x'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/control'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/untitled_entry/control/data'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/control/data'].attrs['units'] = ''
 root['/untitled_entry/control/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['EX_doc'] = '        Detector data should be presented with the first dimension corresponding to the                     scan point and subsequent dimensions corresponding to the output of the detector.                     Detectors that provide more than one value per scan point should have                     a data array of rank 1+d, where d is the dimensions of the array provided per                     scan point. For example, an area detector should have an NXdetector data array                     of 3 dimensions, with the first being the set of scan points and the latter                      two being the x- and y- extent of the detector.                         NOTE: For each dimension > 1 there must exist a dim section such as:        '

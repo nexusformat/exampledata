@@ -29,53 +29,44 @@ root['/untitled_entry/'].create_group('untitled_data')
 root['/untitled_entry/untitled_data'].attrs['NX_class'] = 'NXdata'
 root['/untitled_entry/untitled_data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='title', data=1, maxshape=None)
+root['/untitled_entry/title'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
 #	 NXxasproc
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXxasproc', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
+root['/untitled_entry/definition'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/name'].attrs['units'] = ''
+root['/untitled_entry/untitled_sample'].create_dataset(name='name', data=1, maxshape=None)
+root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/XAS_data_reduction'].create_dataset(name='program', data='!some char data!', maxshape=None)
 root['/untitled_entry/XAS_data_reduction/program'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/XAS_data_reduction/program'].attrs['units'] = ''
 root['/untitled_entry/XAS_data_reduction/program'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/XAS_data_reduction'].create_dataset(name='version', data='!some char data!', maxshape=None)
 root['/untitled_entry/XAS_data_reduction/version'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/XAS_data_reduction/version'].attrs['units'] = ''
 root['/untitled_entry/XAS_data_reduction/version'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-22T14:00:29.007031', maxshape=None)
+root['/untitled_entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-22T16:42:16.557707', maxshape=None)
 root['/untitled_entry/XAS_data_reduction/date'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/XAS_data_reduction/date'].attrs['units'] = ''
 root['/untitled_entry/XAS_data_reduction/date'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/XAS_data_reduction/parameters'].create_dataset(name='raw_file', data='!some char data!', maxshape=None)
 root['/untitled_entry/XAS_data_reduction/parameters/raw_file'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/XAS_data_reduction/parameters/raw_file'].attrs['units'] = ''
 root['/untitled_entry/XAS_data_reduction/parameters/raw_file'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_data']['energy'] = b"['!']"
 root['/untitled_entry/untitled_data/energy'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_data/energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/energy'].attrs['EX_required'] = 'true'
 root['/untitled_entry/untitled_data/energy'].attrs['axis'] = '1'
  
 root['/untitled_entry/untitled_data'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_data/data'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_data/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_data/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/untitled_entry/untitled_sample/name'].attrs['EX_doc'] = '      Descriptive name of sample     '

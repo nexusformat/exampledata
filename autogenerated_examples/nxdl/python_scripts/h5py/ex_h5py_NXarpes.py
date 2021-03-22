@@ -39,30 +39,25 @@ root['/untitled_entry/untitled_data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
 root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T14:00:18.921276', maxshape=None)
+root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T16:42:15.308396', maxshape=None)
 root['/untitled_entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/start_time'].attrs['units'] = ''
 root['/untitled_entry/start_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
 #	 NXarpes
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXarpes', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
+root['/untitled_entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='type', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/untitled_instrument/untitled_source']['probe'] are: 
@@ -70,22 +65,19 @@ root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['EX_requi
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='probe', data='x-ray', maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/monochromator'].create_dataset(name='energy', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['units'] = 'NX_ENERGY'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/data'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/analyser/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='lens_mode', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/lens_mode'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/analyser/lens_mode'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/lens_mode'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/untitled_instrument/analyser']['acquisition_mode'] are: 
@@ -94,7 +86,6 @@ root['/untitled_entry/untitled_instrument/analyser/lens_mode'].attrs['EX_require
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='acquisition_mode', data='swept', maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/acquisition_mode'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/analyser/acquisition_mode'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/acquisition_mode'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/untitled_instrument/analyser']['entrance_slit_shape'] are: 
@@ -103,13 +94,12 @@ root['/untitled_entry/untitled_instrument/analyser/acquisition_mode'].attrs['EX_
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='entrance_slit_shape', data='curved', maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/entrance_slit_shape'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/analyser/entrance_slit_shape'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/entrance_slit_shape'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='entrance_slit_setting', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/entrance_slit_setting'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/analyser/entrance_slit_setting'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/entrance_slit_setting'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_instrument/analyser/entrance_slit_setting'].attrs['units'] = 'NX_ANY'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='entrance_slit_size', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/entrance_slit_size'].attrs['type'] = 'NX_FLOAT'
@@ -128,38 +118,34 @@ root['/untitled_entry/untitled_instrument/analyser/time_per_channel'].attrs['EX_
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='angles', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/angles'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/analyser/angles'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/angles'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_instrument/analyser/angles'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='energies', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/energies'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/analyser/energies'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/energies'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_instrument/analyser/energies'].attrs['units'] = 'NX_ENERGY'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='sensor_size', data=[1, 1], maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/sensor_size'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/analyser/sensor_size'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/sensor_size'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='region_origin', data=[1, 1], maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/region_origin'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/analyser/region_origin'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/region_origin'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/analyser'].create_dataset(name='region_size', data=[1, 1], maxshape=None)
 root['/untitled_entry/untitled_instrument/analyser/region_size'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/analyser/region_size'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/analyser/region_size'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/name'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='temperature', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/temperature'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/temperature'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/temperature'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_sample/temperature'].attrs['units'] = 'NX_TEMPERATURE'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms.    '
 root['/untitled_entry/untitled_instrument/analyser/lens_mode'].attrs['EX_doc'] = '       setting for the electron analyser lens      '
 root['/untitled_entry/untitled_instrument/analyser/entrance_slit_setting'].attrs['EX_doc'] = '       dial setting of the entrance slit      '

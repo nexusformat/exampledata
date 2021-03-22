@@ -37,27 +37,23 @@ root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
+root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXtomoproc
  
 root['/entry'].create_dataset(name='definition', data='NXtomoproc', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_FLOAT'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/untitled_instrument/untitled_source'].create_dataset(name='type', data='!some char data!', maxshape=None)
-root['/entry/untitled_instrument/untitled_source/type'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_instrument/untitled_source/type'].attrs['units'] = ''
+root['/entry/untitled_instrument/untitled_source'].create_dataset(name='type', data=1.0, maxshape=None)
+root['/entry/untitled_instrument/untitled_source/type'].attrs['type'] = 'NX_FLOAT'
 root['/entry/untitled_instrument/untitled_source/type'].attrs['EX_required'] = 'true'
  
-root['/entry/untitled_instrument/untitled_source'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/untitled_instrument/untitled_source/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_instrument/untitled_source/name'].attrs['units'] = ''
+root['/entry/untitled_instrument/untitled_source'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/entry/untitled_instrument/untitled_source/name'].attrs['type'] = 'NX_FLOAT'
 root['/entry/untitled_instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/untitled_instrument/untitled_source']['probe'] are: 
@@ -66,58 +62,51 @@ root['/entry/untitled_instrument/untitled_source/name'].attrs['EX_required'] = '
 #	 electron
  
 root['/entry/untitled_instrument/untitled_source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/entry/untitled_instrument/untitled_source/probe'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_instrument/untitled_source/probe'].attrs['units'] = ''
+root['/entry/untitled_instrument/untitled_source/probe'].attrs['type'] = 'NX_FLOAT'
 root['/entry/untitled_instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
  
-root['/entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_sample/name'].attrs['units'] = ''
+root['/entry/untitled_sample'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/entry/untitled_sample/name'].attrs['type'] = 'NX_FLOAT'
 root['/entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/reconstruction'].create_dataset(name='program', data='!some char data!', maxshape=None)
 root['/entry/reconstruction/program'].attrs['type'] = 'NX_CHAR'
-root['/entry/reconstruction/program'].attrs['units'] = ''
 root['/entry/reconstruction/program'].attrs['EX_required'] = 'true'
  
 root['/entry/reconstruction'].create_dataset(name='version', data='!some char data!', maxshape=None)
 root['/entry/reconstruction/version'].attrs['type'] = 'NX_CHAR'
-root['/entry/reconstruction/version'].attrs['units'] = ''
 root['/entry/reconstruction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/reconstruction'].create_dataset(name='date', data='2021-03-22T14:00:28.880030', maxshape=None)
+root['/entry/reconstruction'].create_dataset(name='date', data='2021-03-22T16:42:16.495348', maxshape=None)
 root['/entry/reconstruction/date'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/reconstruction/date'].attrs['units'] = ''
 root['/entry/reconstruction/date'].attrs['EX_required'] = 'true'
  
 root['/entry/reconstruction/parameters'].create_dataset(name='raw_file', data='!some char data!', maxshape=None)
 root['/entry/reconstruction/parameters/raw_file'].attrs['type'] = 'NX_CHAR'
-root['/entry/reconstruction/parameters/raw_file'].attrs['units'] = ''
 root['/entry/reconstruction/parameters/raw_file'].attrs['EX_required'] = 'true'
  
 root['/entry/data'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
 root['/entry/data/data'].attrs['type'] = 'NX_INT'
-root['/entry/data/data'].attrs['units'] = ''
 root['/entry/data/data'].attrs['EX_required'] = 'true'
 root['/entry/data/data'].attrs['signal'] = '1'
  
 root['/entry/data'].create_dataset(name='x', data=[1.], maxshape=None, compression="gzip")
 root['/entry/data/x'].attrs['type'] = 'NX_FLOAT'
-root['/entry/data/x'].attrs['units'] = ''
 root['/entry/data/x'].attrs['EX_required'] = 'true'
 root['/entry/data/x'].attrs['axis'] = '1'
+root['/entry/data/x'].attrs['units'] = 'NX_ANY'
  
 root['/entry/data'].create_dataset(name='y', data=[1.], maxshape=None, compression="gzip")
 root['/entry/data/y'].attrs['type'] = 'NX_FLOAT'
-root['/entry/data/y'].attrs['units'] = ''
 root['/entry/data/y'].attrs['EX_required'] = 'true'
 root['/entry/data/y'].attrs['axis'] = '2'
+root['/entry/data/y'].attrs['units'] = 'NX_ANY'
  
 root['/entry/data'].create_dataset(name='z', data=[1.], maxshape=None, compression="gzip")
 root['/entry/data/z'].attrs['type'] = 'NX_FLOAT'
-root['/entry/data/z'].attrs['units'] = ''
 root['/entry/data/z'].attrs['EX_required'] = 'true'
 root['/entry/data/z'].attrs['axis'] = '3'
+root['/entry/data/z'].attrs['units'] = 'NX_ANY'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/untitled_sample/name'].attrs['EX_doc'] = '      Descriptive name of sample     '
 root['/entry/reconstruction/program'].attrs['EX_doc'] = '      Name of the program used for reconstruction     '

@@ -53,37 +53,31 @@ root['/untitled_entry/'].create_group('data')
 root['/untitled_entry/data'].attrs['NX_class'] = 'NXdata'
 root['/untitled_entry/data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='title', data=1, maxshape=None)
+root['/untitled_entry/title'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T14:00:27.801331', maxshape=None)
+root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T16:42:15.944675', maxshape=None)
 root['/untitled_entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/start_time'].attrs['units'] = ''
 root['/untitled_entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T14:00:27.803324', maxshape=None)
+root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T16:42:15.946665', maxshape=None)
 root['/untitled_entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/end_time'].attrs['units'] = ''
 root['/untitled_entry/end_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
 #	 NXsas
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXsas', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
+root['/untitled_entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/instrument/source'].create_dataset(name='type', data='!some char data!', maxshape=None)
-root['/untitled_entry/instrument/source/type'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/instrument/source/type'].attrs['units'] = ''
+root['/untitled_entry/instrument/source'].create_dataset(name='type', data='2021-03-22T16:42:15.948687', maxshape=None)
+root['/untitled_entry/instrument/source/type'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/instrument/source/type'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/instrument/source'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/instrument/source/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/instrument/source/name'].attrs['units'] = ''
+root['/untitled_entry/instrument/source'].create_dataset(name='name', data='2021-03-22T16:42:15.949687', maxshape=None)
+root['/untitled_entry/instrument/source/name'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/instrument/source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/instrument/source']['probe'] are: 
@@ -91,18 +85,16 @@ root['/untitled_entry/instrument/source/name'].attrs['EX_required'] = 'true'
 #	 x-ray
  
 root['/untitled_entry/instrument/source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/untitled_entry/instrument/source/probe'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/instrument/source/probe'].attrs['units'] = ''
+root['/untitled_entry/instrument/source/probe'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/instrument/source/probe'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/instrument/monochromator'].create_dataset(name='wavelength', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/monochromator/wavelength'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/monochromator/wavelength'].attrs['units'] = ''
 root['/untitled_entry/instrument/monochromator/wavelength'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/monochromator/wavelength'].attrs['units'] = 'NX_WAVELENGTH'
  
 root['/untitled_entry/instrument/monochromator'].create_dataset(name='wavelength_spread', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/monochromator/wavelength_spread'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/monochromator/wavelength_spread'].attrs['units'] = ''
 root['/untitled_entry/instrument/monochromator/wavelength_spread'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/instrument/collimator/geometry/shape']['shape'] are: 
@@ -111,98 +103,92 @@ root['/untitled_entry/instrument/monochromator/wavelength_spread'].attrs['EX_req
  
 root['/untitled_entry/instrument/collimator/geometry/shape'].create_dataset(name='shape', data='nxcylinder', maxshape=None)
 root['/untitled_entry/instrument/collimator/geometry/shape/shape'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/instrument/collimator/geometry/shape/shape'].attrs['units'] = ''
 root['/untitled_entry/instrument/collimator/geometry/shape/shape'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/instrument/collimator/geometry/shape'].create_dataset(name='size', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/collimator/geometry/shape/size'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/collimator/geometry/shape/size'].attrs['units'] = ''
 root['/untitled_entry/instrument/collimator/geometry/shape/size'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/collimator/geometry/shape/size'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='data', data=[[1]], maxshape=None, compression="gzip")
 root['/untitled_entry/instrument/detector/data'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/instrument/detector/data'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/instrument/detector/data'].attrs['signal'] = '1'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/distance'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/distance'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/distance'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='x_pixel_size', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/x_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/x_pixel_size'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/x_pixel_size'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/x_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='y_pixel_size', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/y_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/y_pixel_size'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/y_pixel_size'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/y_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='polar_angle', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/polar_angle'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='azimuthal_angle', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/azimuthal_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/azimuthal_angle'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/azimuthal_angle'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/azimuthal_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/rotation_angle'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/rotation_angle'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='aequatorial_angle', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/aequatorial_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/aequatorial_angle'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/aequatorial_angle'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/aequatorial_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='beam_center_x', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/beam_center_x'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/beam_center_x'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/beam_center_x'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/beam_center_x'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/instrument/detector'].create_dataset(name='beam_center_y', data=1.0, maxshape=None)
 root['/untitled_entry/instrument/detector/beam_center_y'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/detector/beam_center_y'].attrs['units'] = ''
 root['/untitled_entry/instrument/detector/beam_center_y'].attrs['EX_required'] = 'true'
+root['/untitled_entry/instrument/detector/beam_center_y'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/instrument'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/untitled_entry/instrument/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/instrument/name'].attrs['units'] = ''
 root['/untitled_entry/instrument/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/untitled_entry/sample/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/sample/name'].attrs['units'] = ''
 root['/untitled_entry/sample/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/sample'].create_dataset(name='aequatorial_angle', data=1.0, maxshape=None)
 root['/untitled_entry/sample/aequatorial_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/sample/aequatorial_angle'].attrs['units'] = ''
 root['/untitled_entry/sample/aequatorial_angle'].attrs['EX_required'] = 'true'
+root['/untitled_entry/sample/aequatorial_angle'].attrs['units'] = 'NX_ANGLE'
  
 # Valid enumeration values for root['/untitled_entry/control']['mode'] are: 
 #	 monitor
 #	 timer
  
 root['/untitled_entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/untitled_entry/control/mode'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/control/mode'].attrs['units'] = ''
+root['/untitled_entry/control/mode'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/control/mode'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/untitled_entry/control/preset'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/control/preset'].attrs['units'] = ''
 root['/untitled_entry/control/preset'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/control'].create_dataset(name='integral', data=1.0, maxshape=None)
 root['/untitled_entry/control/integral'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/control/integral'].attrs['units'] = ''
 root['/untitled_entry/control/integral'].attrs['EX_required'] = 'true'
+root['/untitled_entry/control/integral'].attrs['units'] = 'NX_ANY'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/untitled_entry/instrument/source/type'].attrs['EX_doc'] = '       type of radiation source      '
 root['/untitled_entry/instrument/source/name'].attrs['EX_doc'] = '       Name of the radiation source      '

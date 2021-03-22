@@ -25,43 +25,40 @@ root['/entry/untitled_instrument/'].create_group('disk_chopper')
 root['/entry/untitled_instrument/disk_chopper'].attrs['NX_class'] = 'NXdisk_chopper'
 root['/entry/untitled_instrument/disk_chopper'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
+root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_NUMBER'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T14:00:26.982470', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:15.537329', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/start_time'].attrs['units'] = ''
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXdirecttof
  
 root['/entry'].create_dataset(name='definition', data='NXdirecttof', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry/untitled_instrument/fermi_chopper'].create_dataset(name='rotation_speed', data=1.0, maxshape=None)
 root['/entry/untitled_instrument/fermi_chopper/rotation_speed'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_instrument/fermi_chopper/rotation_speed'].attrs['units'] = ''
 root['/entry/untitled_instrument/fermi_chopper/rotation_speed'].attrs['EX_required'] = 'true'
+root['/entry/untitled_instrument/fermi_chopper/rotation_speed'].attrs['units'] = 'NX_FREQUENCY'
  
 root['/entry/untitled_instrument/fermi_chopper'].create_dataset(name='energy', data=1.0, maxshape=None)
 root['/entry/untitled_instrument/fermi_chopper/energy'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_instrument/fermi_chopper/energy'].attrs['units'] = ''
 root['/entry/untitled_instrument/fermi_chopper/energy'].attrs['EX_required'] = 'true'
+root['/entry/untitled_instrument/fermi_chopper/energy'].attrs['units'] = 'NX_ENERGY'
  
 root['/entry/untitled_instrument/disk_chopper'].create_dataset(name='rotation_speed', data=1.0, maxshape=None)
 root['/entry/untitled_instrument/disk_chopper/rotation_speed'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_instrument/disk_chopper/rotation_speed'].attrs['units'] = ''
 root['/entry/untitled_instrument/disk_chopper/rotation_speed'].attrs['EX_required'] = 'true'
+root['/entry/untitled_instrument/disk_chopper/rotation_speed'].attrs['units'] = 'NX_FREQUENCY'
  
 root['/entry/untitled_instrument/disk_chopper'].create_dataset(name='energy', data=1.0, maxshape=None)
 root['/entry/untitled_instrument/disk_chopper/energy'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_instrument/disk_chopper/energy'].attrs['units'] = ''
 root['/entry/untitled_instrument/disk_chopper/energy'].attrs['EX_required'] = 'true'
+root['/entry/untitled_instrument/disk_chopper/energy'].attrs['units'] = 'NX_ENERGY'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/untitled_instrument/fermi_chopper/rotation_speed'].attrs['EX_doc'] = '       chopper rotation speed      '
 root['/entry/untitled_instrument/fermi_chopper/energy'].attrs['EX_doc'] = '       energy selected      '

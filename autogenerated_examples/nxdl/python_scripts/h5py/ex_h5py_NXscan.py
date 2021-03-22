@@ -33,19 +33,16 @@ root['/untitled_entry/'].create_group('untitled_data')
 root['/untitled_entry/untitled_data'].attrs['NX_class'] = 'NXdata'
 root['/untitled_entry/untitled_data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/untitled_entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T14:00:28.012943', maxshape=None)
+root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.044525', maxshape=None)
 root['/untitled_entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/start_time'].attrs['units'] = ''
 root['/untitled_entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T14:00:28.014944', maxshape=None)
+root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T16:42:16.045524', maxshape=None)
 root['/untitled_entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/end_time'].attrs['units'] = ''
 root['/untitled_entry/end_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
@@ -53,24 +50,20 @@ root['/untitled_entry/end_time'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXscan', maxshape=None)
 root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['signal'] = '1'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_sample/rotation_angle'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['EX_required'] = 'true'
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['axis'] = '1'
  
 root['/untitled_entry/untitled_monitor'].create_dataset(name='data', data=[1], maxshape=None)
 root['/untitled_entry/untitled_monitor/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_monitor/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_monitor/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/'].attrs['default'] = 'untitled_entry'

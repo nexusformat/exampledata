@@ -33,33 +33,32 @@ root['/entry/name'].attrs['EX_required'] = 'true'
 #	 NXxeuler
  
 root['/entry'].create_dataset(name='definition', data='NXxeuler', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_FLOAT'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/polar_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/polar_angle'].attrs['axis'] = '1'
+root['/entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/rotation_angle'].attrs['units'] = ''
 root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
 root['/entry/sample/rotation_angle'].attrs['axis'] = '1'
+root['/entry/sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/sample'].create_dataset(name='chi', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/chi'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/chi'].attrs['units'] = ''
 root['/entry/sample/chi'].attrs['EX_required'] = 'true'
 root['/entry/sample/chi'].attrs['axis'] = '1'
+root['/entry/sample/chi'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/sample'].create_dataset(name='phi', data=[1.], maxshape=None, compression="gzip")
 root['/entry/sample/phi'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/phi'].attrs['units'] = ''
 root['/entry/sample/phi'].attrs['EX_required'] = 'true'
 root['/entry/sample/phi'].attrs['signal'] = '1'
+root['/entry/sample/phi'].attrs['units'] = 'NX_ANGLE'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = '       The polar_angle (two theta) where the detector is placed               at each scan point.      '
 root['/entry/sample/rotation_angle'].attrs['EX_doc'] = '      This is an array holding the sample rotation angle at each             scan point     '

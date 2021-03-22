@@ -37,80 +37,71 @@ root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_CHAR'
-root['/entry/title'].attrs['units'] = ''
+root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T14:00:28.517495', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.293855', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/start_time'].attrs['units'] = ''
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXtofraw
  
 root['/entry'].create_dataset(name='definition', data='NXtofraw', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='duration', data=1.0, maxshape=None)
 root['/entry/duration'].attrs['type'] = 'NX_FLOAT'
-root['/entry/duration'].attrs['units'] = ''
 root['/entry/duration'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='run_number', data=1, maxshape=None)
 root['/entry/run_number'].attrs['type'] = 'NX_INT'
-root['/entry/run_number'].attrs['units'] = ''
 root['/entry/run_number'].attrs['EX_required'] = 'true'
  
 root['/entry'].create_dataset(name='pre_sample_flightpath', data=1.0, maxshape=None)
 root['/entry/pre_sample_flightpath'].attrs['type'] = 'NX_FLOAT'
-root['/entry/pre_sample_flightpath'].attrs['units'] = ''
 root['/entry/pre_sample_flightpath'].attrs['EX_required'] = 'true'
+root['/entry/pre_sample_flightpath'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/user'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/entry/user/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/user/name'].attrs['units'] = ''
 root['/entry/user/name'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/detector'].create_dataset(name='data', data=[np.array([1])], maxshape=None)
 root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/detector/data'].attrs['units'] = ''
 root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
  
 root['/entry/instrument/detector'].create_dataset(name='detector_number', data=[1], maxshape=None)
 root['/entry/instrument/detector/detector_number'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/detector/detector_number'].attrs['units'] = ''
 root['/entry/instrument/detector/detector_number'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/detector_number'].attrs['axis'] = '2'
  
 root['/entry/instrument/detector'].create_dataset(name='distance', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/distance'].attrs['units'] = ''
 root['/entry/instrument/detector/distance'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='time_of_flight', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/time_of_flight'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/time_of_flight'].attrs['units'] = ''
 root['/entry/instrument/detector/time_of_flight'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/time_of_flight'].attrs['axis'] = '1'
+root['/entry/instrument/detector/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
  
 root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/polar_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/instrument/detector'].create_dataset(name='azimuthal_angle', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/azimuthal_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/azimuthal_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/azimuthal_angle'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/azimuthal_angle'].attrs['units'] = 'NX_ANGLE'
  
-root['/entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_sample/name'].attrs['units'] = ''
+root['/entry/untitled_sample'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/entry/untitled_sample/name'].attrs['type'] = 'NX_FLOAT'
 root['/entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/untitled_sample']['nature'] are: 
@@ -120,7 +111,6 @@ root['/entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/untitled_sample'].create_dataset(name='nature', data='powder', maxshape=None)
 root['/entry/untitled_sample/nature'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_sample/nature'].attrs['units'] = ''
 root['/entry/untitled_sample/nature'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/untitled_monitor']['mode'] are: 
@@ -129,35 +119,32 @@ root['/entry/untitled_sample/nature'].attrs['EX_required'] = 'true'
  
 root['/entry/untitled_monitor'].create_dataset(name='mode', data='monitor', maxshape=None)
 root['/entry/untitled_monitor/mode'].attrs['type'] = 'NX_CHAR'
-root['/entry/untitled_monitor/mode'].attrs['units'] = ''
 root['/entry/untitled_monitor/mode'].attrs['EX_required'] = 'true'
  
 root['/entry/untitled_monitor'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/entry/untitled_monitor/preset'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_monitor/preset'].attrs['units'] = ''
 root['/entry/untitled_monitor/preset'].attrs['EX_required'] = 'true'
  
 root['/entry/untitled_monitor'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/entry/untitled_monitor/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_monitor/distance'].attrs['units'] = ''
 root['/entry/untitled_monitor/distance'].attrs['EX_required'] = 'true'
+root['/entry/untitled_monitor/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/untitled_monitor'].create_dataset(name='data', data=[1], maxshape=None)
 root['/entry/untitled_monitor/data'].attrs['type'] = 'NX_INT'
-root['/entry/untitled_monitor/data'].attrs['units'] = ''
 root['/entry/untitled_monitor/data'].attrs['EX_required'] = 'true'
 root['/entry/untitled_monitor/data'].attrs['signal'] = '1'
  
 root['/entry/untitled_monitor'].create_dataset(name='time_of_flight', data=[1.], maxshape=None, compression="gzip")
 root['/entry/untitled_monitor/time_of_flight'].attrs['type'] = 'NX_FLOAT'
-root['/entry/untitled_monitor/time_of_flight'].attrs['units'] = ''
 root['/entry/untitled_monitor/time_of_flight'].attrs['EX_required'] = 'true'
 root['/entry/untitled_monitor/time_of_flight'].attrs['axis'] = '1'
+root['/entry/untitled_monitor/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
  
 root['/entry/untitled_monitor'].create_dataset(name='integral_counts', data=1, maxshape=None)
 root['/entry/untitled_monitor/integral_counts'].attrs['type'] = 'NX_INT'
-root['/entry/untitled_monitor/integral_counts'].attrs['units'] = ''
 root['/entry/untitled_monitor/integral_counts'].attrs['EX_required'] = 'true'
+root['/entry/untitled_monitor/integral_counts'].attrs['units'] = 'NX_UNITLESS'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/pre_sample_flightpath'].attrs['EX_doc'] = '     This is the flight path before the sample position. This can be determined by a chopper,         by the moderator, or the source itself. In other words: it is the distance to the component         which gives the T0 signal to the detector electronics. If another component in the         NXinstrument hierarchy provides this information, this should be a link.    '
 root['/entry/instrument/detector/distance'].attrs['EX_doc'] = '       distance to sample for each detector      '

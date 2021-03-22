@@ -29,13 +29,11 @@ root['/entry/instrument/source/distribution'].attrs['EX_required'] = 'true'
 #	 NXxlaue
  
 root['/entry'].create_dataset(name='definition', data='NXxlaue', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_FLOAT'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/source/distribution']['data'] = b"['!']"
-root['/entry/instrument/source/distribution/data'].attrs['type'] = 'NX_CHAR'
-root['/entry/instrument/source/distribution/data'].attrs['units'] = ''
+root['/entry/instrument/source/distribution'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
+root['/entry/instrument/source/distribution/data'].attrs['type'] = 'NX_FLOAT'
 root['/entry/instrument/source/distribution/data'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/source/distribution'].create_dataset(name='wavelength', data=[1.], maxshape=None, compression="gzip")

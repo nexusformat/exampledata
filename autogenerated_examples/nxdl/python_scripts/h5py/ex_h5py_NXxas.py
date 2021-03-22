@@ -45,61 +45,51 @@ root['/untitled_entry/'].create_group('untitled_data')
 root['/untitled_entry/untitled_data'].attrs['NX_class'] = 'NXdata'
 root['/untitled_entry/untitled_data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='title', data='!some char data!', maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/title'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='title', data=1.0, maxshape=None)
+root['/untitled_entry/title'].attrs['type'] = 'NX_FLOAT'
 root['/untitled_entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T14:00:28.943991', maxshape=None)
+root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.522569', maxshape=None)
 root['/untitled_entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/start_time'].attrs['units'] = ''
 root['/untitled_entry/start_time'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
 #	 NXxas
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXxas', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
+root['/untitled_entry/definition'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='type', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='type', data='2021-03-22T16:42:16.525569', maxshape=None)
+root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/untitled_instrument/untitled_source/type'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='name', data='2021-03-22T16:42:16.526568', maxshape=None)
+root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/untitled_instrument/untitled_source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/untitled_instrument/untitled_source']['probe'] are: 
 #	 x-ray
  
 root['/untitled_entry/untitled_instrument/untitled_source'].create_dataset(name='probe', data='x-ray', maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['units'] = ''
+root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['type'] = 'NX_DATE_TIME'
 root['/untitled_entry/untitled_instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/monochromator'].create_dataset(name='energy', data=[1.], maxshape=None, compression="gzip")
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['EX_required'] = 'true'
 root['/untitled_entry/untitled_instrument/monochromator/energy'].attrs['axis'] = '1'
  
 root['/untitled_entry/untitled_instrument/incoming_beam'].create_dataset(name='data', data=[1], maxshape=None)
 root['/untitled_entry/untitled_instrument/incoming_beam/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/incoming_beam/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/incoming_beam/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/absorbed_beam'].create_dataset(name='data', data=[1], maxshape=None)
 root['/untitled_entry/untitled_instrument/absorbed_beam/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/absorbed_beam/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/absorbed_beam/data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/name'].attrs['units'] = ''
+root['/untitled_entry/untitled_sample'].create_dataset(name='name', data=1, maxshape=None)
+root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/untitled_sample/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry/untitled_monitor']['mode'] are: 
@@ -107,18 +97,15 @@ root['/untitled_entry/untitled_sample/name'].attrs['EX_required'] = 'true'
 #	 timer
  
 root['/untitled_entry/untitled_monitor'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/untitled_entry/untitled_monitor/mode'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_monitor/mode'].attrs['units'] = ''
+root['/untitled_entry/untitled_monitor/mode'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/untitled_monitor/mode'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_monitor'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_monitor/preset'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_monitor/preset'].attrs['units'] = ''
 root['/untitled_entry/untitled_monitor/preset'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_monitor'].create_dataset(name='data', data=[1], maxshape=None)
 root['/untitled_entry/untitled_monitor/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_monitor/data'].attrs['units'] = ''
 root['/untitled_entry/untitled_monitor/data'].attrs['EX_required'] = 'true'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/untitled_entry/untitled_instrument/absorbed_beam/data'].attrs['EX_doc'] = '       mark this field with attribute  ``signal=1``      '

@@ -33,9 +33,8 @@ root['/untitled_entry/'].create_group('untitled_sample')
 root['/untitled_entry/untitled_sample'].attrs['NX_class'] = 'NXsample'
 root['/untitled_entry/untitled_sample'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='program_name', data='!some char data!', maxshape=None)
-root['/untitled_entry/program_name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/program_name'].attrs['units'] = ''
+root['/untitled_entry'].create_dataset(name='program_name', data=1, maxshape=None)
+root['/untitled_entry/program_name'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/program_name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/untitled_entry']['definition'] are: 
@@ -43,89 +42,83 @@ root['/untitled_entry/program_name'].attrs['EX_required'] = 'true'
 #	 NXspe
  
 root['/untitled_entry'].create_dataset(name='definition', data='NXSPE', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['units'] = ''
+root['/untitled_entry/definition'].attrs['type'] = 'NX_INT'
 root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_SPE_info'].create_dataset(name='fixed_energy', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_SPE_info/fixed_energy'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_SPE_info/fixed_energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_SPE_info/fixed_energy'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_SPE_info/fixed_energy'].attrs['units'] = 'NX_ENERGY'
  
 root['/untitled_entry/untitled_SPE_info'].create_dataset(name='ki_over_kf_scaling', data=0, maxshape=None)
 root['/untitled_entry/untitled_SPE_info/ki_over_kf_scaling'].attrs['type'] = 'NX_BOOLEAN'
-root['/untitled_entry/untitled_SPE_info/ki_over_kf_scaling'].attrs['units'] = ''
 root['/untitled_entry/untitled_SPE_info/ki_over_kf_scaling'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_SPE_info'].create_dataset(name='psi', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_SPE_info/psi'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_SPE_info/psi'].attrs['units'] = ''
 root['/untitled_entry/untitled_SPE_info/psi'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_SPE_info/psi'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/data'].create_dataset(name='azimuthal', data=1.0, maxshape=None)
 root['/untitled_entry/data/azimuthal'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/data/azimuthal'].attrs['units'] = ''
 root['/untitled_entry/data/azimuthal'].attrs['EX_required'] = 'true'
+root['/untitled_entry/data/azimuthal'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/data'].create_dataset(name='azimuthal_width', data=1.0, maxshape=None)
 root['/untitled_entry/data/azimuthal_width'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/data/azimuthal_width'].attrs['units'] = ''
 root['/untitled_entry/data/azimuthal_width'].attrs['EX_required'] = 'true'
+root['/untitled_entry/data/azimuthal_width'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/data'].create_dataset(name='polar', data=1.0, maxshape=None)
 root['/untitled_entry/data/polar'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/data/polar'].attrs['units'] = ''
 root['/untitled_entry/data/polar'].attrs['EX_required'] = 'true'
+root['/untitled_entry/data/polar'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/data'].create_dataset(name='polar_width', data=1.0, maxshape=None)
 root['/untitled_entry/data/polar_width'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/data/polar_width'].attrs['units'] = ''
 root['/untitled_entry/data/polar_width'].attrs['EX_required'] = 'true'
+root['/untitled_entry/data/polar_width'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/data'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/untitled_entry/data/distance'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/data/distance'].attrs['units'] = ''
 root['/untitled_entry/data/distance'].attrs['EX_required'] = 'true'
+root['/untitled_entry/data/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/untitled_entry/data'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/untitled_entry/data/data'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/data/data'].attrs['units'] = ''
 root['/untitled_entry/data/data'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/data'].create_dataset(name='error', data=1.0, maxshape=None)
 root['/untitled_entry/data/error'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/data/error'].attrs['units'] = ''
 root['/untitled_entry/data/error'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/data'].create_dataset(name='energy', data=1.0, maxshape=None)
 root['/untitled_entry/data/energy'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/data/energy'].attrs['units'] = ''
 root['/untitled_entry/data/energy'].attrs['EX_required'] = 'true'
+root['/untitled_entry/data/energy'].attrs['units'] = 'NX_ENERGY'
  
 root['/untitled_entry/untitled_instrument'].create_dataset(name='name', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_instrument/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_instrument/name'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/name'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_instrument/untitled_fermi_chopper'].create_dataset(name='energy', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_instrument/untitled_fermi_chopper/energy'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_instrument/untitled_fermi_chopper/energy'].attrs['units'] = ''
 root['/untitled_entry/untitled_instrument/untitled_fermi_chopper/energy'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_instrument/untitled_fermi_chopper/energy'].attrs['units'] = 'NX_ENERGY'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/rotation_angle'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/rotation_angle'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='seblock', data='!some char data!', maxshape=None)
 root['/untitled_entry/untitled_sample/seblock'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/seblock'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/seblock'].attrs['EX_required'] = 'true'
  
 root['/untitled_entry/untitled_sample'].create_dataset(name='temperature', data=1.0, maxshape=None)
 root['/untitled_entry/untitled_sample/temperature'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_sample/temperature'].attrs['units'] = ''
 root['/untitled_entry/untitled_sample/temperature'].attrs['EX_required'] = 'true'
+root['/untitled_entry/untitled_sample/temperature'].attrs['units'] = 'NX_TEMPERATURE'
 root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms.    '
 root['/untitled_entry/untitled_SPE_info/fixed_energy'].attrs['EX_doc'] = '      The fixed energy used for this file.     '
 root['/untitled_entry/untitled_SPE_info/ki_over_kf_scaling'].attrs['EX_doc'] = '      Indicates whether ki/kf scaling has been applied or not.     '

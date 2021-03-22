@@ -37,59 +37,54 @@ root['/entry/name'].attrs['EX_required'] = 'true'
 #	 NXlauetof
  
 root['/entry'].create_dataset(name='definition', data='NXlauetof', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/entry/definition'].attrs['units'] = ''
+root['/entry/definition'].attrs['type'] = 'NX_NUMBER'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=1.0, maxshape=None)
 root['/entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/polar_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/instrument/detector'].create_dataset(name='azimuthal_angle', data=1.0, maxshape=None)
 root['/entry/instrument/detector/azimuthal_angle'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/azimuthal_angle'].attrs['units'] = ''
 root['/entry/instrument/detector/azimuthal_angle'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/azimuthal_angle'].attrs['units'] = 'NX_ANGLE'
  
 root['/entry/instrument/detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
 root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
-root['/entry/instrument/detector/data'].attrs['units'] = ''
 root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
  
 root['/entry/instrument/detector'].create_dataset(name='x_pixel_size', data=1.0, maxshape=None)
 root['/entry/instrument/detector/x_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = ''
 root['/entry/instrument/detector/x_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='y_pixel_size', data=1.0, maxshape=None)
 root['/entry/instrument/detector/y_pixel_size'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = ''
 root['/entry/instrument/detector/y_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='distance', data=1.0, maxshape=None)
 root['/entry/instrument/detector/distance'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/distance'].attrs['units'] = ''
 root['/entry/instrument/detector/distance'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/distance'].attrs['units'] = 'NX_LENGTH'
  
 root['/entry/instrument/detector'].create_dataset(name='time_of_flight', data=[1.], maxshape=None, compression="gzip")
 root['/entry/instrument/detector/time_of_flight'].attrs['type'] = 'NX_FLOAT'
-root['/entry/instrument/detector/time_of_flight'].attrs['units'] = ''
 root['/entry/instrument/detector/time_of_flight'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
  
-root['/entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
-root['/entry/sample/name'].attrs['units'] = ''
+root['/entry/sample'].create_dataset(name='name', data=1.0, maxshape=None)
+root['/entry/sample/name'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='orientation_matrix', data=[[1. , 1. , 1.], [1. , 1. , 1.], [1. , 1. , 1.]], maxshape=None, compression="gzip")
 root['/entry/sample/orientation_matrix'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/orientation_matrix'].attrs['units'] = ''
 root['/entry/sample/orientation_matrix'].attrs['EX_required'] = 'true'
  
 root['/entry/sample'].create_dataset(name='unit_cell', data=[1. , 1. , 1. , 1. , 1. , 1.], maxshape=None, compression="gzip")
 root['/entry/sample/unit_cell'].attrs['type'] = 'NX_FLOAT'
-root['/entry/sample/unit_cell'].attrs['units'] = ''
 root['/entry/sample/unit_cell'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/control']['mode'] are: 
@@ -97,24 +92,21 @@ root['/entry/sample/unit_cell'].attrs['EX_required'] = 'true'
 #	 timer
  
 root['/entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/entry/control/mode'].attrs['type'] = 'NX_CHAR'
-root['/entry/control/mode'].attrs['units'] = ''
+root['/entry/control/mode'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/mode'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
 root['/entry/control/preset'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/preset'].attrs['units'] = ''
 root['/entry/control/preset'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='data', data=[1], maxshape=None)
 root['/entry/control/data'].attrs['type'] = 'NX_INT'
-root['/entry/control/data'].attrs['units'] = ''
 root['/entry/control/data'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='time_of_flight', data=[1.], maxshape=None, compression="gzip")
 root['/entry/control/time_of_flight'].attrs['type'] = 'NX_FLOAT'
-root['/entry/control/time_of_flight'].attrs['units'] = ''
 root['/entry/control/time_of_flight'].attrs['EX_required'] = 'true'
+root['/entry/control/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
 root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
 root['/entry/instrument/detector'].attrs['EX_doc'] = '      This assumes a planar 2D detector. All angles and distances refer to the center of the            detector.     '
 root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = '       The polar_angle (two theta) where the detector is placed.      '

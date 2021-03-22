@@ -106,7 +106,7 @@ nx_unit_types = {
  'NX_VOLTAGE' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of voltage, example(s): V'},
  'NX_VOLUME' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of volume, example(s): m3'},
  'NX_WAVELENGTH' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of wavelength, example(s): angstrom'},
- 'NX_WAVENUMBER' : {'val': 1.0, 'type': 'NX_FLOAT',  'doc':'units of wavenumber or Q, example(s): 1/nm | 1/angstrom'}
+ 'NX_WAVENUMBER' : {'val': 1.0, 'type': 'NX_NUMBER',  'doc':'units of wavenumber or Q, example(s): 1/nm | 1/angstrom'}
 }
 
 h5py_script_lst = []
@@ -202,7 +202,7 @@ def _group(nxgrp, name, nxdata_type, dct={}):
     _string_attr(grp, 'NX_class', nxdata_type)
     return (grp)
 
-def _dataset(nxgrp, name, data, nxdata_type, nx_units='NX_ANY', dset={}, do_print=True):
+def _dataset(nxgrp, name, data, nxdata_type, nx_units='', dset={}, do_print=True):
     '''
     create a dataset, apply compression if the data is an array
     '''
@@ -276,10 +276,12 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units='NX_ANY', dset={}, do_prin
 
     _string_attr(grp, 'type', nxdata_type, do_print)
 
-    if (type(nx_units) is dict):
-        _string_attr(grp, 'units', nx_units['units'], do_print)
-    else:
-        _string_attr(grp, 'units', nx_units, do_print)
+    if len(nx_units) > 0:
+        if (type(nx_units) is dict):
+            _string_attr(grp, 'units', nx_units['units'], do_print)
+        else:
+            _string_attr(grp, 'units', nx_units, do_print)
+
     if ('doc' in list(dset.keys())):
         _string_attr(grp, 'doc', dset['doc'], do_print)
 
@@ -546,8 +548,8 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
                     data[:] = '!some char data!'
 
     units = get_units(nx_type)
-    if units in nx_unit_types.keys():
-        unit_dct = nx_unit_types[units]
+    # if units in nx_unit_types.keys():
+    #     unit_dct = nx_unit_types[units]
     #if there are units specified return a data suitable
     if units.find('NX_WAVENUMBER') > -1:
         if (use_dims):
@@ -726,7 +728,7 @@ def process_symbols(soup, sym_args_dct={}):
         if(type(val) is dict):
             #if users passed in symbols from the command line these will  be in a dict
             val = val['value']
-        
+
         slst.append({'name': sym_nm, 'doc': doc, 'value': val})
         sym_dct[sym_nm] = {'doc': doc, 'value': val}
 
@@ -1269,7 +1271,7 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
                 _string_attr(nx_data_grp, 'signal', dset_nm)
                 _string_attr(nx_data_grp[dset_nm], 'signal', '1')
 
-        _dataset(nf, 'README', readme_string % (rel_ver, clss_nm), 'NX_CHAR', nx_units='NX_ANY', dset={}, do_print=False)
+        _dataset(nf, 'README', readme_string % (rel_ver, clss_nm), 'NX_CHAR', nx_units='NX_UNITLESS', dset={}, do_print=False)
         nf.close()
         #print('finished exporting to [%s]' % fpath)
     else:
