@@ -169,8 +169,9 @@ def fix_non_standard_definition_name(nm):
     where the definition name is NXspe.nxdl.xml
     this is important because cnxvalidate uses what it finds in the definition field as a case sensitive filename to open for validation, so NXSPE.nxdl.xml will fail to open
     '''
-    nms = nm.split('NX')
-    s = 'NX{}'.format(nms[1].lower())
+    #nms = nm.split('NX')
+    #s = 'NX{}'.format(nms[1].lower())
+    s = get_cur_def_name()
     return(s)
 
 def _group(nxgrp, name, nxdata_type, dct={}):
@@ -848,6 +849,7 @@ def get_xml_paths(fname, sym_args_dct={}, dct={}, docs=[], report_symbols_only=F
     def_lst = []
     for ext_clss in extends_lst:
         fpath = Path(str(fpath.absolute()).replace(fpath.name, f'{ext_clss}.nxdl.xml'))
+        tables_dct['main'].insert({'filename': str(fpath.name)})
         _root, _soup = get_xml_root(fpath)
         def_lst.append(get_definition_details(_root, _soup))
 
@@ -901,8 +903,8 @@ def get_definition_details(root, soup, sym_args_dct={}, dct={}, docs=[], report_
                 hsh = hash(ch_dct['xpath'])
                 #
                 if hsh not in ldct.keys():
-                    if ch_dct['xpath'] == '/definition/group/group[1]/field[3]/doc':
-                        print()
+                    # if ch_dct['xpath'] == '/definition/group/group[1]/field[3]/doc':
+                    #     print()
                     #print(ch_dct)
                     if type(ch_dct['ptype']) != str:
                         #this is alikely a Comment() function that is the result of reading <!---> in xml doc
@@ -991,8 +993,20 @@ def get_category():
     '''
     return the category of the nxdl file from the database
     '''
-    category = tables_dct['main'].all()[0]['category']
-    return(category)
+    for d in tables_dct['main'].all():
+        if 'category' in d.keys():
+            return(d['category'])
+    return(None)
+
+def get_cur_def_name():
+    '''
+    return the definition name from the database
+    '''
+    for d in tables_dct['main'].all():
+        if 'filename' in d.keys():
+            return d['filename'].replace('.nxdl.xml', '')
+    return (None)
+
 
 def create_groups(nf):
     '''
@@ -1372,7 +1386,7 @@ def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
         #_string_attr(nf, 'NEXUS_release_ver', rel_ver)
         entry_grp, entry_nm = get_entry(nf)
         #ensure the definition is correct
-        entry_grp['definition'][()] = clss_nm
+        entry_grp['definition'][()] = get_cur_def_name()
         _string_attr(nf, 'default', entry_nm)
         nx_data_grp, nx_data_nm = get_NXdata_nm(nf)
         if (nx_data_nm):
