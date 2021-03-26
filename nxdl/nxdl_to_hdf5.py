@@ -950,8 +950,9 @@ def fix_nx_name(nm):
     it appers to be default that if no name attribute was passed then the NX class name is used in upper case sans 'NX'
     '''
     if nm.find('NX') > -1:
-        #make sure it is a class name not some other name with NX_ in front of it like in NXspe.nxdl.xml
-        if nm.find('NX_') > -1:
+        #make sure it is a class name not some other name with NX_ in front of it like in NXspe.nxdl.xml which has
+        # a field called NXSPE_info
+        if nm.find('_') == -1:
             nm = nm.replace('NX', '')
     return(nm)
 
