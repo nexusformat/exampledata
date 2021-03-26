@@ -251,17 +251,15 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units='', dset={}, do_print=True
         s_data = str(data)
         if name == 'definition':
             s_data = fix_non_standard_definition_name(s_data)
+        if nxdata_type == 'NX_BOOLEAN':
+            s_data = 'np.int8(0)'
 
         if type(data) is str:
             if do_print:
                 h5py_script_lst.append(' ')
                 nxsfrmt_script_lst.append(' ')
                 h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=\'%s\', maxshape=None)' % (nxgrp.name, name, s_data))
-                #h5py_script_lst.append('root[\'%s\'][\'%s\'] = \'%s\'' % (nxgrp.name, name, str(data)))
-                #h5py_script_lst.append('root[\'{}\'][\'{}\'] = \'{}\''.format(nxgrp.name, name, data))
 
-                #print('root[\'%s\'].create_dataset(name=\'%s\', data=\'%s\', maxshape=None)' % (nxgrp.name, name, str(data)))
-                #nxsfrmt_script_lst.append('root[\'%s\'] = NXfield(\'%s\', \'%s\')' % (nxgrp.name, name, data))
                 nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield(\'{}\')'.format(nxgrp.name, name, s_data))
         else:
             if do_print:
@@ -271,13 +269,12 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units='', dset={}, do_print=True
                     # make sure it reads correctly as a numpy array
                     s_data = s_data.replace('array', 'np.array')
                 h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None)' % (nxgrp.name, name, s_data))
-                #h5py_script_lst.append('root[\'%s\'][\'%s\'] = %s' % (nxgrp.name, name, str(data)))
-                #h5py_script_lst.append('root[\'{}\'][\'{}\'] = {}'.format(nxgrp.name, name, data))
 
-                #print(
-                #    'root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None)' % (nxgrp.name, name, str(data)))
-                #nxsfrmt_script_lst.append('root[\'%s\'] = NXfield(\'%s\', \'%s\')' % (nxgrp.name, name, s_data))
-                nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield({})'.format(nxgrp.name, name, data))
+                # catch if it is a NX_BOOLEAN, cnxvalidate needs a specific type not just 0 for False it must be an np.int8
+                if nxdata_type == 'NX_BOOLEAN':
+                    nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield(np.int8(0))'.format(nxgrp.name, name))
+                else:
+                    nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield({})'.format(nxgrp.name, name, data))
 
     # grp_name = get_last_name_from_abspath(dct['abspath'])
     # print('root[\'%s\'] = h5py.create_group(\'%s\')' % (get_parent_path(dct['abspath']), grp_name))
@@ -1269,6 +1266,7 @@ def print_nxsfrmt_ex_start(fname):
     nxsfrmt_script_lst = []
     nxsfrmt_script_lst.append('import os')
     nxsfrmt_script_lst.append('import datetime')
+    nxsfrmt_script_lst.append('import numpy as np')
     nxsfrmt_script_lst.append('import h5py')
     nxsfrmt_script_lst.append('import nexusformat')
     nxsfrmt_script_lst.append('from nexusformat.nexus import *')
