@@ -163,8 +163,8 @@ def node_exists(nf, path):
 def fix_non_standard_definition_name(nm):
     '''
     a hack to catch situations like NXspe specifying an enumeration for the definition of
-        NXSPE
-        NXspe
+       [ 'NXSPE',
+        'NXspe']
 
     where the definition name is NXspe.nxdl.xml
     this is important because cnxvalidate uses what it finds in the definition field as a case sensitive filename to open for validation, so NXSPE.nxdl.xml will fail to open
@@ -951,10 +951,9 @@ def fix_nx_name(nm):
     it appers to be default that if no name attribute was passed then the NX class name is used in upper case sans 'NX'
     '''
     if nm.find('NX') > -1:
-        #remove NX and make it upper case
-        # nm = nm.replace('NX','').upper()
-        #nm = nm.replace('NX', 'untitled_')
-        nm = nm.replace('NX', '')
+        #make sure it is a class name not some other name with NX_ in front of it like in NXspe.nxdl.xml
+        if nm.find('NX_') > -1:
+            nm = nm.replace('NX', '')
     return(nm)
 
 def fix_nx_path(path_str):
