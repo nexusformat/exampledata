@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXtas.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -44,12 +46,14 @@ root['/entry/monitor'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:56.943959', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:33.193580', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -183,36 +187,36 @@ root['/entry/monitor'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/entry/monitor/data'].attrs['type'] = 'NX_FLOAT'
 root['/entry/monitor/data'].attrs['EX_required'] = 'true'
 root['/entry/monitor/data'].attrs['units'] = 'NX_ANY'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/ei'] = h5py.SoftLink('/entry/instrument/monochromator/ei')
 root['/entry/data/ei/'].attrs['target'] = '/entry/instrument/monochromator/ei'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/ef'] = h5py.SoftLink('/entry/title')
 root['/entry/data/ef/'].attrs['target'] = '/entry/instrument/analyzer/ef'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/en'] = h5py.SoftLink('/entry/sample/en')
 root['/entry/data/en/'].attrs['target'] = '/entry/sample/en'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/qh'] = h5py.SoftLink('/entry/sample/qh')
 root['/entry/data/qh/'].attrs['target'] = '/entry/sample/qh'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/qk'] = h5py.SoftLink('/entry/sample/qk')
 root['/entry/data/qk/'].attrs['target'] = '/entry/sample/qk'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/ql'] = h5py.SoftLink('/entry/sample/ql')
 root['/entry/data/ql/'].attrs['target'] = '/entry/sample/ql'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
 root['/entry/monitor/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
@@ -220,6 +224,8 @@ root['/entry/monitor/preset'].attrs['EX_doc'] = ' preset value for time or monit
 root['/entry/monitor/data'].attrs['EX_doc'] = ' Total integral monitor counts '
 root['/entry/data'].attrs['EX_doc'] = ' One of the ei,ef,qh,qk,ql,en should get a primary=1 attribute to denote the main scan axis '
  
+
+# Create the ATTRIBUTES 
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
 root['/entry/data'].attrs['signal'] = 'data'
@@ -228,6 +234,8 @@ root.attrs['file_name'] = os.path.abspath('NXtas')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

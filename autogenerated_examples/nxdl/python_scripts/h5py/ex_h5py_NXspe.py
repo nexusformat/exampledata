@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXspe.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -32,6 +34,8 @@ root['/entry/instrument/NXfermi_chopper'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('sample')
 root['/entry/sample'].attrs['NX_class'] = 'NXsample'
 root['/entry/sample'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='program_name', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/program_name'].attrs['type'] = 'NX_CHAR'
@@ -118,13 +122,15 @@ root['/entry/sample'].create_dataset(name='temperature', data=1.0, maxshape=None
 root['/entry/sample/temperature'].attrs['type'] = 'NX_NUMBER'
 root['/entry/sample/temperature'].attrs['EX_required'] = 'true'
 root['/entry/sample/temperature'].attrs['units'] = 'NX_TEMPERATURE'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms. '
 root['/entry/NXSPE_info/fixed_energy'].attrs['EX_doc'] = ' The fixed energy used for this file. '
 root['/entry/NXSPE_info/ki_over_kf_scaling'].attrs['EX_doc'] = ' Indicates whether ki/kf scaling has been applied or not. '
 root['/entry/NXSPE_info/psi'].attrs['EX_doc'] = ' Orientation angle as expected in DCS-MSlice '
  
+
+# Create the ATTRIBUTES 
 root['/entry/definition'].attrs['version'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
@@ -134,6 +140,8 @@ root.attrs['file_name'] = os.path.abspath('NXspe')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

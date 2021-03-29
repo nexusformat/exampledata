@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXsqom.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -40,6 +42,8 @@ root['/entry/reduction/output'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
@@ -117,8 +121,8 @@ root['/entry/data/en'].attrs['type'] = 'NX_FLOAT'
 root['/entry/data/en'].attrs['EX_required'] = 'true'
 root['/entry/data/en'].attrs['axis'] = '1'
 root['/entry/data/en'].attrs['units'] = 'NX_ENERGY'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/name'].attrs['EX_doc'] = ' Name of the instrument from which this data was reduced. '
 root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
@@ -131,6 +135,8 @@ root['/entry/data/qy'].attrs['EX_doc'] = ' Positions for the the second dimensio
 root['/entry/data/qz'].attrs['EX_doc'] = ' Positions for the the third dimension of Q '
 root['/entry/data/en'].attrs['EX_doc'] = ' Values for the energy transfer for each point '
  
+
+# Create the ATTRIBUTES 
 root['/entry'].attrs['entry'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
@@ -140,6 +146,8 @@ root.attrs['file_name'] = os.path.abspath('NXsqom')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

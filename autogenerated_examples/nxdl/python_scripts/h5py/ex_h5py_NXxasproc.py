@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXxasproc.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -28,6 +30,8 @@ root['/entry/XAS_data_reduction/parameters'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
@@ -52,7 +56,7 @@ root['/entry/XAS_data_reduction'].create_dataset(name='version', data='SAMPLE-CH
 root['/entry/XAS_data_reduction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/XAS_data_reduction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-29T13:50:59.540707', maxshape=None)
+root['/entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-29T15:07:37.314965', maxshape=None)
 root['/entry/XAS_data_reduction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/XAS_data_reduction/date'].attrs['EX_required'] = 'true'
  
@@ -68,8 +72,8 @@ root['/entry/data/energy'].attrs['axis'] = '1'
 root['/entry/data'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/entry/data/data'].attrs['type'] = 'NX_FLOAT'
 root['/entry/data/data'].attrs['EX_required'] = 'true'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
 root['/entry/XAS_data_reduction/program'].attrs['EX_doc'] = ' Name of the program used for reconstruction '
@@ -78,6 +82,8 @@ root['/entry/XAS_data_reduction/date'].attrs['EX_doc'] = ' Date and time of reco
 root['/entry/XAS_data_reduction/parameters/raw_file'].attrs['EX_doc'] = ' Original raw data file this data was derived from '
 root['/entry/data/data'].attrs['EX_doc'] = ' This is corrected and calibrated I(incoming)/I(absorbed). So it is the absorption. Expect attribute ``signal=1`` '
  
+
+# Create the ATTRIBUTES 
 root['/entry'].attrs['entry'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
@@ -87,6 +93,8 @@ root.attrs['file_name'] = os.path.abspath('NXxasproc')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

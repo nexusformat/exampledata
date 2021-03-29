@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXtofraw.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -36,12 +38,14 @@ root['/entry/monitor'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:57.673065', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:34.261057', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -145,20 +149,20 @@ root['/entry/monitor'].create_dataset(name='integral_counts', data=1, maxshape=N
 root['/entry/monitor/integral_counts'].attrs['type'] = 'NX_INT'
 root['/entry/monitor/integral_counts'].attrs['EX_required'] = 'true'
 root['/entry/monitor/integral_counts'].attrs['units'] = 'NX_UNITLESS'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/detector_number'] = h5py.SoftLink('/entry/instrument/detector/detector_number')
 root['/entry/data/detector_number/'].attrs['target'] = '/entry/instrument/detector/detector_number'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/time_of_flight'] = h5py.SoftLink('/entry/instrument/detector/time_of_flight')
 root['/entry/data/time_of_flight/'].attrs['target'] = '/entry/instrument/detector/time_of_flight'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/pre_sample_flightpath'].attrs['EX_doc'] = ' This is the flight path before the sample position. This can be determined by a chopper, by the moderator, or the source itself. In other words: it is the distance to the component which gives the T0 signal to the detector electronics. If another component in the NXinstrument hierarchy provides this information, this should be a link. '
 root['/entry/instrument/detector/distance'].attrs['EX_doc'] = ' distance to sample for each detector '
@@ -168,6 +172,8 @@ root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
 root['/entry/monitor/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
 root['/entry/monitor/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
  
+
+# Create the ATTRIBUTES 
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
 root['/entry/data'].attrs['signal'] = 'data'
@@ -176,6 +182,8 @@ root.attrs['file_name'] = os.path.abspath('NXtofraw')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

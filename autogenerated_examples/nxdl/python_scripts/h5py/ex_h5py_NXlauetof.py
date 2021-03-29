@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXlauetof.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -32,6 +34,8 @@ root['/entry/control'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('name')
 root['/entry/name'].attrs['NX_class'] = 'NXdata'
 root['/entry/name'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXlauetof
@@ -107,16 +111,16 @@ root['/entry/control'].create_dataset(name='time_of_flight', data=1.0, maxshape=
 root['/entry/control/time_of_flight'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/time_of_flight'].attrs['EX_required'] = 'true'
 root['/entry/control/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/name/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/name/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/name/time_of_flight'] = h5py.SoftLink('/entry/instrument/detector/time_of_flight')
 root['/entry/name/time_of_flight/'].attrs['target'] = '/entry/instrument/detector/time_of_flight'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/detector'].attrs['EX_doc'] = ' This assumes a planar 2D detector. All angles and distances refer to the center of the detector. '
 root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = ' The polar_angle (two theta) where the detector is placed. '
@@ -128,6 +132,8 @@ root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on
 root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
 root['/entry/control/data'].attrs['EX_doc'] = ' use these attributes ``primary=1 signal=1`` '
  
+
+# Create the ATTRIBUTES 
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'name'
@@ -137,6 +143,8 @@ root.attrs['file_name'] = os.path.abspath('NXlauetof')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

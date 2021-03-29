@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXcanSAS.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -60,6 +62,8 @@ root['/entry/collection'].attrs['EX_required'] = 'false'
 root['/entry/'].create_group('TRANSMISSION_SPECTRUM')
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['NX_class'] = 'NXdata'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['EX_required'] = 'false'
+
+# Create the FIELDS 
  
 # Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXcanSAS
@@ -311,7 +315,7 @@ root['/entry/process'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxs
 root['/entry/process/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/process/name'].attrs['EX_required'] = 'false'
  
-root['/entry/process'].create_dataset(name='date', data='2021-03-29T13:50:50.597692', maxshape=None)
+root['/entry/process'].create_dataset(name='date', data='2021-03-29T15:07:25.564614', maxshape=None)
 root['/entry/process/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/process/date'].attrs['EX_required'] = 'false'
  
@@ -338,8 +342,8 @@ root['/entry/TRANSMISSION_SPECTRUM'].create_dataset(name='Tdev', data=1.0, maxsh
 root['/entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['type'] = 'NX_NUMBER'
 root['/entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['EX_required'] = 'true'
 root['/entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['units'] = 'NX_DIMENSIONLESS'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry'].attrs['EX_doc'] = ' .. index:: NXcanSAS (applications); SASentry Place the canSAS ``SASentry`` group as a child of a NeXus ``NXentry`` group (when data from multiple techniques are being stored) or as a replacement for the ``NXentry`` group. Note: It is required for all numerical objects to provide a *units* attribute that describes the engineering units. Use the Unidata UDunits [#]_ specification as this is compatible with various community standards. .. [#] The UDunits specification also includes instructions for derived units. '
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this subentry conforms. '
 root['/entry/data'].attrs['EX_doc'] = ' A *SASData* group contains a single reduced small-angle scattering data set that can be represented as :math:`I(\vec{Q})` or :math:`I(|\vec{Q}|)`. *Q* can be either a vector (:math:`\vec{Q}`) or a vector magnitude (:math:`|\vec{Q}|`) The name of each *SASdata* group must be unique within a SASentry group. Suggest using names such as ``sasdata01``. NOTE: For the first *SASdata* group, be sure to write the chosen name into the `SASentry/@default` attribute, as in:: SASentry/@default="sasdata01" A *SASdata* group has several attributes: * I_axes * Q_indices * Mask_indices To indicate the dependency relationships of other varied parameters, use attributes similar to ``@Mask_indices`` (such as ``@Temperature_indices`` or ``@Pressure_indices``). '
@@ -407,6 +411,8 @@ root['/entry/TRANSMISSION_SPECTRUM/lambda'].attrs['EX_doc'] = ' Wavelength of th
 root['/entry/TRANSMISSION_SPECTRUM/T'].attrs['EX_doc'] = ' Transmission values (:math:`I/I_0`) as a function of wavelength. This array is of the same shape as ``lambda`` and ``Tdev``. '
 root['/entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['EX_doc'] = ' .. index:: NXcanSAS (applications); Tdev Estimated uncertainty (usually standard deviation) in :math:`T`. Must have the same units as :math:`T`. This is the field is named in the *uncertainties* attribute of *T*, as in:: T/@uncertainties="Tdev" This array is of the same shape as ``lambda`` and ``T``. '
  
+
+# Create the ATTRIBUTES 
 root['/entry'].attrs['default'] = 'SAMPLE-CHAR-DATA'
 root['/entry'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
 root['/entry'].attrs['version'] = 'SAMPLE-CHAR-DATA'
@@ -416,7 +422,7 @@ root['/entry/data'].attrs['I_axes'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['Q_indices'] = '1'
 root['/entry/data'].attrs['mask'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['Mask_indices'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data'].attrs['timestamp'] = '2021-03-29T13:50:50.658697'
+root['/entry/data'].attrs['timestamp'] = '2021-03-29T15:07:25.631614'
 root['/entry/data/Q'].attrs['units'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/Q'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/Q'].attrs['resolutions'] = 'SAMPLE-CHAR-DATA'
@@ -443,7 +449,7 @@ root['/entry/TRANSMISSION_SPECTRUM'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['signal'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['T_axes'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['name'] = 'SAMPLE-CHAR-DATA'
-root['/entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2021-03-29T13:50:50.667322'
+root['/entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2021-03-29T15:07:25.647616'
 root['/entry/TRANSMISSION_SPECTRUM/T'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'TRANSMISSION_SPECTRUM'
@@ -453,6 +459,8 @@ root.attrs['file_name'] = os.path.abspath('NXcanSAS')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

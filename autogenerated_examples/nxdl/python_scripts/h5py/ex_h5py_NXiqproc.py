@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXiqproc.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -40,6 +42,8 @@ root['/entry/reduction/output'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
@@ -108,8 +112,8 @@ root['/entry/data'].create_dataset(name='qy', data=1.0, maxshape=None)
 root['/entry/data/qy'].attrs['type'] = 'NX_NUMBER'
 root['/entry/data/qy'].attrs['EX_required'] = 'true'
 root['/entry/data/qy'].attrs['axis'] = '3'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/name'].attrs['EX_doc'] = ' Name of the instrument from which this data was reduced. '
 root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
@@ -120,6 +124,8 @@ root['/entry/data/data'].attrs['EX_doc'] = ' This is I(Q). The client has to ana
 root['/entry/data/qx'].attrs['EX_doc'] = ' Values for the first dimension of Q '
 root['/entry/data/qy'].attrs['EX_doc'] = ' Values for the second dimension of Q '
  
+
+# Create the ATTRIBUTES 
 root['/entry'].attrs['entry'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/variable'].attrs['varied_variable'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'
@@ -130,6 +136,8 @@ root.attrs['file_name'] = os.path.abspath('NXiqproc')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

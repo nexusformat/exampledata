@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXstxm.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -52,16 +54,18 @@ root['/entry/data'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('control')
 root['/entry/control'].attrs['NX_class'] = 'NXmonitor'
 root['/entry/control'].attrs['EX_required'] = 'false'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:56.517816', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:32.419258', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T13:50:56.520814', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:07:32.426260', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -143,8 +147,8 @@ root['/entry/data/sample_x'].attrs['EX_required'] = 'true'
 root['/entry/control'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/entry/control/data'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/data'].attrs['EX_required'] = 'true'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' Detector data should be presented with the first dimension corresponding to the scan point and subsequent dimensions corresponding to the output of the detector. Detectors that provide more than one value per scan point should have a data array of rank 1+d, where d is the dimensions of the array provided per scan point. For example, an area detector should have an NXdetector data array of 3 dimensions, with the first being the set of scan points and the latter two being the x- and y- extent of the detector. NOTE: For each dimension > 1 there must exist a dim section such as: '
 root['/entry/instrument/sample_x'].attrs['EX_doc'] = ' Measurements of the sample position from the x-axis interferometer. '
@@ -157,6 +161,8 @@ root['/entry/data/sample_y'].attrs['EX_doc'] = ' List of Y positions on the samp
 root['/entry/data/sample_x'].attrs['EX_doc'] = ' List of X positions on the sample. If scanned through multiple values, then an "axis" attribute will be required to link the field to the appropriate data array dimension. '
 root['/entry/control/data'].attrs['EX_doc'] = ' Values to use to normalise for time-variations in photon flux. Typically, the synchrotron storage ring electron beam current is used as a proxy for the X-ray beam intensity. Array must have same shape as the NXdata groups. '
  
+
+# Create the ATTRIBUTES 
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
 root['/entry/data'].attrs['signal'] = 'data'
@@ -165,6 +171,8 @@ root.attrs['file_name'] = os.path.abspath('NXstxm')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

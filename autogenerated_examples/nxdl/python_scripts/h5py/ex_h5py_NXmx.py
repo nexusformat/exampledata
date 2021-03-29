@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXmx.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -64,20 +66,22 @@ root['/entry/instrument/beam/incident_wavelength_spectrum'].attrs['EX_required']
 root['/entry/'].create_group('source')
 root['/entry/source'].attrs['NX_class'] = 'NXsource'
 root['/entry/source'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:53.871908', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:29.289912', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T13:50:53.875930', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:07:29.293912', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='end_time_estimated', data='2021-03-29T13:50:53.878930', maxshape=None)
+root['/entry'].create_dataset(name='end_time_estimated', data='2021-03-29T15:07:29.296913', maxshape=None)
 root['/entry/end_time_estimated'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time_estimated'].attrs['EX_required'] = 'true'
  
@@ -109,7 +113,7 @@ root['/entry/instrument'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', m
 root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument'].create_dataset(name='time_zone', data='2021-03-29T13:50:53.904911', maxshape=None)
+root['/entry/instrument'].create_dataset(name='time_zone', data='2021-03-29T15:07:29.320913', maxshape=None)
 root['/entry/instrument/time_zone'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/time_zone'].attrs['EX_required'] = 'true'
  
@@ -337,8 +341,8 @@ root['/entry/instrument/beam/incident_polarisation_stokes'].attrs['EX_required']
 root['/entry/source'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/source/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/source/name'].attrs['EX_required'] = 'true'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry'].attrs['EX_doc'] = ' Note, it is recommended that ``file_name`` and ``file_time`` are included     as attributes at the root of a file that includes :ref:`NXmx`. See     :ref:`NXroot`. '
 root['/entry/start_time'].attrs['EX_doc'] = ' ISO 8601 time/date of the first data point collected in UTC,      using the Z suffix to avoid confusion with local time.      Note that the time zone of the beamline should be provided in      NXentry/NXinstrument/time_zone. '
 root['/entry/end_time'].attrs['EX_doc'] = ' ISO 8601 time/date of the last data point collected in UTC,      using the Z suffix to avoid confusion with local time.      Note that the time zone of the beamline should be provided in      NXentry/NXinstrument/time_zone. This field should only be      filled when the value is accurately observed. If the data      collection aborts or otherwise prevents accurate recording of      the end_time, this field should be omitted. '
@@ -405,6 +409,8 @@ root['/entry/instrument/beam/profile'].attrs['EX_doc'] = ' The beam profile, Gau
 root['/entry/source'].attrs['EX_doc'] = ' The neutron or x-ray storage ring/facility. Note, the NXsource base class      has many more fields available, but at present we only require the name. '
 root['/entry/source/name'].attrs['EX_doc'] = ' Name of source. Consistency with the naming in       https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.pdbx_synchrotron_site.html       controlled vocabulary is highly recommended. '
  
+
+# Create the ATTRIBUTES 
 root['/entry'].attrs['version'] = 'SAMPLE-CHAR-DATA'
 root['/entry/instrument/name'].attrs['short_name'] = 'SAMPLE-CHAR-DATA'
 root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['transformation_type'] = 'SAMPLE-CHAR-DATA'
@@ -428,6 +434,8 @@ root.attrs['file_name'] = os.path.abspath('NXmx')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

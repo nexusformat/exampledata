@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXsastof.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -48,12 +50,14 @@ root['/entry/control'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:55.488684', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:30.916535', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -183,16 +187,16 @@ root['/entry/control'].create_dataset(name='time_of_flight', data=1.0, maxshape=
 root['/entry/control/time_of_flight'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/time_of_flight'].attrs['EX_required'] = 'true'
 root['/entry/control/time_of_flight'].attrs['units'] = 'NX_TIME_OF_FLIGHT'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/time_of_flight'] = h5py.SoftLink('/entry/instrument/detector/time_of_flight')
 root['/entry/data/time_of_flight/'].attrs['target'] = '/entry/instrument/detector/time_of_flight'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/source/type'].attrs['EX_doc'] = ' type of radiation source '
 root['/entry/instrument/source/name'].attrs['EX_doc'] = ' Name of the radiation source '
@@ -208,6 +212,8 @@ root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
 root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
 root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
  
+
+# Create the ATTRIBUTES 
 root['/entry'].attrs['entry'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
@@ -217,6 +223,8 @@ root.attrs['file_name'] = os.path.abspath('NXsastof')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXmonopd.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -40,12 +42,14 @@ root['/entry/monitor'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:52.538248', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:27.711509', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -113,16 +117,16 @@ root['/entry/monitor'].create_dataset(name='integral', data=1.0, maxshape=None)
 root['/entry/monitor/integral'].attrs['type'] = 'NX_FLOAT'
 root['/entry/monitor/integral'].attrs['EX_required'] = 'true'
 root['/entry/monitor/integral'].attrs['units'] = 'NX_ANY'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/polar_angle'] = h5py.SoftLink('/entry/instrument/detector/polar_angle')
 root['/entry/data/polar_angle/'].attrs['target'] = '/entry/instrument/detector/polar_angle'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/crystal/wavelength'].attrs['EX_doc'] = ' Optimum diffracted wavelength '
 root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' detector signal (usually counts) are already corrected for detector efficiency '
@@ -134,6 +138,8 @@ root['/entry/monitor/integral'].attrs['EX_doc'] = ' Total integral monitor count
 root['/entry/data/polar_angle'].attrs['EX_doc'] = ' Link to polar angle in /NXentry/NXinstrument/NXdetector '
 root['/entry/data/data'].attrs['EX_doc'] = ' Link to data in /NXentry/NXinstrument/NXdetector '
  
+
+# Create the ATTRIBUTES 
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
 root['/entry/data'].attrs['signal'] = 'data'
@@ -142,6 +148,8 @@ root.attrs['file_name'] = os.path.abspath('NXmonopd')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

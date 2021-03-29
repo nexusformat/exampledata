@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXxbase.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -40,12 +42,14 @@ root['/entry/control'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:50:59.868706', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:37.866964', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -149,12 +153,12 @@ root['/entry/control'].create_dataset(name='integral', data=1.0, maxshape=None)
 root['/entry/control/integral'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/integral'].attrs['EX_required'] = 'true'
 root['/entry/control/integral'].attrs['units'] = 'NX_ANY'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' The area detector data, the first dimension is always the number of scan points, the second and third are the number of pixels in x and y. The origin is always assumed to be in the center of the detector. maxOccurs is limited to the the number of detectors on your instrument. '
 root['/entry/instrument/detector'].attrs['EX_doc'] = ' The name of the group is detector if there is only one detector, if there are several, names have to be detector1, detector2, ...detectorn. '
@@ -171,6 +175,8 @@ root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monit
 root['/entry/control/integral'].attrs['EX_doc'] = ' Total integral monitor counts '
 root['/entry/data'].attrs['EX_doc'] = ' The name of this group id data if there is only one detector; if there are several the names will be data1, data2, data3 and will point to the corresponding detector groups in the instrument hierarchy. '
  
+
+# Create the ATTRIBUTES 
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
@@ -180,6 +186,8 @@ root.attrs['file_name'] = os.path.abspath('NXxbase')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXxlaueplate.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -52,12 +54,14 @@ root['/entry/name'].attrs['EX_required'] = 'true'
 root['/entry/instrument/source/'].create_group('distribution')
 root['/entry/instrument/source/distribution'].attrs['NX_class'] = 'NXdata'
 root['/entry/instrument/source/distribution'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T13:51:02.205693', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:42.088317', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -212,16 +216,16 @@ root['/entry/instrument/detector'].create_dataset(name='diameter', data=1.0, max
 root['/entry/instrument/detector/diameter'].attrs['type'] = 'NX_FLOAT'
 root['/entry/instrument/detector/diameter'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/diameter'].attrs['units'] = 'NX_LENGTH'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
- 
-# Create the soft links 
+
+# Create the LINKS 
 root['/entry/name/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle')
 root['/entry/name/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' The area detector data, the first dimension is always the number of scan points, the second and third are the number of pixels in x and y. The origin is always assumed to be in the center of the detector. maxOccurs is limited to the the number of detectors on your instrument. '
 root['/entry/instrument/detector'].attrs['EX_doc'] = ' The name of the group is detector if there is only one detector, if there are several, names have to be detector1, detector2, ...detectorn. '
@@ -247,6 +251,8 @@ root['/entry/instrument/source/distribution/data'].attrs['EX_doc'] = ' expect ``
 root['/entry/instrument/source/distribution'].attrs['EX_doc'] = ' This is the wavelength distribution of the beam '
 root['/entry/instrument/detector/diameter'].attrs['EX_doc'] = ' The diameter of a cylindrical detector '
  
+
+# Create the ATTRIBUTES 
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
@@ -256,6 +262,8 @@ root.attrs['file_name'] = os.path.abspath('NXxlaueplate')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 

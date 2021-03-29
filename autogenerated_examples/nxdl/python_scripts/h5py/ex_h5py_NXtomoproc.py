@@ -8,6 +8,8 @@ import os
 # installed version of the NEXUS definitions ver[v2020.10] 
  
 root = h5py.File('NXtomoproc.h5', 'w')
+
+# Create the GROUPS 
  
 root.create_group('entry')
 root['/entry'].attrs['NX_class'] = 'NXentry'
@@ -36,6 +38,8 @@ root['/entry/reconstruction/parameters'].attrs['EX_required'] = 'true'
 root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
+
+# Create the FIELDS 
  
 root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
@@ -77,7 +81,7 @@ root['/entry/reconstruction'].create_dataset(name='version', data='SAMPLE-CHAR-D
 root['/entry/reconstruction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/reconstruction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/reconstruction'].create_dataset(name='date', data='2021-03-29T13:50:59.145425', maxshape=None)
+root['/entry/reconstruction'].create_dataset(name='date', data='2021-03-29T15:07:36.603963', maxshape=None)
 root['/entry/reconstruction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/reconstruction/date'].attrs['EX_required'] = 'true'
  
@@ -107,8 +111,8 @@ root['/entry/data/z'].attrs['type'] = 'NX_FLOAT'
 root['/entry/data/z'].attrs['EX_required'] = 'true'
 root['/entry/data/z'].attrs['axis'] = '3'
 root['/entry/data/z'].attrs['units'] = 'NX_ANY'
- 
-# Assign all of the doc strings
+
+# Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
 root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
 root['/entry/reconstruction/program'].attrs['EX_doc'] = ' Name of the program used for reconstruction '
@@ -120,6 +124,8 @@ root['/entry/data/x'].attrs['EX_doc'] = ' This is an array holding the values to
 root['/entry/data/y'].attrs['EX_doc'] = ' This is an array holding the values to use for the y-axis of data. The units must be appropriate for the measurement. '
 root['/entry/data/z'].attrs['EX_doc'] = ' This is an array holding the values to use for the z-axis of data. The units must be appropriate for the measurement. '
  
+
+# Create the ATTRIBUTES 
 root['/entry/data/data'].attrs['transform'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/data'].attrs['offset'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/data'].attrs['scaling'] = 'SAMPLE-CHAR-DATA'
@@ -131,6 +137,8 @@ root.attrs['file_name'] = os.path.abspath('NXtomoproc')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version
 root.attrs['HDF5_Version'] = h5py.version.hdf5_version
+
+# Close the file
 root.close()
 
 
