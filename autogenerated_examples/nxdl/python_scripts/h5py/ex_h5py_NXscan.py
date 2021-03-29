@@ -41,11 +41,11 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:31.136542', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:41.971096', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:07:31.138539', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:51:41.974077', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -79,7 +79,7 @@ root['/entry/data/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle
 root['/entry/data/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
  
 
 # Create the ATTRIBUTES 

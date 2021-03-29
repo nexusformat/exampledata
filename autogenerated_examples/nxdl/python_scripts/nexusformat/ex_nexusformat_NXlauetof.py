@@ -105,16 +105,16 @@ root['/entry/name/data'] = NXlink(target='/entry/instrument/detector/data')
 root['/entry/name/time_of_flight'] = NXlink(target='/entry/instrument/detector/time_of_flight')
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/detector'].attrs['EX_doc'] = ' This assumes a planar 2D detector. All angles and distances refer to the center of the detector. '
-root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = ' The polar_angle (two theta) where the detector is placed. '
-root['/entry/instrument/detector/azimuthal_angle'].attrs['EX_doc'] = ' The azimuthal angle where the detector is placed. '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/sample/orientation_matrix'].attrs['EX_doc'] = ' The orientation matrix according to Busing and Levy conventions. This is not strictly necessary as the UB can always be derived from the data. But let us bow to common usage which includes thie UB nearly always. '
-root['/entry/sample/unit_cell'].attrs['EX_doc'] = ' The unit cell, a, b, c, alpha, beta, gamma. Again, not strictly necessary, but normally written. '
-root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/control/data'].attrs['EX_doc'] = ' use these attributes ``primary=1 signal=1`` '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/detector'].attrs['EX_doc'] = 'This assumes a planar 2D detector. All angles and distances refer to the center of the detector. '
+root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = 'The polar_angle (two theta) where the detector is placed. '
+root['/entry/instrument/detector/azimuthal_angle'].attrs['EX_doc'] = 'The azimuthal angle where the detector is placed. '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/sample/orientation_matrix'].attrs['EX_doc'] = 'The orientation matrix according to Busing and Levy conventions. This is not strictly necessary as the UB can always be derived from the data. But let us bow to common usage which includes thie UB nearly always. '
+root['/entry/sample/unit_cell'].attrs['EX_doc'] = 'The unit cell, a, b, c, alpha, beta, gamma. Again, not strictly necessary, but normally written. '
+root['/entry/control/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/control/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/control/data'].attrs['EX_doc'] = 'use these attributes ``primary=1 signal=1`` '
  
 
 # Create the ATTRIBUTES 

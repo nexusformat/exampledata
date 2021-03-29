@@ -31,11 +31,11 @@ root['/entry/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry/start_time'] = NXfield('2021-03-29T15:07:29.744479')
+root['/entry/start_time'] = NXfield('2021-03-29T15:51:40.531791')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry/end_time'] = NXfield('2021-03-29T15:07:29.747481')
+root['/entry/end_time'] = NXfield('2021-03-29T15:51:40.534797')
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -115,11 +115,11 @@ root['/entry/data/rotation_angle'] = NXlink(target='/entry/sample/rotation_angle
 root['/entry/data/polar_angle'] = NXlink(target='/entry/instrument/detector/polar_angle')
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/control/data'].attrs['EX_doc'] = ' Monitor counts for each step '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/control/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/control/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/control/data'].attrs['EX_doc'] = 'Monitor counts for each step '
  
 
 # Create the ATTRIBUTES 

@@ -29,11 +29,11 @@ root['/entry/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'false'
  
-root['/entry/start_time'] = NXfield('2021-03-29T15:07:35.383177')
+root['/entry/start_time'] = NXfield('2021-03-29T15:51:44.650319')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'false'
  
-root['/entry/end_time'] = NXfield('2021-03-29T15:07:35.388175')
+root['/entry/end_time'] = NXfield('2021-03-29T15:51:44.652319')
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
@@ -133,12 +133,12 @@ root['/entry/data/rotation_angle'] = NXlink(target='/entry/sample/rotation_angle
 root['/entry/data/image_key'] = NXlink(target='/entry/instrument/detector/image_key')
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/detector/image_key'].attrs['EX_doc'] = ' In order    to distinguish between sample projections, dark and flat    images, a magic number is recorded per frame.    The key is as follows:    * projection = 0    * flat field = 1    * dark field = 2    * invalid = 3 '
-root['/entry/instrument/detector/distance'].attrs['EX_doc'] = ' Distance between detector and sample '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/sample/rotation_angle'].attrs['EX_doc'] = ' In practice this axis is always aligned along one pixel direction on the detector and usually vertical.    There are experiments with horizontal rotation axes, so this would need to be indicated somehow.    For now the best way for that is an open question. '
-root['/entry/control/data'].attrs['EX_doc'] = ' Total integral monitor counts for each measured frame. Allows a to correction for fluctuations in the beam between frames. '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/detector/image_key'].attrs['EX_doc'] = 'In order    to distinguish between sample projections, dark and flat    images, a magic number is recorded per frame.    The key is as follows:    * projection = 0    * flat field = 1    * dark field = 2    * invalid = 3 '
+root['/entry/instrument/detector/distance'].attrs['EX_doc'] = 'Distance between detector and sample '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/sample/rotation_angle'].attrs['EX_doc'] = 'In practice this axis is always aligned along one pixel direction on the detector and usually vertical.    There are experiments with horizontal rotation axes, so this would need to be indicated somehow.    For now the best way for that is an open question. '
+root['/entry/control/data'].attrs['EX_doc'] = 'Total integral monitor counts for each measured frame. Allows a to correction for fluctuations in the beam between frames. '
  
 
 # Create the ATTRIBUTES 

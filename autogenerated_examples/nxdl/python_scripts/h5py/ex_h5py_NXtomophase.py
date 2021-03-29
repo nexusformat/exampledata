@@ -53,11 +53,11 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:36.064699', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:45.057350', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:07:36.068699', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:51:45.060350', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -166,10 +166,10 @@ root['/entry/data/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle
 root['/entry/data/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/sample/distance'].attrs['EX_doc'] = ' Distance between detector and sample '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/control/integral'].attrs['EX_doc'] = ' Total integral monitor counts for each measured frame. Allows a correction for fluctuations in the beam between frames. '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/sample/distance'].attrs['EX_doc'] = 'Distance between detector and sample '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/control/integral'].attrs['EX_doc'] = 'Total integral monitor counts for each measured frame. Allows a correction for fluctuations in the beam between frames. '
  
 
 # Create the ATTRIBUTES 

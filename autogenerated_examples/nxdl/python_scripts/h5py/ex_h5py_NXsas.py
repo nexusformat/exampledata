@@ -61,11 +61,11 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:30.404195', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:41.340791', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:07:30.408191', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:51:41.343788', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -199,23 +199,23 @@ root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/source/type'].attrs['EX_doc'] = ' type of radiation source '
-root['/entry/instrument/source/name'].attrs['EX_doc'] = ' Name of the radiation source '
-root['/entry/instrument/monochromator/wavelength'].attrs['EX_doc'] = ' The wavelength of the radiation '
-root['/entry/instrument/monochromator/wavelength_spread'].attrs['EX_doc'] = ' delta_lambda/lambda (:math:`\Delta\lambda/\lambda`):   Important for resolution calculations '
-root['/entry/instrument/collimator/geometry/shape/size'].attrs['EX_doc'] = ' The collimation length '
-root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' This is area detector data, of number of x-pixel versus number of y-pixels. Since the beam center is to be determined as a step of data reduction, it is not necessary to document or assume the position of the beam center in acquired data. '
-root['/entry/instrument/detector/distance'].attrs['EX_doc'] = ' The distance between detector and sample '
-root['/entry/instrument/detector/x_pixel_size'].attrs['EX_doc'] = ' Physical size of a pixel in x-direction '
-root['/entry/instrument/detector/y_pixel_size'].attrs['EX_doc'] = ' Size of a pixel in y direction '
-root['/entry/instrument/detector/beam_center_x'].attrs['EX_doc'] = ' This is the x position where the direct beam would hit the detector. This is a     length, not a pixel position, and can be outside of the actual detector. '
-root['/entry/instrument/detector/beam_center_y'].attrs['EX_doc'] = ' This is the y position where the direct beam would hit the detector. This is a     length, not a pixel position, and can be outside of the actual detector. '
-root['/entry/instrument/name'].attrs['EX_doc'] = ' Name of the instrument actually used to perform the experiment '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time    (timer) or received monitor counts (monitor). '
-root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/control/integral'].attrs['EX_doc'] = ' Total integral monitor counts '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/source/type'].attrs['EX_doc'] = 'type of radiation source '
+root['/entry/instrument/source/name'].attrs['EX_doc'] = 'Name of the radiation source '
+root['/entry/instrument/monochromator/wavelength'].attrs['EX_doc'] = 'The wavelength of the radiation '
+root['/entry/instrument/monochromator/wavelength_spread'].attrs['EX_doc'] = 'delta_lambda/lambda (:math:`\Delta\lambda/\lambda`):   Important for resolution calculations '
+root['/entry/instrument/collimator/geometry/shape/size'].attrs['EX_doc'] = 'The collimation length '
+root['/entry/instrument/detector/data'].attrs['EX_doc'] = 'This is area detector data, of number of x-pixel versus number of y-pixels. Since the beam center is to be determined as a step of data reduction, it is not necessary to document or assume the position of the beam center in acquired data. '
+root['/entry/instrument/detector/distance'].attrs['EX_doc'] = 'The distance between detector and sample '
+root['/entry/instrument/detector/x_pixel_size'].attrs['EX_doc'] = 'Physical size of a pixel in x-direction '
+root['/entry/instrument/detector/y_pixel_size'].attrs['EX_doc'] = 'Size of a pixel in y direction '
+root['/entry/instrument/detector/beam_center_x'].attrs['EX_doc'] = 'This is the x position where the direct beam would hit the detector. This is a     length, not a pixel position, and can be outside of the actual detector. '
+root['/entry/instrument/detector/beam_center_y'].attrs['EX_doc'] = 'This is the y position where the direct beam would hit the detector. This is a     length, not a pixel position, and can be outside of the actual detector. '
+root['/entry/instrument/name'].attrs['EX_doc'] = 'Name of the instrument actually used to perform the experiment '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/control/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time    (timer) or received monitor counts (monitor). '
+root['/entry/control/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/control/integral'].attrs['EX_doc'] = 'Total integral monitor counts '
  
 
 # Create the ATTRIBUTES 

@@ -53,7 +53,7 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:42.737747', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:49.239441', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -199,25 +199,25 @@ root['/entry/name/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle
 root['/entry/name/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' The area detector data, the first dimension is always the number of scan points, the second and third are the number of pixels in x and y. The origin is always assumed to be in the center of the detector. maxOccurs is limited to the the number of detectors on your instrument. '
-root['/entry/instrument/detector'].attrs['EX_doc'] = ' The name of the group is detector if there is only one detector, if there are several, names have to be detector1, detector2, ...detectorn. '
-root['/entry/instrument/detector/frame_start_number'].attrs['EX_doc'] = ' This is the start number of the first frame of a scan. In PX one often scans a couple of frames on a give sample, then does something else, then returns to the same sample and scans some more frames. Each time with a new data file. This number helps concatenating such measurements. '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/sample/orientation_matrix'].attrs['EX_doc'] = ' The orientation matrix according to Busing and Levy conventions. This is not strictly necessary as the UB can always be derived from the data. But let us bow to common usage which includes the UB nearly always. '
-root['/entry/sample/unit_cell'].attrs['EX_doc'] = ' The unit cell, a, b, c, alpha, beta, gamma. Again, not strictly necessary, but normally written. '
-root['/entry/sample/temperature'].attrs['EX_doc'] = ' The sample temperature or whatever sensor represents this value best '
-root['/entry/sample/x_translation'].attrs['EX_doc'] = ' Translation of the sample along the X-direction of the laboratory coordinate system '
-root['/entry/sample/y_translation'].attrs['EX_doc'] = ' Translation of the sample along the Y-direction of the laboratory coordinate system '
-root['/entry/sample/distance'].attrs['EX_doc'] = ' Translation of the sample along the Z-direction of the laboratory coordinate system '
-root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/control/integral'].attrs['EX_doc'] = ' Total integral monitor counts '
-root['/entry/data'].attrs['EX_doc'] = ' The name of this group id data if there is only one detector; if there are several the names will be data1, data2, data3 and will point to the corresponding detector groups in the instrument hierarchy. '
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = ' The polar_angle (gamma) of the detector for each scan point. '
-root['/entry/instrument/detector/tilt_angle'].attrs['EX_doc'] = ' The angle by which the detector has been tilted out of the scattering plane. '
-root['/entry/sample/rotation_angle'].attrs['EX_doc'] = ' This is an array holding the sample rotation angle at each scan point '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/detector/data'].attrs['EX_doc'] = 'The area detector data, the first dimension is always the number of scan points, the second and third are the number of pixels in x and y. The origin is always assumed to be in the center of the detector. maxOccurs is limited to the the number of detectors on your instrument. '
+root['/entry/instrument/detector'].attrs['EX_doc'] = 'The name of the group is detector if there is only one detector, if there are several, names have to be detector1, detector2, ...detectorn. '
+root['/entry/instrument/detector/frame_start_number'].attrs['EX_doc'] = 'This is the start number of the first frame of a scan. In PX one often scans a couple of frames on a give sample, then does something else, then returns to the same sample and scans some more frames. Each time with a new data file. This number helps concatenating such measurements. '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/sample/orientation_matrix'].attrs['EX_doc'] = 'The orientation matrix according to Busing and Levy conventions. This is not strictly necessary as the UB can always be derived from the data. But let us bow to common usage which includes the UB nearly always. '
+root['/entry/sample/unit_cell'].attrs['EX_doc'] = 'The unit cell, a, b, c, alpha, beta, gamma. Again, not strictly necessary, but normally written. '
+root['/entry/sample/temperature'].attrs['EX_doc'] = 'The sample temperature or whatever sensor represents this value best '
+root['/entry/sample/x_translation'].attrs['EX_doc'] = 'Translation of the sample along the X-direction of the laboratory coordinate system '
+root['/entry/sample/y_translation'].attrs['EX_doc'] = 'Translation of the sample along the Y-direction of the laboratory coordinate system '
+root['/entry/sample/distance'].attrs['EX_doc'] = 'Translation of the sample along the Z-direction of the laboratory coordinate system '
+root['/entry/control/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/control/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/control/integral'].attrs['EX_doc'] = 'Total integral monitor counts '
+root['/entry/data'].attrs['EX_doc'] = 'The name of this group id data if there is only one detector; if there are several the names will be data1, data2, data3 and will point to the corresponding detector groups in the instrument hierarchy. '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = 'The polar_angle (gamma) of the detector for each scan point. '
+root['/entry/instrument/detector/tilt_angle'].attrs['EX_doc'] = 'The angle by which the detector has been tilted out of the scattering plane. '
+root['/entry/sample/rotation_angle'].attrs['EX_doc'] = 'This is an array holding the sample rotation angle at each scan point '
  
 
 # Create the ATTRIBUTES 

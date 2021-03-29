@@ -45,11 +45,11 @@ root['/entry/entry_identifier'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/entry_identifier'].attrs['type'] = 'NX_CHAR'
 root['/entry/entry_identifier'].attrs['EX_required'] = 'true'
  
-root['/entry/start_time'] = NXfield('2021-03-29T15:07:22.320657')
+root['/entry/start_time'] = NXfield('2021-03-29T15:51:33.227367')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry/end_time'] = NXfield('2021-03-29T15:07:22.323655')
+root['/entry/end_time'] = NXfield('2021-03-29T15:51:33.233370')
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -197,25 +197,25 @@ root['/entry/sample/pressure'].attrs['EX_required'] = 'true'
 root['/entry/sample/pressure'].attrs['units'] = 'NX_PRESSURE'
 
 # Create the DOC strings 
-root['/entry/experiment_identifier'].attrs['EX_doc'] = ' unique identifier for the experiment '
-root['/entry/experiment_description'].attrs['EX_doc'] = ' Brief description of the experiment and its objectives '
-root['/entry/collection_identifier'].attrs['EX_doc'] = ' ID of user or DAQ define group of data files '
-root['/entry/collection_description'].attrs['EX_doc'] = ' Brief summary of the collection, including grouping criteria '
-root['/entry/entry_identifier'].attrs['EX_doc'] = ' unique identifier for this measurement as provided by the facility '
-root['/entry/duration'].attrs['EX_doc'] = ' TODO: needs documentation '
-root['/entry/collection_time'].attrs['EX_doc'] = ' TODO: needs documentation '
-root['/entry/run_cycle'].attrs['EX_doc'] = ' TODO: needs documentation '
-root['/entry/revision'].attrs['EX_doc'] = ' revision ID of this file, may be after recalibration, reprocessing etc. '
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/program'].attrs['EX_doc'] = ' The program and version used for generating this file '
-root['/entry/release_date'].attrs['EX_doc'] = ' when this file is to be released into PD '
-root['/entry/user/role'].attrs['EX_doc'] = ' role of the user '
-root['/entry/user/facility_user_id'].attrs['EX_doc'] = ' ID of the user in the facility burocracy database '
-root['/entry/instrument/description'].attrs['EX_doc'] = ' Brief description of the instrument '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/sample/sample_id'].attrs['EX_doc'] = ' Unique database id of the sample '
-root['/entry/sample/chemical_formula'].attrs['EX_doc'] = ' Chemical formula formatted according to CIF conventions '
-root['/entry/sample/situation'].attrs['EX_doc'] = ' Description of the environment the sample is in:   air, vacuum, oxidizing atmosphere, dehydrated, etc. '
+root['/entry/experiment_identifier'].attrs['EX_doc'] = 'unique identifier for the experiment '
+root['/entry/experiment_description'].attrs['EX_doc'] = 'Brief description of the experiment and its objectives '
+root['/entry/collection_identifier'].attrs['EX_doc'] = 'ID of user or DAQ define group of data files '
+root['/entry/collection_description'].attrs['EX_doc'] = 'Brief summary of the collection, including grouping criteria '
+root['/entry/entry_identifier'].attrs['EX_doc'] = 'unique identifier for this measurement as provided by the facility '
+root['/entry/duration'].attrs['EX_doc'] = 'TODO: needs documentation '
+root['/entry/collection_time'].attrs['EX_doc'] = 'TODO: needs documentation '
+root['/entry/run_cycle'].attrs['EX_doc'] = 'TODO: needs documentation '
+root['/entry/revision'].attrs['EX_doc'] = 'revision ID of this file, may be after recalibration, reprocessing etc. '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/program'].attrs['EX_doc'] = 'The program and version used for generating this file '
+root['/entry/release_date'].attrs['EX_doc'] = 'when this file is to be released into PD '
+root['/entry/user/role'].attrs['EX_doc'] = 'role of the user '
+root['/entry/user/facility_user_id'].attrs['EX_doc'] = 'ID of the user in the facility burocracy database '
+root['/entry/instrument/description'].attrs['EX_doc'] = 'Brief description of the instrument '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/sample/sample_id'].attrs['EX_doc'] = 'Unique database id of the sample '
+root['/entry/sample/chemical_formula'].attrs['EX_doc'] = 'Chemical formula formatted according to CIF conventions '
+root['/entry/sample/situation'].attrs['EX_doc'] = 'Description of the environment the sample is in:   air, vacuum, oxidizing atmosphere, dehydrated, etc. '
  
 
 # Create the ATTRIBUTES 

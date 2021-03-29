@@ -53,7 +53,7 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:26.042612', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:37.033456', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -191,19 +191,19 @@ root['/entry/data/time_of_flight'] = h5py.SoftLink('/entry/instrument/detector/t
 root['/entry/data/time_of_flight/'].attrs['target'] = '/entry/instrument/detector/time_of_flight'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/pre_sample_flightpath'].attrs['EX_doc'] = ' This is the flight path before the sample position. This can be determined by a chopper, by the moderator, or the source itself. In other words: it is the distance to the component which gives the T0 signal to the detector electronics. If another component in the NXinstrument hierarchy provides this information, this should be a link. '
-root['/entry/instrument/detector/distance'].attrs['EX_doc'] = ' distance to sample for each detector '
-root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = ' polar angle for each detector element '
-root['/entry/instrument/detector/azimuthal_angle'].attrs['EX_doc'] = ' polar angle for each detector element '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/monitor/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/monitor/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/instrument/fermi_chopper/rotation_speed'].attrs['EX_doc'] = ' chopper rotation speed '
-root['/entry/instrument/fermi_chopper/energy'].attrs['EX_doc'] = ' energy selected '
-root['/entry/instrument/disk_chopper/rotation_speed'].attrs['EX_doc'] = ' chopper rotation speed '
-root['/entry/instrument/disk_chopper/energy'].attrs['EX_doc'] = ' energy selected '
-root['/entry/instrument'].attrs['EX_doc'] = ' We definitly want the rotation_speed and energy of the chopper. Thus either a fermi_chopper or a disk_chopper group is required. '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/pre_sample_flightpath'].attrs['EX_doc'] = 'This is the flight path before the sample position. This can be determined by a chopper, by the moderator, or the source itself. In other words: it is the distance to the component which gives the T0 signal to the detector electronics. If another component in the NXinstrument hierarchy provides this information, this should be a link. '
+root['/entry/instrument/detector/distance'].attrs['EX_doc'] = 'distance to sample for each detector '
+root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = 'polar angle for each detector element '
+root['/entry/instrument/detector/azimuthal_angle'].attrs['EX_doc'] = 'polar angle for each detector element '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/monitor/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/monitor/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/instrument/fermi_chopper/rotation_speed'].attrs['EX_doc'] = 'chopper rotation speed '
+root['/entry/instrument/fermi_chopper/energy'].attrs['EX_doc'] = 'energy selected '
+root['/entry/instrument/disk_chopper/rotation_speed'].attrs['EX_doc'] = 'chopper rotation speed '
+root['/entry/instrument/disk_chopper/energy'].attrs['EX_doc'] = 'energy selected '
+root['/entry/instrument'].attrs['EX_doc'] = 'We definitly want the rotation_speed and energy of the chopper. Thus either a fermi_chopper or a disk_chopper group is required. '
  
 
 # Create the ATTRIBUTES 

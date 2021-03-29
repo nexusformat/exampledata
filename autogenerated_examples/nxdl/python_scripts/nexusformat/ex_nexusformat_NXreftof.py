@@ -29,11 +29,11 @@ root['/entry/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry/start_time'] = NXfield('2021-03-29T15:07:30.006018')
+root['/entry/start_time'] = NXfield('2021-03-29T15:51:40.907789')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry/end_time'] = NXfield('2021-03-29T15:07:30.009018')
+root['/entry/end_time'] = NXfield('2021-03-29T15:51:40.911793')
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -128,15 +128,15 @@ root['/entry/data/data'] = NXlink(target='/entry/instrument/detector/data')
 root['/entry/data/time_binning'] = NXlink(target='/entry/title')
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/chopper/distance'].attrs['EX_doc'] = ' Distance between chopper and sample '
-root['/entry/instrument/detector/time_of_flight'].attrs['EX_doc'] = ' Array of time values for each bin in a time-of-flight measurement '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/control/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/control/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/control/integral'].attrs['EX_doc'] = ' Total integral monitor counts '
-root['/entry/control/time_of_flight'].attrs['EX_doc'] = ' Time channels '
-root['/entry/control/data'].attrs['EX_doc'] = ' Monitor counts in each time channel '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/chopper/distance'].attrs['EX_doc'] = 'Distance between chopper and sample '
+root['/entry/instrument/detector/time_of_flight'].attrs['EX_doc'] = 'Array of time values for each bin in a time-of-flight measurement '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/control/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/control/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/control/integral'].attrs['EX_doc'] = 'Total integral monitor counts '
+root['/entry/control/time_of_flight'].attrs['EX_doc'] = 'Time channels '
+root['/entry/control/data'].attrs['EX_doc'] = 'Monitor counts in each time channel '
  
 
 # Create the ATTRIBUTES 

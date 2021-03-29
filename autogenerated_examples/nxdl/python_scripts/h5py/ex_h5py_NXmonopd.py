@@ -49,7 +49,7 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:27.711509', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:38.596455', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -127,16 +127,16 @@ root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/crystal/wavelength'].attrs['EX_doc'] = ' Optimum diffracted wavelength '
-root['/entry/instrument/detector/data'].attrs['EX_doc'] = ' detector signal (usually counts) are already corrected for detector efficiency '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/sample/rotation_angle'].attrs['EX_doc'] = ' Optional rotation angle for the case when the powder diagram has been obtained through an omega-2theta scan like from a traditional single detector powder diffractometer '
-root['/entry/monitor/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/monitor/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/monitor/integral'].attrs['EX_doc'] = ' Total integral monitor counts '
-root['/entry/data/polar_angle'].attrs['EX_doc'] = ' Link to polar angle in /NXentry/NXinstrument/NXdetector '
-root['/entry/data/data'].attrs['EX_doc'] = ' Link to data in /NXentry/NXinstrument/NXdetector '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/crystal/wavelength'].attrs['EX_doc'] = 'Optimum diffracted wavelength '
+root['/entry/instrument/detector/data'].attrs['EX_doc'] = 'detector signal (usually counts) are already corrected for detector efficiency '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/sample/rotation_angle'].attrs['EX_doc'] = 'Optional rotation angle for the case when the powder diagram has been obtained through an omega-2theta scan like from a traditional single detector powder diffractometer '
+root['/entry/monitor/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/monitor/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/monitor/integral'].attrs['EX_doc'] = 'Total integral monitor counts '
+root['/entry/data/polar_angle'].attrs['EX_doc'] = 'Link to polar angle in /NXentry/NXinstrument/NXdetector '
+root['/entry/data/data'].attrs['EX_doc'] = 'Link to data in /NXentry/NXinstrument/NXdetector '
  
 
 # Create the ATTRIBUTES 

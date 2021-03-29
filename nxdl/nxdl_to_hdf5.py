@@ -1274,7 +1274,7 @@ def add_docs(nf, docs):
         while doc_str.find('  ') > -1:
             doc_str = doc_str.replace('  ', ' ')
 
-        _string_attr(pgrp, 'EX_doc', doc_str)
+        _string_attr(pgrp, 'EX_doc', doc_str[1:])
 
 def print_script_start(fname):
     '''

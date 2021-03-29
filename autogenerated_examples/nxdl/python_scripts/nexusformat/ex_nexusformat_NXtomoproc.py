@@ -65,7 +65,7 @@ root['/entry/reconstruction/version'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/reconstruction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/reconstruction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/reconstruction/date'] = NXfield('2021-03-29T15:07:36.603963')
+root['/entry/reconstruction/date'] = NXfield('2021-03-29T15:51:45.375352')
 root['/entry/reconstruction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/reconstruction/date'].attrs['EX_required'] = 'true'
  
@@ -97,16 +97,16 @@ root['/entry/data/z'].attrs['axis'] = '3'
 root['/entry/data/z'].attrs['units'] = 'NX_ANY'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/reconstruction/program'].attrs['EX_doc'] = ' Name of the program used for reconstruction '
-root['/entry/reconstruction/version'].attrs['EX_doc'] = ' Version of the program used '
-root['/entry/reconstruction/date'].attrs['EX_doc'] = ' Date and time of reconstruction processing. '
-root['/entry/reconstruction/parameters/raw_file'].attrs['EX_doc'] = ' Original raw data file this data was derived from '
-root['/entry/data/data'].attrs['EX_doc'] = ' This is the reconstructed volume. This can be different things. Please indicate in the unit attribute what physical quantity this really is. '
-root['/entry/data/x'].attrs['EX_doc'] = ' This is an array holding the values to use for the x-axis of data. The units must be appropriate for the measurement. '
-root['/entry/data/y'].attrs['EX_doc'] = ' This is an array holding the values to use for the y-axis of data. The units must be appropriate for the measurement. '
-root['/entry/data/z'].attrs['EX_doc'] = ' This is an array holding the values to use for the z-axis of data. The units must be appropriate for the measurement. '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/reconstruction/program'].attrs['EX_doc'] = 'Name of the program used for reconstruction '
+root['/entry/reconstruction/version'].attrs['EX_doc'] = 'Version of the program used '
+root['/entry/reconstruction/date'].attrs['EX_doc'] = 'Date and time of reconstruction processing. '
+root['/entry/reconstruction/parameters/raw_file'].attrs['EX_doc'] = 'Original raw data file this data was derived from '
+root['/entry/data/data'].attrs['EX_doc'] = 'This is the reconstructed volume. This can be different things. Please indicate in the unit attribute what physical quantity this really is. '
+root['/entry/data/x'].attrs['EX_doc'] = 'This is an array holding the values to use for the x-axis of data. The units must be appropriate for the measurement. '
+root['/entry/data/y'].attrs['EX_doc'] = 'This is an array holding the values to use for the y-axis of data. The units must be appropriate for the measurement. '
+root['/entry/data/z'].attrs['EX_doc'] = 'This is an array holding the values to use for the z-axis of data. The units must be appropriate for the measurement. '
  
 
 # Create the ATTRIBUTES 

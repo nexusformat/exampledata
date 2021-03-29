@@ -105,17 +105,17 @@ root['/entry/data/en'].attrs['axis'] = '1'
 root['/entry/data/en'].attrs['units'] = 'NX_ENERGY'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/instrument/name'].attrs['EX_doc'] = ' Name of the instrument from which this data was reduced. '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/reduction/input/filenames'].attrs['EX_doc'] = ' Raw data files used to generate this I(Q) '
-root['/entry/reduction/input'].attrs['EX_doc'] = ' Input parameters for the reduction program used '
-root['/entry/reduction/output'].attrs['EX_doc'] = ' Eventual output parameters from the data reduction program used '
-root['/entry/data/data'].attrs['EX_doc'] = ' This is the intensity for each point in QE '
-root['/entry/data/qx'].attrs['EX_doc'] = ' Positions for the first dimension of Q '
-root['/entry/data/qy'].attrs['EX_doc'] = ' Positions for the the second dimension of Q '
-root['/entry/data/qz'].attrs['EX_doc'] = ' Positions for the the third dimension of Q '
-root['/entry/data/en'].attrs['EX_doc'] = ' Values for the energy transfer for each point '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/instrument/name'].attrs['EX_doc'] = 'Name of the instrument from which this data was reduced. '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/reduction/input/filenames'].attrs['EX_doc'] = 'Raw data files used to generate this I(Q) '
+root['/entry/reduction/input'].attrs['EX_doc'] = 'Input parameters for the reduction program used '
+root['/entry/reduction/output'].attrs['EX_doc'] = 'Eventual output parameters from the data reduction program used '
+root['/entry/data/data'].attrs['EX_doc'] = 'This is the intensity for each point in QE '
+root['/entry/data/qx'].attrs['EX_doc'] = 'Positions for the first dimension of Q '
+root['/entry/data/qy'].attrs['EX_doc'] = 'Positions for the the second dimension of Q '
+root['/entry/data/qz'].attrs['EX_doc'] = 'Positions for the the third dimension of Q '
+root['/entry/data/en'].attrs['EX_doc'] = 'Values for the energy transfer for each point '
  
 
 # Create the ATTRIBUTES 

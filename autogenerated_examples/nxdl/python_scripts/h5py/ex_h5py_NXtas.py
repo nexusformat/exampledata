@@ -53,7 +53,7 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:07:33.193580', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:43.263179', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -217,12 +217,12 @@ root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
 root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/monitor/mode'].attrs['EX_doc'] = ' Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
-root['/entry/monitor/preset'].attrs['EX_doc'] = ' preset value for time or monitor '
-root['/entry/monitor/data'].attrs['EX_doc'] = ' Total integral monitor counts '
-root['/entry/data'].attrs['EX_doc'] = ' One of the ei,ef,qh,qk,ql,en should get a primary=1 attribute to denote the main scan axis '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/monitor/mode'].attrs['EX_doc'] = 'Count to a preset value based on either clock time (timer) or received monitor counts (monitor). '
+root['/entry/monitor/preset'].attrs['EX_doc'] = 'preset value for time or monitor '
+root['/entry/monitor/data'].attrs['EX_doc'] = 'Total integral monitor counts '
+root['/entry/data'].attrs['EX_doc'] = 'One of the ei,ef,qh,qk,ql,en should get a primary=1 attribute to denote the main scan axis '
  
 
 # Create the ATTRIBUTES 

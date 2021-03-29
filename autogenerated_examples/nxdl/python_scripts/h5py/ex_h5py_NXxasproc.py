@@ -56,7 +56,7 @@ root['/entry/XAS_data_reduction'].create_dataset(name='version', data='SAMPLE-CH
 root['/entry/XAS_data_reduction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/XAS_data_reduction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-29T15:07:37.314965', maxshape=None)
+root['/entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-29T15:51:45.804350', maxshape=None)
 root['/entry/XAS_data_reduction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/XAS_data_reduction/date'].attrs['EX_required'] = 'true'
  
@@ -74,13 +74,13 @@ root['/entry/data/data'].attrs['type'] = 'NX_FLOAT'
 root['/entry/data/data'].attrs['EX_required'] = 'true'
 
 # Create the DOC strings 
-root['/entry/definition'].attrs['EX_doc'] = ' Official NeXus NXDL schema to which this file conforms '
-root['/entry/sample/name'].attrs['EX_doc'] = ' Descriptive name of sample '
-root['/entry/XAS_data_reduction/program'].attrs['EX_doc'] = ' Name of the program used for reconstruction '
-root['/entry/XAS_data_reduction/version'].attrs['EX_doc'] = ' Version of the program used '
-root['/entry/XAS_data_reduction/date'].attrs['EX_doc'] = ' Date and time of reconstruction processing. '
-root['/entry/XAS_data_reduction/parameters/raw_file'].attrs['EX_doc'] = ' Original raw data file this data was derived from '
-root['/entry/data/data'].attrs['EX_doc'] = ' This is corrected and calibrated I(incoming)/I(absorbed). So it is the absorption. Expect attribute ``signal=1`` '
+root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms '
+root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
+root['/entry/XAS_data_reduction/program'].attrs['EX_doc'] = 'Name of the program used for reconstruction '
+root['/entry/XAS_data_reduction/version'].attrs['EX_doc'] = 'Version of the program used '
+root['/entry/XAS_data_reduction/date'].attrs['EX_doc'] = 'Date and time of reconstruction processing. '
+root['/entry/XAS_data_reduction/parameters/raw_file'].attrs['EX_doc'] = 'Original raw data file this data was derived from '
+root['/entry/data/data'].attrs['EX_doc'] = 'This is corrected and calibrated I(incoming)/I(absorbed). So it is the absorption. Expect attribute ``signal=1`` '
  
 
 # Create the ATTRIBUTES 
