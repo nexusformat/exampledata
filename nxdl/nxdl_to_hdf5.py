@@ -323,8 +323,8 @@ def abspath_lst_to_str(l):
     '''
     assemble a path string from list of names
     '''
-    if l is None:
-        print()
+    # if l is None:
+    #     print()
     s = '/'
     for n in l:
         s += '%s/' % fix_nx_name(n)
@@ -898,8 +898,8 @@ def get_definition_details(root, soup, sym_args_dct={}, dct={}, docs=[], report_
         for ch_dct in ch_lst:
             if ch_dct['ptype'] not in skip_lst:
                 hsh = hash(ch_dct['xpath'])
-                if ch_dct['ptype'] == 'enumeration':
-                    print()
+                # if ch_dct['ptype'] == 'enumeration':
+                #     print()
                 if hsh not in ldct.keys():
                     # if ch_dct['xpath'] == '/definition/group/group[1]/field[3]/doc':
                     #     print()
@@ -1147,13 +1147,17 @@ def fix_link_target(nf, trgt_dct, hdf5_path_lst):
     # nxdata._id.link(source_addr, target_addr, h5py.h5g.LINK_HARD)
 
     '''
-    h5py_script_lst.append(' ')
     ppath = get_parent_path(trgt_dct['abspath'])
     if ppath not in nf:
         print('\t-Error: while checking the links, this parent path [%s] not exist in generated file' % ppath)
         print('\t\ttarget path: [%s] ' % trgt_dct['abspath'])
         exit()
     else:
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('# Create the soft links ')
+        nxsfrmt_script_lst.append(' ')
+        nxsfrmt_script_lst.append('# Create the soft links ')
+
         pgrp = nf[ppath]
         # force link targets to default removal of class type NX, if the have any
         target_str = standardize_link_target_str(trgt_dct['attrib']['target'])
@@ -1181,11 +1185,9 @@ def fix_link_target(nf, trgt_dct, hdf5_path_lst):
             pgrp[link_nm].attrs['target'] = pstr
 
             #need to add this to the list oof script items
-            h5py_script_lst.append(' ')
             h5py_script_lst.append('root[\'%s%s\'] = h5py.SoftLink(\'%s\')' % (ppath, link_nm, pstr))
             h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (trgt_dct['abspath'], 'target', target_str))
 
-            nxsfrmt_script_lst.append(' ')
             nxsfrmt_script_lst.append('root[\'%s%s\'] = NXlink(target=\'%s\')' % (ppath, link_nm, pstr))
             #root['/entry/data/data'] = NXlink(target='/entry/instrument/detector/data')
             #nxsfrmt_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (trgt_dct['abspath'], 'target', target_str))
@@ -1241,6 +1243,11 @@ def add_docs(nf, docs):
     takes a list of dicts that contain doc strings and the paths to the parent field or group, just add the doc string
     as a string attribute to the field or group for the user reference when looking with an hdf5 inspection tool
     '''
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append('# Assign all of the doc strings')
+    nxsfrmt_script_lst.append(' ')
+    nxsfrmt_script_lst.append('# Assign all of the doc strings')
+
     for d in docs:
         # print(d)
         ppath = d['abspath']
@@ -1252,7 +1259,12 @@ def add_docs(nf, docs):
         else:
             pgrp = nf[ppath]
 
-        _string_attr(pgrp, 'EX_doc', d['doc'].replace('\'', '"'))
+        doc_str = d['doc']
+        doc_str = doc_str.replace('\'', '"')
+        while doc_str.find('  ') > -1:
+            doc_str = doc_str.replace('  ', ' ')
+
+        _string_attr(pgrp, 'EX_doc', doc_str)
 
 def print_script_start(fname):
     print_h5py_ex_start(fname)
@@ -1365,7 +1377,7 @@ def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
     create_links(nf)
 
     # add the docs from fields and groups now that they exist
-    add_docs(nf, tables_dct['docs'].all())
+    add_docs(nf, tables_dct['doc'].all())
 
     h5py_script_lst.append(' ')
     nxsfrmt_script_lst.append(' ')
