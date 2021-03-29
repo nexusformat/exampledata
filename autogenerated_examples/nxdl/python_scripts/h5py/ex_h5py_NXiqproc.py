@@ -9,120 +9,112 @@ import os
  
 root = h5py.File('h5py_NXiqproc.h5', 'w')
  
-root.create_group('untitled_entry')
-root['/untitled_entry'].attrs['NX_class'] = 'NXentry'
-root['/untitled_entry'].attrs['EX_required'] = 'true'
+root.create_group('entry')
+root['/entry'].attrs['NX_class'] = 'NXentry'
+root['/entry'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('instrument')
-root['/untitled_entry/instrument'].attrs['NX_class'] = 'NXinstrument'
-root['/untitled_entry/instrument'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('instrument')
+root['/entry/instrument'].attrs['NX_class'] = 'NXinstrument'
+root['/entry/instrument'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/instrument/'].create_group('untitled_source')
-root['/untitled_entry/instrument/untitled_source'].attrs['NX_class'] = 'NXsource'
-root['/untitled_entry/instrument/untitled_source'].attrs['EX_required'] = 'true'
+root['/entry/instrument/'].create_group('source')
+root['/entry/instrument/source'].attrs['NX_class'] = 'NXsource'
+root['/entry/instrument/source'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('untitled_sample')
-root['/untitled_entry/untitled_sample'].attrs['NX_class'] = 'NXsample'
-root['/untitled_entry/untitled_sample'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('sample')
+root['/entry/sample'].attrs['NX_class'] = 'NXsample'
+root['/entry/sample'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('reduction')
-root['/untitled_entry/reduction'].attrs['NX_class'] = 'NXprocess'
-root['/untitled_entry/reduction'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('reduction')
+root['/entry/reduction'].attrs['NX_class'] = 'NXprocess'
+root['/entry/reduction'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/reduction/'].create_group('input')
-root['/untitled_entry/reduction/input'].attrs['NX_class'] = 'NXparameters'
-root['/untitled_entry/reduction/input'].attrs['EX_required'] = 'true'
+root['/entry/reduction/'].create_group('input')
+root['/entry/reduction/input'].attrs['NX_class'] = 'NXparameters'
+root['/entry/reduction/input'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/reduction/'].create_group('output')
-root['/untitled_entry/reduction/output'].attrs['NX_class'] = 'NXparameters'
-root['/untitled_entry/reduction/output'].attrs['EX_required'] = 'true'
+root['/entry/reduction/'].create_group('output')
+root['/entry/reduction/output'].attrs['NX_class'] = 'NXparameters'
+root['/entry/reduction/output'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('untitled_data')
-root['/untitled_entry/untitled_data'].attrs['NX_class'] = 'NXdata'
-root['/untitled_entry/untitled_data'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('data')
+root['/entry/data'].attrs['NX_class'] = 'NXdata'
+root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='title', data=1.0, maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/title'].attrs['EX_required'] = 'true'
+root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_CHAR'
+root['/entry/title'].attrs['EX_required'] = 'true'
  
-# Valid enumeration values for root['/untitled_entry']['definition'] are: 
+# Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXiqproc
  
-root['/untitled_entry'].create_dataset(name='definition', data='NXiqproc', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
+root['/entry'].create_dataset(name='definition', data='NXiqproc', maxshape=None)
+root['/entry/definition'].attrs['type'] = 'NX_CHAR'
+root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/instrument/untitled_source'].create_dataset(name='type', data=1.0, maxshape=None)
-root['/untitled_entry/instrument/untitled_source/type'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/untitled_source/type'].attrs['EX_required'] = 'true'
+root['/entry/instrument/source'].create_dataset(name='type', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/type'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/type'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/instrument/untitled_source'].create_dataset(name='name', data=1.0, maxshape=None)
-root['/untitled_entry/instrument/untitled_source/name'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/untitled_source/name'].attrs['EX_required'] = 'true'
+root['/entry/instrument/source'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/name'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/name'].attrs['EX_required'] = 'true'
  
-# Valid enumeration values for root['/untitled_entry/instrument/untitled_source']['probe'] are: 
+# Valid enumeration values for root['/entry/instrument/source']['probe'] are: 
 #	 neutron
 #	 x-ray
 #	 electron
  
-root['/untitled_entry/instrument/untitled_source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/untitled_entry/instrument/untitled_source/probe'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/instrument/untitled_source/probe'].attrs['EX_required'] = 'true'
+root['/entry/instrument/source'].create_dataset(name='probe', data='neutron', maxshape=None)
+root['/entry/instrument/source/probe'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/probe'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/instrument'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/instrument/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/instrument/name'].attrs['EX_required'] = 'true'
+root['/entry/instrument'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
-root['/untitled_entry/untitled_sample/name'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/untitled_sample/name'].attrs['EX_required'] = 'true'
+root['/entry/sample'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
+root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/reduction'].create_dataset(name='program', data='!some char data!', maxshape=None)
-root['/untitled_entry/reduction/program'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/reduction/program'].attrs['EX_required'] = 'true'
+root['/entry/reduction'].create_dataset(name='program', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/reduction/program'].attrs['type'] = 'NX_CHAR'
+root['/entry/reduction/program'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/reduction'].create_dataset(name='version', data='!some char data!', maxshape=None)
-root['/untitled_entry/reduction/version'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/reduction/version'].attrs['EX_required'] = 'true'
+root['/entry/reduction'].create_dataset(name='version', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/reduction/version'].attrs['type'] = 'NX_CHAR'
+root['/entry/reduction/version'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/reduction/input'].create_dataset(name='filenames', data='!some char data!', maxshape=None)
-root['/untitled_entry/reduction/input/filenames'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/reduction/input/filenames'].attrs['EX_required'] = 'true'
+root['/entry/reduction/input'].create_dataset(name='filenames', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/reduction/input/filenames'].attrs['type'] = 'NX_CHAR'
+root['/entry/reduction/input/filenames'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_data'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
-root['/untitled_entry/untitled_data/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_data/data'].attrs['EX_required'] = 'true'
-root['/untitled_entry/untitled_data/data'].attrs['signal'] = '1'
+root['/entry/data'].create_dataset(name='data', data=1, maxshape=None)
+root['/entry/data/data'].attrs['type'] = 'NX_INT'
+root['/entry/data/data'].attrs['EX_required'] = 'true'
+root['/entry/data/data'].attrs['signal'] = '1'
  
-root['/untitled_entry/untitled_data'].create_dataset(name='variable', data=[1], maxshape=None, compression="gzip")
-root['/untitled_entry/untitled_data/variable'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/variable'].attrs['EX_required'] = 'true'
-root['/untitled_entry/untitled_data/variable'].attrs['axis'] = '1'
+root['/entry/data'].create_dataset(name='variable', data=1.0, maxshape=None)
+root['/entry/data/variable'].attrs['type'] = 'NX_NUMBER'
+root['/entry/data/variable'].attrs['EX_required'] = 'true'
+root['/entry/data/variable'].attrs['axis'] = '1'
  
-root['/untitled_entry/untitled_data'].create_dataset(name='qx', data=[1], maxshape=None, compression="gzip")
-root['/untitled_entry/untitled_data/qx'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/qx'].attrs['EX_required'] = 'true'
-root['/untitled_entry/untitled_data/qx'].attrs['axis'] = '2'
+root['/entry/data'].create_dataset(name='qx', data=1.0, maxshape=None)
+root['/entry/data/qx'].attrs['type'] = 'NX_NUMBER'
+root['/entry/data/qx'].attrs['EX_required'] = 'true'
+root['/entry/data/qx'].attrs['axis'] = '2'
  
-root['/untitled_entry/untitled_data'].create_dataset(name='qy', data=[1], maxshape=None, compression="gzip")
-root['/untitled_entry/untitled_data/qy'].attrs['type'] = 'NX_NUMBER'
-root['/untitled_entry/untitled_data/qy'].attrs['EX_required'] = 'true'
-root['/untitled_entry/untitled_data/qy'].attrs['axis'] = '3'
-root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
-root['/untitled_entry/instrument/name'].attrs['EX_doc'] = '      Name of the instrument from which this data was reduced.     '
-root['/untitled_entry/untitled_sample/name'].attrs['EX_doc'] = '      Descriptive name of sample     '
-root['/untitled_entry/reduction/input/filenames'].attrs['EX_doc'] = '       Raw data files used to generate this I(Q)      '
-root['/untitled_entry/reduction/input'].attrs['EX_doc'] = '      Input parameters for the reduction program used     '
-root['/untitled_entry/reduction/output'].attrs['EX_doc'] = '      Eventual output parameters from the data reduction program used     '
-root['/untitled_entry/untitled_data/data'].attrs['EX_doc'] = '      This is I(Q). The client has to analyse the dimensions                 of I(Q). Often, multiple I(Q) for various environment                 conditions are measured; that would be the first                 dimension. Q can be multidimensional, this accounts for                 the further dimensions in the data     '
-root['/untitled_entry/untitled_data/qx'].attrs['EX_doc'] = '      Values for the first dimension of Q     '
-root['/untitled_entry/untitled_data/qy'].attrs['EX_doc'] = '      Values for the second dimension of Q     '
-root['/untitled_entry'].attrs['entry'] = '!some char data!'
-root['/untitled_entry/untitled_data/variable'].attrs['varied_variable'] = '!some char data!'
-root['/'].attrs['default'] = 'untitled_entry'
-root['/untitled_entry'].attrs['default'] = 'untitled_data'
-root['/untitled_entry/untitled_data'].attrs['signal'] = 'data'
-root['/untitled_entry/untitled_data/data'].attrs['signal'] = '1'
+root['/entry/data'].create_dataset(name='qy', data=1.0, maxshape=None)
+root['/entry/data/qy'].attrs['type'] = 'NX_NUMBER'
+root['/entry/data/qy'].attrs['EX_required'] = 'true'
+root['/entry/data/qy'].attrs['axis'] = '3'
+ 
+root['/entry'].attrs['entry'] = 'SAMPLE-CHAR-DATA'
+root['/entry/data/variable'].attrs['varied_variable'] = 'SAMPLE-CHAR-DATA'
+root['/'].attrs['default'] = 'entry'
+root['/entry'].attrs['default'] = 'data'
+root['/entry/data'].attrs['signal'] = 'data'
+root['/entry/data/data'].attrs['signal'] = '1'
 root.attrs['file_name'] = os.path.abspath('NXiqproc')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version

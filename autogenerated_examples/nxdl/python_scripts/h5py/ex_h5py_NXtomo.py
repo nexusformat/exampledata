@@ -17,9 +17,9 @@ root['/entry/'].create_group('instrument')
 root['/entry/instrument'].attrs['NX_class'] = 'NXinstrument'
 root['/entry/instrument'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/'].create_group('untitled_source')
-root['/entry/instrument/untitled_source'].attrs['NX_class'] = 'NXsource'
-root['/entry/instrument/untitled_source'].attrs['EX_required'] = 'false'
+root['/entry/instrument/'].create_group('source')
+root['/entry/instrument/source'].attrs['NX_class'] = 'NXsource'
+root['/entry/instrument/source'].attrs['EX_required'] = 'false'
  
 root['/entry/instrument/'].create_group('detector')
 root['/entry/instrument/detector'].attrs['NX_class'] = 'NXdetector'
@@ -37,15 +37,15 @@ root['/entry/'].create_group('data')
 root['/entry/data'].attrs['NX_class'] = 'NXdata'
 root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_FLOAT'
+root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.405774', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-26T13:07:57.457568', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-22T16:42:16.407494', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2021-03-26T13:07:57.460549', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
@@ -53,32 +53,32 @@ root['/entry/end_time'].attrs['EX_required'] = 'false'
 #	 NXtomo
  
 root['/entry'].create_dataset(name='definition', data='NXtomo', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/definition'].attrs['type'] = 'NX_CHAR'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/untitled_source'].create_dataset(name='type', data='2021-03-22T16:42:16.410511', maxshape=None)
-root['/entry/instrument/untitled_source/type'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/instrument/untitled_source/type'].attrs['EX_required'] = 'false'
+root['/entry/instrument/source'].create_dataset(name='type', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/type'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/type'].attrs['EX_required'] = 'false'
  
-root['/entry/instrument/untitled_source'].create_dataset(name='name', data='2021-03-22T16:42:16.411512', maxshape=None)
-root['/entry/instrument/untitled_source/name'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/instrument/untitled_source/name'].attrs['EX_required'] = 'false'
+root['/entry/instrument/source'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/name'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/name'].attrs['EX_required'] = 'false'
  
-# Valid enumeration values for root['/entry/instrument/untitled_source']['probe'] are: 
+# Valid enumeration values for root['/entry/instrument/source']['probe'] are: 
 #	 neutron
 #	 x-ray
 #	 electron
  
-root['/entry/instrument/untitled_source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/entry/instrument/untitled_source/probe'].attrs['type'] = 'NX_DATE_TIME'
-root['/entry/instrument/untitled_source/probe'].attrs['EX_required'] = 'false'
+root['/entry/instrument/source'].create_dataset(name='probe', data='neutron', maxshape=None)
+root['/entry/instrument/source/probe'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/probe'].attrs['EX_required'] = 'false'
  
-root['/entry/instrument/detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
+root['/entry/instrument/detector'].create_dataset(name='data', data=1, maxshape=None)
 root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
 root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
  
-root['/entry/instrument/detector'].create_dataset(name='image_key', data=[1], maxshape=None)
+root['/entry/instrument/detector'].create_dataset(name='image_key', data=1, maxshape=None)
 root['/entry/instrument/detector/image_key'].attrs['type'] = 'NX_INT'
 root['/entry/instrument/detector/image_key'].attrs['EX_required'] = 'true'
  
@@ -105,43 +105,52 @@ root['/entry/instrument/detector'].create_dataset(name='y_rotation_axis_pixel_po
 root['/entry/instrument/detector/y_rotation_axis_pixel_position'].attrs['type'] = 'NX_FLOAT'
 root['/entry/instrument/detector/y_rotation_axis_pixel_position'].attrs['EX_required'] = 'false'
  
-root['/entry/sample'].create_dataset(name='name', data=1.0, maxshape=None)
-root['/entry/sample/name'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
-root['/entry/sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
 root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
 root['/entry/sample/rotation_angle'].attrs['axis'] = '1'
 root['/entry/sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
  
-root['/entry/sample'].create_dataset(name='x_translation', data=[1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='x_translation', data=1.0, maxshape=None)
 root['/entry/sample/x_translation'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/x_translation'].attrs['EX_required'] = 'false'
 root['/entry/sample/x_translation'].attrs['units'] = 'NX_LENGTH'
  
-root['/entry/sample'].create_dataset(name='y_translation', data=[1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='y_translation', data=1.0, maxshape=None)
 root['/entry/sample/y_translation'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/y_translation'].attrs['EX_required'] = 'false'
 root['/entry/sample/y_translation'].attrs['units'] = 'NX_LENGTH'
  
-root['/entry/sample'].create_dataset(name='z_translation', data=[1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='z_translation', data=1.0, maxshape=None)
 root['/entry/sample/z_translation'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/z_translation'].attrs['EX_required'] = 'false'
 root['/entry/sample/z_translation'].attrs['units'] = 'NX_LENGTH'
  
-root['/entry/control'].create_dataset(name='data', data=[1.], maxshape=None, compression="gzip")
+root['/entry/control'].create_dataset(name='data', data=1.0, maxshape=None)
 root['/entry/control/data'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/data'].attrs['EX_required'] = 'true'
 root['/entry/control/data'].attrs['units'] = 'NX_ANY'
-root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
-root['/entry/instrument/detector/image_key'].attrs['EX_doc'] = '       In order    to distinguish between sample projections, dark and flat    images, a magic number is recorded per frame.    The key is as follows:     * projection = 0    * flat field = 1    * dark field = 2    * invalid = 3      '
-root['/entry/instrument/detector/distance'].attrs['EX_doc'] = '       Distance between detector and sample      '
-root['/entry/sample/name'].attrs['EX_doc'] = '      Descriptive name of sample     '
-root['/entry/sample/rotation_angle'].attrs['EX_doc'] = '      In practice this axis is always aligned along one pixel direction on the detector and usually vertical.    There are experiments with horizontal rotation axes, so this would need to be indicated somehow.    For now the best way for that is an open question.     '
-root['/entry/control/data'].attrs['EX_doc'] = '      Total integral monitor counts for each measured frame. Allows a to correction for           fluctuations in the beam between frames.     '
+ 
+ 
+root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
+root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
+ 
+ 
+root['/entry/data/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle')
+root['/entry/data/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
+ 
+ 
+root['/entry/data/image_key'] = h5py.SoftLink('/entry/instrument/detector/image_key')
+root['/entry/data/image_key/'].attrs['target'] = '/entry/instrument/detector/image_key'
+ 
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'
+root['/entry/data'].attrs['signal'] = 'data'
+root['/entry/data/data'].attrs['signal'] = '1'
 root.attrs['file_name'] = os.path.abspath('NXtomo')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version

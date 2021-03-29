@@ -17,6 +17,14 @@ root['/entry/'].create_group('instrument')
 root['/entry/instrument'].attrs['NX_class'] = 'NXinstrument'
 root['/entry/instrument'].attrs['EX_required'] = 'true'
  
+root['/entry/instrument/'].create_group('source')
+root['/entry/instrument/source'].attrs['NX_class'] = 'NXsource'
+root['/entry/instrument/source'].attrs['EX_required'] = 'true'
+ 
+root['/entry/instrument/'].create_group('monochromator')
+root['/entry/instrument/monochromator'].attrs['NX_class'] = 'NXmonochromator'
+root['/entry/instrument/monochromator'].attrs['EX_required'] = 'true'
+ 
 root['/entry/instrument/'].create_group('detector')
 root['/entry/instrument/detector'].attrs['NX_class'] = 'NXdetector'
 root['/entry/instrument/detector'].attrs['EX_required'] = 'true'
@@ -25,41 +33,172 @@ root['/entry/'].create_group('sample')
 root['/entry/sample'].attrs['NX_class'] = 'NXsample'
 root['/entry/sample'].attrs['EX_required'] = 'true'
  
+root['/entry/'].create_group('control')
+root['/entry/control'].attrs['NX_class'] = 'NXmonitor'
+root['/entry/control'].attrs['EX_required'] = 'true'
+ 
+root['/entry/'].create_group('data')
+root['/entry/data'].attrs['NX_class'] = 'NXdata'
+root['/entry/data'].attrs['EX_required'] = 'true'
+ 
 root['/entry/'].create_group('name')
 root['/entry/name'].attrs['NX_class'] = 'NXdata'
 root['/entry/name'].attrs['EX_required'] = 'true'
  
+root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_CHAR'
+root['/entry/title'].attrs['EX_required'] = 'true'
+ 
+root['/entry'].create_dataset(name='start_time', data='2021-03-26T13:08:01.724187', maxshape=None)
+root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/start_time'].attrs['EX_required'] = 'true'
+ 
 # Valid enumeration values for root['/entry']['definition'] are: 
+#	 NXxbase
 #	 NXxnb
  
-root['/entry'].create_dataset(name='definition', data='NXxnb', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_FLOAT'
+root['/entry'].create_dataset(name='definition', data='NXxbase', maxshape=None)
+root['/entry/definition'].attrs['type'] = 'NX_CHAR'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=[1.], maxshape=None, compression="gzip")
+root['/entry/instrument/source'].create_dataset(name='type', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/type'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/type'].attrs['EX_required'] = 'true'
+ 
+root['/entry/instrument/source'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/name'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/name'].attrs['EX_required'] = 'true'
+ 
+# Valid enumeration values for root['/entry/instrument/source']['probe'] are: 
+#	 neutron
+#	 x-ray
+#	 electron
+ 
+root['/entry/instrument/source'].create_dataset(name='probe', data='neutron', maxshape=None)
+root['/entry/instrument/source/probe'].attrs['type'] = 'NX_CHAR'
+root['/entry/instrument/source/probe'].attrs['EX_required'] = 'true'
+ 
+root['/entry/instrument/monochromator'].create_dataset(name='wavelength', data=1.0, maxshape=None)
+root['/entry/instrument/monochromator/wavelength'].attrs['type'] = 'NX_FLOAT'
+root['/entry/instrument/monochromator/wavelength'].attrs['EX_required'] = 'true'
+root['/entry/instrument/monochromator/wavelength'].attrs['units'] = 'NX_WAVELENGTH'
+ 
+root['/entry/instrument/detector'].create_dataset(name='data', data=1, maxshape=None)
+root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
+root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/data'].attrs['signal'] = '1'
+ 
+root['/entry/instrument/detector'].create_dataset(name='x_pixel_size', data=1.0, maxshape=None)
+root['/entry/instrument/detector/x_pixel_size'].attrs['type'] = 'NX_FLOAT'
+root['/entry/instrument/detector/x_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/x_pixel_size'].attrs['units'] = 'NX_LENGTH'
+ 
+root['/entry/instrument/detector'].create_dataset(name='y_pixel_size', data=1.0, maxshape=None)
+root['/entry/instrument/detector/y_pixel_size'].attrs['type'] = 'NX_FLOAT'
+root['/entry/instrument/detector/y_pixel_size'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/y_pixel_size'].attrs['units'] = 'NX_LENGTH'
+ 
+root['/entry/instrument/detector'].create_dataset(name='distance', data=1.0, maxshape=None)
+root['/entry/instrument/detector/distance'].attrs['type'] = 'NX_FLOAT'
+root['/entry/instrument/detector/distance'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/distance'].attrs['units'] = 'NX_LENGTH'
+ 
+root['/entry/instrument/detector'].create_dataset(name='frame_start_number', data=1, maxshape=None)
+root['/entry/instrument/detector/frame_start_number'].attrs['type'] = 'NX_INT'
+root['/entry/instrument/detector/frame_start_number'].attrs['EX_required'] = 'true'
+ 
+root['/entry/sample'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
+root['/entry/sample/name'].attrs['EX_required'] = 'true'
+ 
+root['/entry/sample'].create_dataset(name='orientation_matrix', data=1.0, maxshape=None)
+root['/entry/sample/orientation_matrix'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/orientation_matrix'].attrs['EX_required'] = 'true'
+ 
+root['/entry/sample'].create_dataset(name='unit_cell', data=1.0, maxshape=None)
+root['/entry/sample/unit_cell'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/unit_cell'].attrs['EX_required'] = 'true'
+ 
+root['/entry/sample'].create_dataset(name='temperature', data=1.0, maxshape=None)
+root['/entry/sample/temperature'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/temperature'].attrs['EX_required'] = 'true'
+ 
+root['/entry/sample'].create_dataset(name='x_translation', data=1.0, maxshape=None)
+root['/entry/sample/x_translation'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/x_translation'].attrs['EX_required'] = 'true'
+root['/entry/sample/x_translation'].attrs['units'] = 'NX_LENGTH'
+ 
+root['/entry/sample'].create_dataset(name='y_translation', data=1.0, maxshape=None)
+root['/entry/sample/y_translation'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/y_translation'].attrs['EX_required'] = 'true'
+root['/entry/sample/y_translation'].attrs['units'] = 'NX_LENGTH'
+ 
+root['/entry/sample'].create_dataset(name='distance', data=1.0, maxshape=None)
+root['/entry/sample/distance'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/distance'].attrs['EX_required'] = 'true'
+root['/entry/sample/distance'].attrs['units'] = 'NX_LENGTH'
+ 
+# Valid enumeration values for root['/entry/control']['mode'] are: 
+#	 monitor
+#	 timer
+ 
+root['/entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
+root['/entry/control/mode'].attrs['type'] = 'NX_CHAR'
+root['/entry/control/mode'].attrs['EX_required'] = 'true'
+ 
+root['/entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
+root['/entry/control/preset'].attrs['type'] = 'NX_FLOAT'
+root['/entry/control/preset'].attrs['EX_required'] = 'true'
+ 
+root['/entry/control'].create_dataset(name='integral', data=1.0, maxshape=None)
+root['/entry/control/integral'].attrs['type'] = 'NX_FLOAT'
+root['/entry/control/integral'].attrs['EX_required'] = 'true'
+root['/entry/control/integral'].attrs['units'] = 'NX_ANY'
+ 
+# Valid enumeration values for root['/entry']['definition'] are: 
+#	 NXxbase
+#	 NXxnb
+ 
+root['/entry/instrument/detector'].create_dataset(name='polar_angle', data=1.0, maxshape=None)
 root['/entry/instrument/detector/polar_angle'].attrs['type'] = 'NX_FLOAT'
 root['/entry/instrument/detector/polar_angle'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/polar_angle'].attrs['axis'] = '1'
 root['/entry/instrument/detector/polar_angle'].attrs['units'] = 'NX_ANGLE'
  
-root['/entry/instrument/detector'].create_dataset(name='tilt_angle', data=[1.], maxshape=None, compression="gzip")
+root['/entry/instrument/detector'].create_dataset(name='tilt_angle', data=1.0, maxshape=None)
 root['/entry/instrument/detector/tilt_angle'].attrs['type'] = 'NX_FLOAT'
 root['/entry/instrument/detector/tilt_angle'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/tilt_angle'].attrs['axis'] = '1'
 root['/entry/instrument/detector/tilt_angle'].attrs['units'] = 'NX_ANGLE'
  
-root['/entry/sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
 root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
 root['/entry/sample/rotation_angle'].attrs['axis'] = '1'
 root['/entry/sample/rotation_angle'].attrs['primary'] = '1'
 root['/entry/sample/rotation_angle'].attrs['units'] = 'NX_ANGLE'
-root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
-root['/entry/instrument/detector/polar_angle'].attrs['EX_doc'] = '       The polar_angle (gamma) of the detector for each scan point.      '
-root['/entry/instrument/detector/tilt_angle'].attrs['EX_doc'] = '       The angle by which the detector has been tilted out of the             scattering plane.      '
-root['/entry/sample/rotation_angle'].attrs['EX_doc'] = '      This is an array holding the sample rotation angle at each           scan point     '
+ 
+ 
+root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
+root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
+ 
+ 
+root['/entry/name/polar_angle'] = h5py.SoftLink('/entry/instrument/detector/polar_angle')
+root['/entry/name/polar_angle/'].attrs['target'] = '/entry/instrument/detector/polar_angle'
+ 
+ 
+root['/entry/name/tilt'] = h5py.SoftLink('/entry/title')
+root['/entry/name/tilt/'].attrs['target'] = '/entry/instrument/detector/tilt'
+ 
+ 
+root['/entry/name/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle')
+root['/entry/name/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
+ 
+root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root['/'].attrs['default'] = 'entry'
-root['/entry'].attrs['default'] = 'name'
+root['/entry'].attrs['default'] = 'data'
+root['/entry/data'].attrs['signal'] = 'data'
+root['/entry/data/data'].attrs['signal'] = '1'
 root.attrs['file_name'] = os.path.abspath('NXxnb')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version

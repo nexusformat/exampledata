@@ -37,15 +37,15 @@ root['/entry/'].create_group('control')
 root['/entry/control'].attrs['NX_class'] = 'NXmonitor'
 root['/entry/control'].attrs['EX_required'] = 'true'
  
-root['/entry/'].create_group('untitled_data')
-root['/entry/untitled_data'].attrs['NX_class'] = 'NXdata'
-root['/entry/untitled_data'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('data')
+root['/entry/data'].attrs['NX_class'] = 'NXdata'
+root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='title', data=1.0, maxshape=None)
-root['/entry/title'].attrs['type'] = 'NX_FLOAT'
+root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.589708', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2021-03-26T13:07:58.918173', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -53,15 +53,15 @@ root['/entry/start_time'].attrs['EX_required'] = 'true'
 #	 NXxbase
  
 root['/entry'].create_dataset(name='definition', data='NXxbase', maxshape=None)
-root['/entry/definition'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/definition'].attrs['type'] = 'NX_CHAR'
 root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/source'].create_dataset(name='type', data='2021-03-22T16:42:16.591856', maxshape=None)
-root['/entry/instrument/source/type'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/instrument/source'].create_dataset(name='type', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/type'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/source/type'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/source'].create_dataset(name='name', data='2021-03-22T16:42:16.593850', maxshape=None)
-root['/entry/instrument/source/name'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/instrument/source'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/instrument/source/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/source/name'].attrs['EX_required'] = 'true'
  
 # Valid enumeration values for root['/entry/instrument/source']['probe'] are: 
@@ -70,7 +70,7 @@ root['/entry/instrument/source/name'].attrs['EX_required'] = 'true'
 #	 electron
  
 root['/entry/instrument/source'].create_dataset(name='probe', data='neutron', maxshape=None)
-root['/entry/instrument/source/probe'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/instrument/source/probe'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/source/probe'].attrs['EX_required'] = 'true'
  
 root['/entry/instrument/monochromator'].create_dataset(name='wavelength', data=1.0, maxshape=None)
@@ -78,7 +78,7 @@ root['/entry/instrument/monochromator/wavelength'].attrs['type'] = 'NX_FLOAT'
 root['/entry/instrument/monochromator/wavelength'].attrs['EX_required'] = 'true'
 root['/entry/instrument/monochromator/wavelength'].attrs['units'] = 'NX_WAVELENGTH'
  
-root['/entry/instrument/detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
+root['/entry/instrument/detector'].create_dataset(name='data', data=1, maxshape=None)
 root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
 root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
@@ -102,19 +102,19 @@ root['/entry/instrument/detector'].create_dataset(name='frame_start_number', dat
 root['/entry/instrument/detector/frame_start_number'].attrs['type'] = 'NX_INT'
 root['/entry/instrument/detector/frame_start_number'].attrs['EX_required'] = 'true'
  
-root['/entry/sample'].create_dataset(name='name', data='!some char data!', maxshape=None)
+root['/entry/sample'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', maxshape=None)
 root['/entry/sample/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/sample/name'].attrs['EX_required'] = 'true'
  
-root['/entry/sample'].create_dataset(name='orientation_matrix', data=[[1. , 1. , 1.], [1. , 1. , 1.], [1. , 1. , 1.]], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='orientation_matrix', data=1.0, maxshape=None)
 root['/entry/sample/orientation_matrix'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/orientation_matrix'].attrs['EX_required'] = 'true'
  
-root['/entry/sample'].create_dataset(name='unit_cell', data=[1. , 1. , 1. , 1. , 1. , 1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='unit_cell', data=1.0, maxshape=None)
 root['/entry/sample/unit_cell'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/unit_cell'].attrs['EX_required'] = 'true'
  
-root['/entry/sample'].create_dataset(name='temperature', data=[1.], maxshape=None, compression="gzip")
+root['/entry/sample'].create_dataset(name='temperature', data=1.0, maxshape=None)
 root['/entry/sample/temperature'].attrs['type'] = 'NX_FLOAT'
 root['/entry/sample/temperature'].attrs['EX_required'] = 'true'
  
@@ -138,7 +138,7 @@ root['/entry/sample/distance'].attrs['units'] = 'NX_LENGTH'
 #	 timer
  
 root['/entry/control'].create_dataset(name='mode', data='monitor', maxshape=None)
-root['/entry/control/mode'].attrs['type'] = 'NX_FLOAT'
+root['/entry/control/mode'].attrs['type'] = 'NX_CHAR'
 root['/entry/control/mode'].attrs['EX_required'] = 'true'
  
 root['/entry/control'].create_dataset(name='preset', data=1.0, maxshape=None)
@@ -149,24 +149,16 @@ root['/entry/control'].create_dataset(name='integral', data=1.0, maxshape=None)
 root['/entry/control/integral'].attrs['type'] = 'NX_FLOAT'
 root['/entry/control/integral'].attrs['EX_required'] = 'true'
 root['/entry/control/integral'].attrs['units'] = 'NX_ANY'
-root['/entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
-root['/entry/instrument/detector/data'].attrs['EX_doc'] = '       The area detector data, the first dimension is always the               number of scan points, the second and third are the number               of pixels in x and y. The origin is always assumed to be               in the center of the detector. maxOccurs is limited to the               the number of detectors on your instrument.      '
-root['/entry/instrument/detector'].attrs['EX_doc'] = '      The name of the group is detector if there is only one detector,              if there are several,  names have to be detector1,              detector2, ...detectorn.     '
-root['/entry/instrument/detector/frame_start_number'].attrs['EX_doc'] = '       This is the start number of the first frame of a scan. In PX one often scans a couple                of frames on a give sample, then does something else, then returns to the same sample                and scans some more frames. Each time with a new data file.               This number helps concatenating such measurements.      '
-root['/entry/sample/name'].attrs['EX_doc'] = '      Descriptive name of sample     '
-root['/entry/sample/orientation_matrix'].attrs['EX_doc'] = '      The orientation matrix according to Busing and              Levy conventions. This is not strictly necessary as              the UB can always be derived from the data.  But              let us bow to common usage which includes the              UB nearly always.     '
-root['/entry/sample/unit_cell'].attrs['EX_doc'] = '      The unit cell, a, b, c, alpha, beta, gamma.              Again, not strictly necessary, but normally written.     '
-root['/entry/sample/temperature'].attrs['EX_doc'] = '      The sample temperature or whatever sensor represents this value best     '
-root['/entry/sample/x_translation'].attrs['EX_doc'] = '      Translation of the sample along the X-direction of the laboratory coordinate system     '
-root['/entry/sample/y_translation'].attrs['EX_doc'] = '      Translation of the sample along the Y-direction of the laboratory coordinate system     '
-root['/entry/sample/distance'].attrs['EX_doc'] = '      Translation of the sample along the Z-direction of the laboratory coordinate system     '
-root['/entry/control/mode'].attrs['EX_doc'] = '      Count to a preset value based on either clock time (timer)             or received monitor counts (monitor).     '
-root['/entry/control/preset'].attrs['EX_doc'] = '      preset value for time or monitor     '
-root['/entry/control/integral'].attrs['EX_doc'] = '      Total integral monitor counts     '
-root['/entry/untitled_data'].attrs['EX_doc'] = '     The name of this group id data if there is only              one detector; if there are several the names will              be data1, data2, data3 and will point              to the corresponding detector groups in the              instrument hierarchy.    '
+ 
+ 
+root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
+root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
+ 
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root['/'].attrs['default'] = 'entry'
-root['/entry'].attrs['default'] = 'untitled_data'
+root['/entry'].attrs['default'] = 'data'
+root['/entry/data'].attrs['signal'] = 'data'
+root['/entry/data/data'].attrs['signal'] = '1'
 root.attrs['file_name'] = os.path.abspath('NXxbase')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version

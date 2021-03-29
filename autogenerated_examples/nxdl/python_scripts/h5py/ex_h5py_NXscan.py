@@ -9,65 +9,75 @@ import os
  
 root = h5py.File('h5py_NXscan.h5', 'w')
  
-root.create_group('untitled_entry')
-root['/untitled_entry'].attrs['NX_class'] = 'NXentry'
-root['/untitled_entry'].attrs['EX_required'] = 'true'
+root.create_group('entry')
+root['/entry'].attrs['NX_class'] = 'NXentry'
+root['/entry'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('untitled_instrument')
-root['/untitled_entry/untitled_instrument'].attrs['NX_class'] = 'NXinstrument'
-root['/untitled_entry/untitled_instrument'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('instrument')
+root['/entry/instrument'].attrs['NX_class'] = 'NXinstrument'
+root['/entry/instrument'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_instrument/'].create_group('untitled_detector')
-root['/untitled_entry/untitled_instrument/untitled_detector'].attrs['NX_class'] = 'NXdetector'
-root['/untitled_entry/untitled_instrument/untitled_detector'].attrs['EX_required'] = 'true'
+root['/entry/instrument/'].create_group('detector')
+root['/entry/instrument/detector'].attrs['NX_class'] = 'NXdetector'
+root['/entry/instrument/detector'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('untitled_sample')
-root['/untitled_entry/untitled_sample'].attrs['NX_class'] = 'NXsample'
-root['/untitled_entry/untitled_sample'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('sample')
+root['/entry/sample'].attrs['NX_class'] = 'NXsample'
+root['/entry/sample'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('untitled_monitor')
-root['/untitled_entry/untitled_monitor'].attrs['NX_class'] = 'NXmonitor'
-root['/untitled_entry/untitled_monitor'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('monitor')
+root['/entry/monitor'].attrs['NX_class'] = 'NXmonitor'
+root['/entry/monitor'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/'].create_group('untitled_data')
-root['/untitled_entry/untitled_data'].attrs['NX_class'] = 'NXdata'
-root['/untitled_entry/untitled_data'].attrs['EX_required'] = 'true'
+root['/entry/'].create_group('data')
+root['/entry/data'].attrs['NX_class'] = 'NXdata'
+root['/entry/data'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='title', data=1.0, maxshape=None)
-root['/untitled_entry/title'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/title'].attrs['EX_required'] = 'true'
+root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=None)
+root['/entry/title'].attrs['type'] = 'NX_CHAR'
+root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='start_time', data='2021-03-22T16:42:16.044525', maxshape=None)
-root['/untitled_entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/start_time'].attrs['EX_required'] = 'true'
+root['/entry'].create_dataset(name='start_time', data='2021-03-26T13:07:54.757241', maxshape=None)
+root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry'].create_dataset(name='end_time', data='2021-03-22T16:42:16.045524', maxshape=None)
-root['/untitled_entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
-root['/untitled_entry/end_time'].attrs['EX_required'] = 'true'
+root['/entry'].create_dataset(name='end_time', data='2021-03-26T13:07:54.759241', maxshape=None)
+root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
+root['/entry/end_time'].attrs['EX_required'] = 'true'
  
-# Valid enumeration values for root['/untitled_entry']['definition'] are: 
+# Valid enumeration values for root['/entry']['definition'] are: 
 #	 NXscan
  
-root['/untitled_entry'].create_dataset(name='definition', data='NXscan', maxshape=None)
-root['/untitled_entry/definition'].attrs['type'] = 'NX_CHAR'
-root['/untitled_entry/definition'].attrs['EX_required'] = 'true'
+root['/entry'].create_dataset(name='definition', data='NXscan', maxshape=None)
+root['/entry/definition'].attrs['type'] = 'NX_CHAR'
+root['/entry/definition'].attrs['EX_required'] = 'true'
  
-root['/untitled_entry/untitled_instrument/untitled_detector'].create_dataset(name='data', data=[np.array([[1]])], maxshape=None)
-root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['EX_required'] = 'true'
-root['/untitled_entry/untitled_instrument/untitled_detector/data'].attrs['signal'] = '1'
+root['/entry/instrument/detector'].create_dataset(name='data', data=1, maxshape=None)
+root['/entry/instrument/detector/data'].attrs['type'] = 'NX_INT'
+root['/entry/instrument/detector/data'].attrs['EX_required'] = 'true'
+root['/entry/instrument/detector/data'].attrs['signal'] = '1'
  
-root['/untitled_entry/untitled_sample'].create_dataset(name='rotation_angle', data=[1.], maxshape=None, compression="gzip")
-root['/untitled_entry/untitled_sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
-root['/untitled_entry/untitled_sample/rotation_angle'].attrs['EX_required'] = 'true'
-root['/untitled_entry/untitled_sample/rotation_angle'].attrs['axis'] = '1'
+root['/entry/sample'].create_dataset(name='rotation_angle', data=1.0, maxshape=None)
+root['/entry/sample/rotation_angle'].attrs['type'] = 'NX_FLOAT'
+root['/entry/sample/rotation_angle'].attrs['EX_required'] = 'true'
+root['/entry/sample/rotation_angle'].attrs['axis'] = '1'
  
-root['/untitled_entry/untitled_monitor'].create_dataset(name='data', data=[1], maxshape=None)
-root['/untitled_entry/untitled_monitor/data'].attrs['type'] = 'NX_INT'
-root['/untitled_entry/untitled_monitor/data'].attrs['EX_required'] = 'true'
-root['/untitled_entry/definition'].attrs['EX_doc'] = '     Official NeXus NXDL schema to which this file conforms    '
-root['/'].attrs['default'] = 'untitled_entry'
-root['/untitled_entry'].attrs['default'] = 'untitled_data'
+root['/entry/monitor'].create_dataset(name='data', data=1, maxshape=None)
+root['/entry/monitor/data'].attrs['type'] = 'NX_INT'
+root['/entry/monitor/data'].attrs['EX_required'] = 'true'
+ 
+ 
+root['/entry/data/data'] = h5py.SoftLink('/entry/instrument/detector/data')
+root['/entry/data/data/'].attrs['target'] = '/entry/instrument/detector/data'
+ 
+ 
+root['/entry/data/rotation_angle'] = h5py.SoftLink('/entry/sample/rotation_angle')
+root['/entry/data/rotation_angle/'].attrs['target'] = '/entry/sample/rotation_angle'
+ 
+root['/'].attrs['default'] = 'entry'
+root['/entry'].attrs['default'] = 'data'
+root['/entry/data'].attrs['signal'] = 'data'
+root['/entry/data/data'].attrs['signal'] = '1'
 root.attrs['file_name'] = os.path.abspath('NXscan')
 root.attrs['file_time'] = datetime.datetime.now().isoformat()
 root.attrs['h5py_version'] = h5py.version.version

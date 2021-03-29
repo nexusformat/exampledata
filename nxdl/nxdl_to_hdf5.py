@@ -898,7 +898,8 @@ def get_definition_details(root, soup, sym_args_dct={}, dct={}, docs=[], report_
         for ch_dct in ch_lst:
             if ch_dct['ptype'] not in skip_lst:
                 hsh = hash(ch_dct['xpath'])
-                #
+                if ch_dct['ptype'] == 'enumeration':
+                    print()
                 if hsh not in ldct.keys():
                     # if ch_dct['xpath'] == '/definition/group/group[1]/field[3]/doc':
                     #     print()
@@ -1078,12 +1079,7 @@ def create_fields(nf, sym_dct={}, category=''):
             _type = 'NX_CHAR'
 
         #get all enumerations if any exist for this parent path
-        enums = get_enums(d['abspath'])#, dct)
-        #get the dimensions dict if one exists for this field
-        # if('dimensions' in dct.keys()):
-        #     use_dim_dct_lst = get_dimensions_dicts(d, dct)
-        # else:
-        #     use_dim_dct_lst = {}
+        enums = get_enums(d['abspath'])
         _res_lst = tables_dct['dimensions'].search(query.abspath == d['abspath'])
         if len(_res_lst) > 0:
             use_dim_dct_lst = get_dimensions_dicts(d, _res_lst)
