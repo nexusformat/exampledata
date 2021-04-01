@@ -1,4 +1,4 @@
-
+from pathlib import Path
 import os
 import pkg_resources
 import h5py
@@ -7,6 +7,8 @@ import datetime
 import numpy as np
 from lxml import etree
 import bs4
+from tinydb import TinyDB, Query
+
 
 readme_string = """
 
@@ -35,8 +37,38 @@ as a string attribute for that field or group called EX_doc.
  https://github.com/nexusformat/exampledata
  
  """
+h5py_script_lst = []
+nxsfrmt_script_lst = []
+db = None
+query = None
+tables_dct = None
 
-def _string_attr(nxgrp, name, sdata):
+def init_database():
+    global db, query, tables_dct
+    if os.path.exists('db.json'):
+        # reset database to nothing
+        if db is not None:
+            db.close()
+        os.remove('db.json')
+    db = TinyDB('db.json')
+    query = Query()
+
+    # 'category', 'doc', 'group', 'field', 'enumeration', 'item', 'dimensions', 'dim', 'attribute', 'link'
+    tables_dct = {'main': db.table('main_table'),
+                'doc': db.table('doc_table'),
+                'group': db.table('group_table'),
+                'field': db.table('field_table'),
+                'enumeration': db.table('enumeration_table'),
+                'item': db.table('item_table'),
+                'dimensions': db.table('dimensions_table'),
+                'dim': db.table('dim_table'),
+                'attribute': db.table('attribute_table'),
+                'link': db.table('link_table'),
+                'symbols': db.table('symbols_table'),
+                'docs': db.table('docs_table')
+                  }
+
+def _string_attr(nxgrp, name, sdata, do_print=True, skip_nxsfrmt=False):
     '''
     used to create string attributes
     '''
@@ -46,8 +78,46 @@ def _string_attr(nxgrp, name, sdata):
         return
     nxgrp.attrs[name] = sdata
 
+    if do_print:
+        s_data = sdata.replace(__file__.replace('/nxdl_to_hdf5.py', ''), '')
+        s_data = s_data.replace('/..', '..')
+        if sdata.find('.hdf5') > -1:
+            #just use the file name
+            h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, s_data.split('/')[-1]))
+            if not skip_nxsfrmt:
+                nxsfrmt_script_lst.append('root[\'{}\'].attrs[\'{}\'] = \'{}\''.format(nxgrp.name, name, s_data))
+        else:
+            h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, sdata))
 
-def _list_attr(nxgrp, name, lstdata):
+            if not skip_nxsfrmt:
+                if name.find('default') > -1:
+                    if nxgrp.name == '/':
+                        #need to set the 'default' attribute for the file to point to the default entry name
+                        nxsfrmt_script_lst.append('root.attrs[\'default\'] = \'{}\''.format(s_data))
+                    else:
+                        #nxsfrmt_script_lst.append('root[\'{}/{}\'].set_default()'.format(nxgrp.name, s_data))
+                        if s_data == 'SAMPLE-CHAR-DATA':
+                            #this is the /entry default attribute
+                            nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXdata()'.format(nxgrp.name, s_data))
+                            nxsfrmt_script_lst.append('root[\'{}/{}\'].set_default()'.format(nxgrp.name, s_data))
+                        else:
+                            nxsfrmt_script_lst.append('root[\'{}/{}\'].set_default()'.format(nxgrp.name, s_data))
+                else:
+                    nxsfrmt_script_lst.append('root[\'{}\'].attrs[\'{}\'] = \'{}\''.format(nxgrp.name, name, s_data))
+
+def _num_attr(nxgrp, name, data, do_print=True):
+    '''
+    used to create string attributes
+    '''
+    if (nxgrp is None):
+        return
+    nxgrp.attrs[name] = data
+
+    if do_print:
+        h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, str(data)))
+        #print('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, sdata.replace('\'', '"')))
+
+def _list_attr(nxgrp, name, lstdata, do_print=True):
     '''
     used to create list attributes
     '''
@@ -60,46 +130,168 @@ def _list_attr(nxgrp, name, lstdata):
         nxgrp.attrs[name] = lstdata
 
 
-def _group(nxgrp, name, nxdata_type):
-    '''
-    create a group
-    '''
-    if (name == ''):
-        return
-    #if name of group already exists then increment name by one until it is unique
+def print_list_attr(nxgrp, name, lstdata, do_print=True):
+    if do_print:
+        h5py_script_lst.append(' ')
+        nxsfrmt_script_lst.append(' ')
+        #h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, str(lstdata)))
+        #h5py_script_lst.append('# the allowable values for root[\'%s\'].attrs[\'%s\'] are: \'%s\'' % (nxgrp.name, name, str(lstdata)))
+        h5py_script_lst.append(
+            '# Valid enumeration values for root[\'%s\'][\'%s\'] are: ' % (nxgrp.name, name))
+        nxsfrmt_script_lst.append(
+            '# Valid enumeration values for root[\'%s\'][\'%s\'] are: ' % (nxgrp.name, name))
+        for i in lstdata:
+            h5py_script_lst.append('#\t %s' % i)
+            nxsfrmt_script_lst.append('#\t %s' % i)
+
+
+def check_for_duplicate_grp_names(nxgrp, name, nxdata_type):
+    # if name of group already exists then increment name by one until it is unique
     i = 1
     _name = name
     while name in nxgrp.keys() and i < 100:
         name = _name + '_%d' % i
         i += 1
+        return(True)
+    return(False)
 
-    grp = nxgrp.create_group(name)
-    _string_attr(grp, 'NX_class', nxdata_type)
-    return (grp)
+def node_exists(nf, path):
+    if path in nf:
+        return(True)
+    else:
+        return(False)
 
-def _dataset(nxgrp, name, data, nxdata_type, nx_units='NX_ANY', dset={}):
+def fix_non_standard_definition_name(nm):
+    '''
+    a hack to catch situations like NXspe specifying an enumeration for the definition of
+       [ 'NXSPE',
+        'NXspe']
+
+    where the definition name is NXspe.nxdl.xml
+    this is important because cnxvalidate uses what it finds in the definition field as a case sensitive filename to open for validation, so NXSPE.nxdl.xml will fail to open
+    '''
+    #nms = nm.split('NX')
+    #s = 'NX{}'.format(nms[1].lower())
+    s = get_cur_def_name()
+    return(s)
+
+def _group(nxgrp, name, nxdata_type, dct={}):
+    '''
+    create a group
+    '''
+    if (name == ''):
+        return
+
+    if not check_for_duplicate_grp_names(nxgrp, name, nxdata_type):
+
+        grp = nxgrp.create_group(name)
+
+        # #update the group name if it changed as NX canSAS specifies 2 NXdata groups at same level but only one is required
+        dct['abspath'] = grp.name
+        print_script_group(dct)
+
+        _string_attr(grp, 'NX_class', nxdata_type, skip_nxsfrmt=True)
+        return (grp)
+
+def _dataset(nxgrp, name, data, nxdata_type, nx_units='', dset={}, do_print=True):
     '''
     create a dataset, apply compression if the data is an array
     '''
     # grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
-    if (type(data) == np.ndarray):
+    #strip any units off of nxdata_type
+    _dt = nxdata_type.split('-')
+    nxdata_type = _dt[0]
+
+    if type(data) == np.chararray:
+        grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
+
+        data = str(data.astype(str))
+        if data.find('\' ') > -1:
+            data = data.replace('\' ', '\' , ')
+        data = data.encode("ascii", "ignore")
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root[\'{}\'][\'{}\'] = {}'.format(nxgrp.name, name, data))
+
+    elif (type(data) == np.ndarray):
         #print('creating np.ndarray dataset [%s]' % name)
         grp = nxgrp.create_dataset(name=name, data=data, maxshape=None, compression="gzip")
+
+        if nxdata_type == 'NX_FLOAT':
+            #s = str(data.astype(float))
+            s = str(data.astype(float)).replace('\n', ',')
+        elif nxdata_type in ['NX_INT', 'NX_NUMBER', 'NX_POSINT', 'NX_UINT']:
+            s = str(data.astype(int)).replace('\n', ',')
+        else:
+            print('_dataset: UNSUPPORTED ndarray TYPE %s' % nxdata_type)
+
+        if s.find('. ') > -1:
+            data = s.replace('. ', '. , ').replace('\n', ',')
+        h5py_script_lst .append(' ')
+        h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None, compression="gzip")' % (nxgrp.name, name, str(data)))
+
+            #h5py_script_lst.append('root[\'{}\'][\'{}\'] = {}'.format(nxgrp.name, name, data))
+
     else:
         #print('name[%s] data[%s]' % (name, data))
         if(data is None):
             data = ''
+
+        if node_exists(nxgrp, name):
+            # update the contents
+            #print('modify [%s] = %s' % (nxgrp.name + '/' + name, data))
+            nxgrp['%s' % nxgrp.name + '/' + name][()] = data
+            #TODO: now add this mod to h5py_script_lst
+            return
+
         #print('creating dataset [%s]' % name)
-        grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
+        if nxdata_type == 'NX_INT':
+            grp = nxgrp.create_dataset(name=name, data=data, dtype=np.int64, maxshape=None)
+        else:
+            grp = nxgrp.create_dataset(name=name, data=data, maxshape=None)
 
-    _string_attr(grp, 'type', nxdata_type)
+        s_data = str(data)
+        if name == 'definition':
+            s_data = fix_non_standard_definition_name(s_data)
+        if nxdata_type == 'NX_BOOLEAN':
+            s_data = 'np.int8(0)'
 
-    if (type(nx_units) is dict):
-        _string_attr(grp, 'units', nx_units['units'])
-    else:
-        _string_attr(grp, 'units', nx_units)
+        if type(data) is str:
+            if do_print:
+                h5py_script_lst.append(' ')
+                nxsfrmt_script_lst.append(' ')
+                h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=\'%s\', maxshape=None)' % (nxgrp.name, name, s_data))
+
+                nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield(\'{}\')'.format(nxgrp.name, name, s_data))
+        else:
+            if do_print:
+                h5py_script_lst.append(' ')
+                nxsfrmt_script_lst.append(' ')
+                if s_data.find('array') > -1:
+                    # make sure it reads correctly as a numpy array
+                    s_data = s_data.replace('array', 'np.array')
+                h5py_script_lst.append('root[\'%s\'].create_dataset(name=\'%s\', data=%s, maxshape=None)' % (nxgrp.name, name, s_data))
+
+                # catch if it is a NX_BOOLEAN, cnxvalidate needs a specific type not just 0 for False it must be an np.int8
+                if nxdata_type == 'NX_BOOLEAN':
+                    nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield(np.int8(0))'.format(nxgrp.name, name))
+                else:
+                    nxsfrmt_script_lst.append('root[\'{}/{}\'] = NXfield({})'.format(nxgrp.name, name, data))
+
+    # grp_name = get_last_name_from_abspath(dct['abspath'])
+    # print('root[\'%s\'] = h5py.create_group(\'%s\')' % (get_parent_path(dct['abspath']), grp_name))
+
+    _string_attr(grp, 'type', nxdata_type, do_print)
+
+    if len(nx_units) > 0:
+        if (type(nx_units) is dict):
+            _string_attr(grp, 'units', nx_units['units'], do_print)
+        else:
+            _string_attr(grp, 'units', nx_units, do_print)
+
     if ('doc' in list(dset.keys())):
-        _string_attr(grp, 'doc', dset['doc'])
+        _string_attr(grp, 'doc', dset['doc'], do_print)
+
+
     return (grp)
 
 def get_abspath(a):
@@ -132,15 +324,17 @@ def abspath_lst_to_str(l):
     '''
     assemble a path string from list of names
     '''
-    if l is None:
-        print()
+    # if l is None:
+    #     print()
     s = '/'
     for n in l:
         s += '%s/' % fix_nx_name(n)
     return(s)
 
 def get_children_list_of_lists(e):
-    #print(str(e) + str(e.attrib))
+    '''
+    create a list of dicts for each item
+    '''
     pth_lst = get_abspath(e)
     abspath = abspath_lst_to_str(pth_lst)
     t = e.getroottree()
@@ -166,6 +360,9 @@ def get_children_list_of_lists(e):
     return(lst)
 
 def get_children(e):
+    '''
+    get the children of an element return as a list
+    '''
     lists = get_children_list_of_lists(e)
     l = list(flatten(lists))
     return(l)
@@ -180,8 +377,17 @@ def flatten(lst):
             yield el
 
 def get_type(d):
-    if('type' not in d['attrib'].keys()):
-        return('NX_CHAR')
+    known_int_types = []
+    known_char_types = []
+    if 'type' not in d['attrib'].keys():
+        if d['attrib']['name'] in known_int_types:
+            return('NX_INT')
+
+        if 'units' in d['attrib'].keys():
+            #return a concatenation of the default for no specified type 'NX_CHAR' and '-<units>
+            return ('NX_CHAR-%s' % d['attrib']['units'])
+        #return ('NX_CHAR')
+        return ('')
     else:
         return(d['attrib']['type'])
 
@@ -192,6 +398,14 @@ def get_parent_path(pth):
             pth2.remove(p)
     p = abspath_lst_to_str(pth2[0:-1])
     return(p)
+
+def get_last_name_from_abspath(pth):
+    pth2 = pth.split('/')
+    for p in pth2:
+        if(p == ''):
+            pth2.remove(p)
+    return(pth2[-1])
+
 
 def get_min_occurs(d, category):
     '''
@@ -228,7 +442,7 @@ def get_doc(d):
                 doc = d['doc']
     return(doc)
 
-def sanity_check_dimensions(dct, sym_dct={}):
+def sanity_check_dimensions(dct, sym_dct={}, show_warnings=True):
     '''
      for every dimensions spec there should be a 'rank' specified and there should be at least the same number
      of accompnying dim sections as the value specified in 'rank'
@@ -241,20 +455,23 @@ def sanity_check_dimensions(dct, sym_dct={}):
                     rank = int(dct['attrib']['rank'])
                 elif has_expression(dct['attrib']['rank']):
                     rank = 1
-                    print(
-                        '\t\tNote: rank designation is using an expression, expressions are currently not supported for generation, the value of 1 will be used')
-                    print('\t\t The expression used in the definition is: [%s]' % (dct['attrib']['rank']))
+                    if show_warnings:
+                        print(
+                            '\t\tNote: rank designation is using an expression, expressions are currently not supported for generation, the value of 1 will be used')
+                        print('\t\t The expression used in the definition is: [%s]' % (dct['attrib']['rank']))
                 else:
-                    print(
-                        '\t\tError: rank designation is using a symbol that has not been defined in Symbols table or it is a comment')
-                    print('\t\t [%s]' % (dct['attrib']['rank']))
+                    if show_warnings:
+                        print(
+                            '\t\tError: rank designation is using a symbol that has not been defined in Symbols table or it is a comment')
+                        print('\t\t [%s]' % (dct['attrib']['rank']))
                     return(False)
 
                 if(rank <= len(dct['attrib']['dim'])):
                     return(True)
                 else:
-                    print('\t\tError: Incorrect number of dim sections for this dimensions specification, should be at least [%d] found [%d]' %  (rank, len(dct['attrib']['dim'])))
-                    print('\t\t[%s]' % dct['abspath'])
+                    if show_warnings:
+                        print('\t\tError: Incorrect number of dim sections for this dimensions specification, should be at least [%d] found [%d]' %  (rank, len(dct['attrib']['dim'])))
+                        print('\t\t[%s]' % dct['abspath'])
                     return (False)
             else:
                 #print('\t\tError: dimensions must specify a rank, this does not >', dct)
@@ -266,12 +483,12 @@ def sanity_check_dimensions(dct, sym_dct={}):
 
 def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
     '''
-    using the passed in type, return some sample data of the correct type, dimension and size if an array
+    using the passed in NX type, return some sample data of the correct type, dimension and size if an array
     '''
     errors = False
     data = None
     use_dims = False
-    if( sanity_check_dimensions(dimensions, sym_dct)):
+    if( sanity_check_dimensions(dimensions, sym_dct, show_warnings=False)):
         if (dimensions and 'attrib' in dimensions.keys() and len(dimensions['attrib']['dim']) > 0):
             dimensions = dimensions['attrib']
             arr = []
@@ -303,7 +520,9 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
                             errors = True
                             return(None)
                         # check if symbol was used in defining a dim value
-                        if('value' not in dimensions['dim'][r].keys()):
+                        _keys = dimensions['dim'][r].keys()
+                        #if('value' not in dimensions['dim'][r].keys()):
+                        if 'value' not in _keys:
                             print('\t\tError, there is no [value] key in dim specification' , dimensions['dim'][r])
                             errors = True
                             return (None)
@@ -332,12 +551,17 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
                     data = np.ones(tuple(arr), dtype=np.float)
                 elif (nx_type.find('NX_CHAR') > -1):
                     data = np.chararray(tuple(arr))
-                    data[:] = '!some char data!'
+                    data[:] = 'SAMPLE-CHAR-DATA'
 
-
-    if(nx_type.find('NX_CHAR') > -1):
+    units = get_units(nx_type)
+    if units.find('NX_WAVENUMBER') > -1:
+        if (use_dims):
+            return (1.0)
+        else:
+            return (1.0)
+    elif(nx_type.find('NX_CHAR') > -1):
         if(data is None):
-            return('!some char data!')
+            return('SAMPLE-CHAR-DATA')
         else:
             return(data)
     elif(nx_type.find('NX_FLOAT') > -1):
@@ -347,6 +571,9 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
             return(1.0)
     elif (nx_type.find('NX_INT') > -1):
         if (use_dims):
+            if(type(data) is np.ndarray):
+                #convert this array into a list
+                data = list(data)
             return (data)
         else:
             return (1)
@@ -371,6 +598,17 @@ def get_nx_data_by_type(nx_type, dimensions=None, sym_dct={}):
             return (data)
         else:
             return (1)
+
+
+def get_units(nx_type):
+    ''' check to see if this nx_type contains the units as well
+     ex: NX_CHAR-NX_WAVENUMBER
+    '''
+    units = nx_type.split('-')
+    if len(units) == 2:
+        return(units[1])
+    else:
+        return('')
 
 def make_timestamp_now():
     """
@@ -408,6 +646,9 @@ def get_NXdata_nm(nf):
     return(None, None)
 
 def get_all_paths_in_hdf5(nf):
+    '''
+    return all absolute paths contained in an hdf5 file
+    '''
     list(nf.keys())
     list(nf.values())
     members = []
@@ -415,6 +656,9 @@ def get_all_paths_in_hdf5(nf):
     return(members)
 
 def get_NXdataset_nm(nxdata_grp):
+    '''
+    return the NXdata group name
+    '''
     keys = list(nxdata_grp.keys())
     #remove the most likely keys that we do not want for sure
     keys = trim_dset_list(keys)
@@ -437,35 +681,23 @@ def trim_dset_list(dset_lst):
     return(lst)
 
 def has_numbers(inputString):
+    '''
+    does string contain numbers?
+    '''
     #make sure it is a string
     inputString = str(inputString)
     return all([c.isdigit() or c == '.' for c in inputString])
 
 def has_expression(inputString):
+    '''
+    does string contain an expression?
+    '''
     #make sure it is a string
     inputString = str(inputString)
     for op in ['+','-','*','/']:
         if inputString.__contains__(op):
             return(True)
     return False
-
-def get_symbols(fname):
-    '''# print(root.xpath("//article[@type='news']/content/text()"))
-    # print(root.xpath("//article"))
-    '''
-    from bs4 import BeautifulSoup
-    infile = open(fname, "r")
-    contents = infile.read()
-    infile.close()
-    soup = BeautifulSoup(contents, 'xml')
-    symbols = soup.find_all('symbol')
-    slst = []
-    for symbol in symbols:
-        #print(symbol)
-        slst.append({'name': symbol.get('name'), 'doc': symbol.get_text(), 'value': 1})
-
-    return(slst)
-
 
 def process_symbols(soup, sym_args_dct={}):
     '''
@@ -494,9 +726,10 @@ def process_symbols(soup, sym_args_dct={}):
         if(type(val) is dict):
             #if users passed in symbols from the command line these will  be in a dict
             val = val['value']
-        
+
         slst.append({'name': sym_nm, 'doc': doc, 'value': val})
         sym_dct[sym_nm] = {'doc': doc, 'value': val}
+        tables_dct['symbols'].upsert({'name': sym_nm, 'doc': doc, 'value': val}, query.name == sym_nm)
 
     #now walk through each dimension definition and perform symbol substitutions to the read in xml doc where applicable
     # get all dimensions fields where rank is defined using keyword 'dataRank'
@@ -546,14 +779,25 @@ def process_symbols(soup, sym_args_dct={}):
     xml = xml.decode('utf-8')
     return(xml, sym_dct)
 
+def get_extending_class(fname, cls_nm, sym_args_dct={}, dct={}, docs=[], report_symbols_only=False):
+    fparts = fname.split('\\')
+    eclass_file = fname.replace(fparts[-1], '%s.nxdl.xml' % cls_nm)
+    if (not os.path.exists(eclass_file)):
+        print('get_extending_class: XML file [%s] does not exist' % eclass_file)
+        return({}, {}, {})
+    print('extending with [%s]' % cls_nm)
+    dct, syms, docs = get_xml_paths(eclass_file, sym_args_dct=sym_args_dct, dct=dct, docs=docs, report_symbols_only=report_symbols_only, allow_extend=True)
 
-def get_xml_paths(fname, sym_args_dct={}, report_symbols_only=False):
+    return (dct, syms, docs)
+
+def get_xml_root(fname):
     '''
     takes the path to teh nxdl.xml file and returns a dict of element category lists of the entire structure
     '''
-    if(not os.path.exists(fname)):
-        print('XML file [%s] does not exist' % fname)
-        return
+
+    if(not fname.exists()):
+        print('XML file [%s] does not exist' % str(fname.absolute()))
+        return(None)
 
     infile = open(fname, "r")
     contents = infile.read()
@@ -562,23 +806,77 @@ def get_xml_paths(fname, sym_args_dct={}, report_symbols_only=False):
     contents = contents.replace('xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n', '')
     contents = contents.replace('xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd"', '')
     soup = bs4.BeautifulSoup(contents, 'xml')
-    # syms = get_symbols(fname)
+    xml = soup.prettify(encoding='utf-8')
+    xml = xml.decode('utf-8')
+    xml = xml.replace('encoding="utf-8"', '')
+    xxml = etree.XML(xml)
+    tree = etree.ElementTree(xxml)
+    root = tree.getroot()
+    return(root, soup)
+
+def walk_extends_chain(fpath, root):
+    '''
+    starting with the main defintion file find out all of the extends definitions
+    and return with a list of dicts
+    '''
+    main_clss = fpath.name
+    main_clss = main_clss.replace('.nxdl.xml','')
+    ext_lst = [main_clss]
+    extends_clss = root.get('extends')
+    fpath = Path(str(fpath.absolute()).replace(main_clss, f'{extends_clss}'))
+    while extends_clss != 'NXobject':
+        #(dct, syms, docs) =
+        ext_lst.append(extends_clss)
+        _root, _soup = get_xml_root(fpath)
+        extends_clss = _root.get('extends')
+        fpath = Path(str(fpath.absolute()).replace(ext_lst[-1], f'{extends_clss}'))
+    ext_lst.reverse()
+    return(ext_lst)
+
+def get_xml_paths(fname, sym_args_dct={}, dct={}, docs=[], report_symbols_only=False, allow_extend=True):
+    '''
+    takes the path to teh nxdl.xml file and returns a dict of element category lists of the entire structure
+    '''
+
+    fname = fname.replace('\\', '/')
+    fpath = Path(fname)
+    _root, _soup = get_xml_root(fpath)
+    if _root is None:
+        return
+    extends_lst = walk_extends_chain(fpath, _root)
+    def_lst = []
+    for ext_clss in extends_lst:
+        fpath = Path(str(fpath.absolute()).replace(fpath.name, f'{ext_clss}.nxdl.xml'))
+        tables_dct['main'].insert({'filename': str(fpath.name)})
+        _root, _soup = get_xml_root(fpath)
+        def_lst.append(get_definition_details(_root, _soup))
+
+    #merge all into one dct, syms, docs and return
+    #dct, syms, docs = merge_extends_results(def_lst)
+    #return(dct, syms, docs)
+    return (None, None, None)
+
+def get_definition_details(root, soup, sym_args_dct={}, dct={}, docs=[], report_symbols_only=False, allow_extend=True):
+    '''
+    walk the root and return a dct of all fields groups etc, symbols used and doc strings
+    '''
+    global tables_dct
     xml, syms = process_symbols(soup, sym_args_dct=sym_args_dct)
-    if(report_symbols_only):
+    if (report_symbols_only):
         exit(0)
 
     ldct = {}
     dct = {}
     docs = []
-    xml = xml.replace('encoding="utf-8"', '')
-    xxml = etree.XML(xml)
-    #xxml = etree.parse(fname).getroot()
-    tree = etree.ElementTree(xxml)
-    root = tree.getroot()
 
     def_dir = root.get('category')
+    doc =  root.get('doc')
+    if doc is None:
+        doc = ''
+    tables_dct['main'].insert({'category': def_dir})
+    tables_dct['main'].insert({'doc': doc})
     dct['category'] = def_dir
-    dct['doc'] = ''
+
     ch = root.getchildren()
 
     #confirm that an NXentry group exists, if not then bail
@@ -589,6 +887,7 @@ def get_xml_paths(fname, sym_args_dct={}, report_symbols_only=False):
     for c in ch:
         if(c.tag == 'doc'):
             dct['doc'] = c.text
+            tables_dct['main'].update({'doc': c.text})
         elif(c.tag == 'group'):
             entry_grp = c
             break
@@ -600,9 +899,17 @@ def get_xml_paths(fname, sym_args_dct={}, report_symbols_only=False):
         for ch_dct in ch_lst:
             if ch_dct['ptype'] not in skip_lst:
                 hsh = hash(ch_dct['xpath'])
-                #print(ch_dct)
+                # if ch_dct['ptype'] == 'enumeration':
+                #     print()
                 if hsh not in ldct.keys():
-                    #print(ch_dct['ptype'] + ch_dct['abspath'])
+                    # if ch_dct['xpath'] == '/definition/group/group[1]/field[3]/doc':
+                    #     print()
+                    #print(ch_dct)
+                    if type(ch_dct['ptype']) != str:
+                        #this is alikely a Comment() function that is the result of reading <!---> in xml doc
+                        continue
+                    tables_dct[ch_dct['ptype']].upsert(ch_dct, (query.xpath == ch_dct['xpath']) & (query.abspath == ch_dct['abspath']))
+
                     if ch_dct['ptype'] not in dct.keys():
                         dct[ch_dct['ptype']] = []
 
@@ -610,7 +917,6 @@ def get_xml_paths(fname, sym_args_dct={}, report_symbols_only=False):
                         #here using the abspath find the nearest field or group that this doc belongs to and assign it
                         #dct[ch_dct['ptype']] = []
                         docs.append(ch_dct)
-
                     else:
                         dct[ch_dct['ptype']].append(
                             {'abspath': ch_dct['abspath'], 'xpath': ch_dct['xpath'], 'attrib': dict(ch_dct['attrib']),
@@ -631,12 +937,12 @@ def get_parent_group(nf, ppath):
             pgrp = nf[ppath]
     return(pgrp)
 
-def get_enums(abspath, dct):
+def get_enums(abspath):#, dct):
     '''
     for a given parent path, return all enumerations as a list
     '''
     l = []
-    for d in dct['item']:
+    for d in tables_dct['item'].all():
         if(abspath == d['abspath']):
             l.append(d['attrib']['value'])
     return(l)
@@ -646,9 +952,10 @@ def fix_nx_name(nm):
     it appers to be default that if no name attribute was passed then the NX class name is used in upper case sans 'NX'
     '''
     if nm.find('NX') > -1:
-        #remove NX and make it upper case
-        # nm = nm.replace('NX','').upper()
-        nm = nm.replace('NX', 'untitled_')
+        #make sure it is a class name not some other name with NX_ in front of it like in NXspe.nxdl.xml which has
+        # a field called NXSPE_info
+        if nm.find('_') == -1:
+            nm = nm.replace('NX', '')
     return(nm)
 
 def fix_nx_path(path_str):
@@ -659,12 +966,65 @@ def fix_nx_path(path_str):
             s += fix_nx_name(ss) + '/'
     return(s)
 
+def print_script_group(dct):
+    '''
+    '''
+    #grp_name = dct['abspath'].replace('/','')
+    parent_grp = get_parent_path(dct['abspath'])
+    grp_name = get_last_name_from_abspath(dct['abspath'])
+    #print('root[\'%s\'] = root.create_group(\'%s\')' % (get_parent_path(dct['abspath']), grp_name))
+    if len(parent_grp) > 1:
+        #print('root[\'%s\'].create_group(\'%s\')' % (parent_grp, grp_name))
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root[\'%s\'].create_group(\'%s\')' % (parent_grp, grp_name))
 
-def create_groups(nf, dct):
+        nxsfrmt_script_lst.append('root[\'%s\'] = %s()' % (dct['abspath'], dct['attrib']['type']))
+
+    else:
+        #print('root.create_group(\'%s\')' % (grp_name))
+        h5py_script_lst.append(' ')
+        h5py_script_lst.append('root.create_group(\'%s\')' % (grp_name))
+        #h5py_script_lst.append('root[\'%s%s\'] = [()]' % (parent_grp, grp_name))
+
+
+        nxsfrmt_script_lst.append('root[\'%s\'] = %s()' % (dct['abspath'], dct['attrib']['type']))
+
+def get_category():
+    '''
+    return the category of the nxdl file from the database
+    '''
+    for d in tables_dct['main'].all():
+        if 'category' in d.keys():
+            return(d['category'])
+    return(None)
+
+def get_cur_def_name():
+    '''
+    return the definition name from the database
+    '''
+    for d in tables_dct['main'].all():
+        if 'filename' in d.keys():
+            return d['filename'].replace('.nxdl.xml', '')
+    return (None)
+
+def add_line_to_scripts(msg, with_prec_newline=False):
+    '''
+    add the specified message to the script string list that will be used to generate the examples cript file
+    '''
+    if with_prec_newline:
+        h5py_script_lst.append('')
+        nxsfrmt_script_lst.append('')
+    h5py_script_lst.append(msg)
+    nxsfrmt_script_lst.append(msg)
+
+def create_groups(nf):
     '''
     walk all dicts of type GROUP creating them as it goes
     '''
-    for d in dct['group']:
+
+    add_line_to_scripts('# Create the GROUPS ', with_prec_newline=True)
+
+    for d in tables_dct['group'].all():
         _type = get_type(d)
         if('name' in d['attrib'].keys()):
             if _type.replace('NX','') == d['attrib']['name']:
@@ -681,29 +1041,29 @@ def create_groups(nf, dct):
             pgrp = nf
         else:
             pgrp = nf[ppath]
-        min_occurs_str = get_min_occurs(d, dct['category'])
-        _grp = _group(pgrp, name, nxdata_type=_type)
+        min_occurs_str = get_min_occurs(d, get_category())
+        _grp = _group(pgrp, name, nxdata_type=_type, dct=d)
         _string_attr(_grp, 'EX_required', min_occurs_str)
         doc = get_doc(d)
         if (doc):
             _string_attr(_grp, 'doc', doc)
         #print('created: GROUP [%s]' % fix_nx_path(d['abspath']))
 
-def get_dimensions_dicts(d, dct):
-    dimensions_dct = next((item for item in dct['dimensions'] if item["abspath"] == d['abspath']), {'attrib':{}})
-    #dim_dct = next((item for item in dct['DIM'] if item["abspath"] == d['abspath']), {'attrib':{}})
+
+
+def get_dimensions_dicts(d, dimensions_lst):
+    dimensions_dct = next((item for item in dimensions_lst if item["abspath"] == d['abspath']), {'attrib': {}})
     dim_l = []
-    if('dim' in dct.keys()):
-        for item in dct['dim']:
+    if('dim' in dimensions_dct.keys()):
+        for item in dimensions_dct['dim']:
             #get all who share the abspath
             if item['abspath'] == d['abspath']:
                 dim_l.append(item['attrib'])
 
     dimensions_dct['attrib']['dim'] = dim_l
-    #dimensions_dct['attrib'].update(dim_dct['attrib'])
     return(dimensions_dct)
 
-def create_fields(nf, dct, sym_dct={}, category=''):
+def create_fields(nf, sym_dct={}, category=''):
     '''
         walk all dicts of type FIELD creating them as it goes
 
@@ -715,32 +1075,48 @@ def create_fields(nf, dct, sym_dct={}, category=''):
            'type': 'NX_INT'},
           'doc': '\n     '},
     '''
+    add_line_to_scripts('# Create the FIELDS ', with_prec_newline=True)
+
+    unit_dct = {}
     valid_fld_attr_nms_lst = ['axes','axis','data_offset','interpretation','long_name','maxOccurs','minOccurs','nameType','primary','signal','stride','units'] #type was removed because I think it is handled when dataset is created
     # create FIELDs
-    for d in dct['field']:
+    for d in tables_dct['field'].all():
+        #print(d)
         name = fix_nx_name(d['attrib']['name'])
         _type = get_type(d)
-
-        #get teh parent path to this field
+        units = get_units(_type)
         ppath = fix_nx_path(get_parent_path(d['abspath']))
 
+        if len(_type) == 0:
+            #there has been no declaration for this item so try to use type of the parent group
+            #default
+            _type = 'NX_CHAR'
+
         #get all enumerations if any exist for this parent path
-        enums = get_enums(d['abspath'], dct)
-        #get the dimensions dict if one exists for this field
-        if('dimensions' in dct.keys()):
-            use_dim_dct_lst = get_dimensions_dicts(d, dct)
+        enums = get_enums(d['abspath'])
+        _res_lst = tables_dct['dimensions'].search(query.abspath == d['abspath'])
+        if len(_res_lst) > 0:
+            use_dim_dct_lst = get_dimensions_dicts(d, _res_lst)
         else:
             use_dim_dct_lst = {}
+
         pgrp = get_parent_group(nf, ppath)
         if len(enums) > 0:
             #if this is an enumerated data type just use teh first enumeration as the data
             data = enums[0]
+            # and include a comment in teh script
+            print_list_attr(pgrp, name, enums)
         else:
             data = get_nx_data_by_type(_type, use_dim_dct_lst, sym_dct)
             if(data is None):
                 print('\t\tError: There is an issue with a non standard field for fieldname [%s]' % name)
                 return(False)
-        _dset = _dataset(pgrp, name, data, _type)
+
+        # if name.find('depends_on'):
+        #     #default value for a depends_on field is '.', at least
+        #     data = ppath
+
+        _dset = _dataset(pgrp, name, data, _type, nx_units=units)
         #print('created: FIELD [%s]' % fix_nx_path(d['abspath']))
         _string_attr(_dset, 'EX_required', get_min_occurs(d, category))
         doc = get_doc(d)
@@ -763,15 +1139,16 @@ def create_fields(nf, dct, sym_dct={}, category=''):
 
     return(True)
 
-def create_links(nf, dct):
+def create_links(nf): #, dct):
     '''
     walk all dicts of type LINK creating them as it goes
 
     '''
-    if('link' not in dct.keys()):
-        return
+    # if('link' not in dct.keys()):
+    #     return
     paths_lst = get_all_paths_in_hdf5(nf)
-    for d in dct['link']:
+
+    for d in tables_dct['link'].all():
         fix_link_target(nf, d, paths_lst)
 
 def fix_link_target(nf, trgt_dct, hdf5_path_lst):
@@ -791,9 +1168,10 @@ def fix_link_target(nf, trgt_dct, hdf5_path_lst):
         print('\t\ttarget path: [%s] ' % trgt_dct['abspath'])
         exit()
     else:
+        add_line_to_scripts('# Create the LINKS ', with_prec_newline=True)
         pgrp = nf[ppath]
-        target_str = trgt_dct['attrib']['target']
-
+        # force link targets to default removal of class type NX, if the have any
+        target_str = standardize_link_target_str(trgt_dct['attrib']['target'])
         #check target link path against all valid paths in nf file
         for p in hdf5_path_lst:
             # irespective of case is this path a match?
@@ -807,23 +1185,43 @@ def fix_link_target(nf, trgt_dct, hdf5_path_lst):
             target_str = '/' + target_str
 
         link_nm = get_last_name_in_path(trgt_dct['abspath'])
-        if(target_str not in nf):
+        #if(target_str not in nf):
+        if (pstr not in nf):
             #print('\t-Error: The link path [%s] specified in NXDL file for [%s] does not exist in the generated file' % (target_str, trgt_dct['abspath']))
             print('\t-Link Error: This field [%s] specifies a link target that does not exist in the generated file [%s]' % (trgt_dct['abspath'], target_str))
             #exit()
         else:
-            pgrp[link_nm] = nf[target_str]
-            nf[target_str].attrs['target'] = target_str
+            #force the link to be what we found in the file
+            pgrp[link_nm] = nf[pstr]
+            pgrp[link_nm].attrs['target'] = pstr
+
+            #need to add this to the list oof script items
+            h5py_script_lst.append('root[\'%s%s\'] = h5py.SoftLink(\'%s\')' % (ppath, link_nm, pstr))
+            h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (trgt_dct['abspath'], 'target', target_str))
+
+            nxsfrmt_script_lst.append('root[\'%s%s\'] = NXlink(target=\'%s\')' % (ppath, link_nm, pstr))
+            #root['/entry/data/data'] = NXlink(target='/entry/instrument/detector/data')
+            #nxsfrmt_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (trgt_dct['abspath'], 'target', target_str))
 
 
-def create_attributes(nf, dct):
+
+def standardize_link_target_str(trgt):
+    trgt = trgt.replace('NX','')
+    class_idx = trgt.find(':')
+    class_idx2 = trgt[class_idx:].find('/')
+    res = trgt.replace(trgt[class_idx:class_idx+class_idx2],'')
+    return(res)
+
+def _soft_link(nxgrp, name, target):
+    nxgrp[name] = h5py.SoftLink(target)
+
+def create_attributes(nf):#, dct):
     '''
     '''
+    #paths_lst = get_all_paths_in_hdf5(nf)
+    add_line_to_scripts('# Create the ATTRIBUTES ', with_prec_newline=True)
 
-    if('attribute' not in dct.keys()):
-        return
-    paths_lst = get_all_paths_in_hdf5(nf)
-    for d in dct['attribute']:
+    for d in tables_dct['attribute'].all():
         #print(d)
         ppath = get_parent_path(d['abspath'])
         if ppath not in nf:
@@ -837,10 +1235,15 @@ def create_attributes(nf, dct):
         else:
             data = get_nx_data_by_type('NX_CHAR')
 
-        pgrp.attrs[d['attrib']['name']] = data
-        #_string_attr(pgrp, d['attrib']['name'], data)
+        if type(data) is str:
+            _string_attr(pgrp, d['attrib']['name'], data)
+        else:
+            _num_attr(pgrp, d['attrib']['name'], data)
 
 def get_last_name_in_path(pth):
+    '''
+    given an absolute path to a node return the node name
+    '''
     p2 = pth.split('/')
     for p in p2:
         if(len(p) == 0):
@@ -853,6 +1256,8 @@ def add_docs(nf, docs):
     takes a list of dicts that contain doc strings and the paths to the parent field or group, just add the doc string
     as a string attribute to the field or group for the user reference when looking with an hdf5 inspection tool
     '''
+    add_line_to_scripts('# Create the DOC strings ', with_prec_newline=True)
+
     for d in docs:
         # print(d)
         ppath = d['abspath']
@@ -864,12 +1269,88 @@ def add_docs(nf, docs):
         else:
             pgrp = nf[ppath]
 
-        _string_attr(pgrp, 'EX_doc', d['doc'])
+        doc_str = d['doc']
+        doc_str = doc_str.replace('\'', '"')
+        while doc_str.find('  ') > -1:
+            doc_str = doc_str.replace('  ', ' ')
 
-def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
+        _string_attr(pgrp, 'EX_doc', doc_str[1:])
+
+def print_script_start(fname):
+    '''
+    make calls to the currently supported example script modules (h5py, nexusformat) so that the proper lines can be appended to their respective string lists
+    from which the final scripto file will be written from
+    '''
+    print_h5py_ex_start(fname)
+    print_nxsfrmt_ex_start(fname)
+
+def print_nxsfrmt_ex_start(fname):
+    '''
+    append the proper lines to open each example script for nexusformat
+    '''
+    global nxsfrmt_script_lst
+    nxsfrmt_script_lst = []
+    nxsfrmt_script_lst.append(' ')
+    nxsfrmt_script_lst.append('import numpy as np')
+    nxsfrmt_script_lst.append('from nexusformat.nexus import *')
+    nxsfrmt_script_lst.append(' ')
+    nxsfrmt_script_lst.append('# Note this example script was generated by nxdl_to_hdf5.py using the current \n# installed version of the NEXUS definitions ver[%s] ' % rel_ver)
+    nxsfrmt_script_lst.append(' ')
+    nxsfrmt_script_lst.append('root = NXroot()')
+
+
+def print_h5py_ex_start(fname):
+    '''
+        append the proper lines to open each example script for h5py
+   '''
+
+    global h5py_script_lst
+    h5py_script_lst = []
+    #fpath = __file__.replace('nxdl_to_hdf5.py','')
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append('import numpy as np')
+    h5py_script_lst.append('import datetime')
+    h5py_script_lst.append('import h5py')
+    h5py_script_lst.append('import os')
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append(
+        '# Note this example script was generated by nxdl_to_hdf5.py using the current \n# installed version of the NEXUS definitions ver[%s] ' % rel_ver)
+    h5py_script_lst.append(' ')
+    h5py_script_lst.append('root = h5py.File(\'%s.h5\', \'w\')' % (fname))
+
+def print_script_close(class_nm):
+    '''
+    make calls to the currently supported example script modules (h5py, nexusformat) so that the proper lines can be appended to their respective string lists
+    to close the files
+
+   '''
+
+    print_h5py_close()
+    print_nxsfrmt_close(class_nm)
+
+def print_h5py_close():
+    '''
+            append the proper lines to close each example script for h5py
+    '''
+    h5py_script_lst.append('\n# Close the file')
+    h5py_script_lst.append('root.close()\n\n')
+
+def print_nxsfrmt_close(class_nm):
+    '''
+            append the proper lines to close each example script for nexusformat
+    '''
+    nxsfrmt_script_lst.append('\n# Save the file')
+    nxsfrmt_script_lst.append('root.save(\'%s.nxs\', \'w\')\n\n' % class_nm)
+
+
+def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
+    '''
+    create an hdf5 file of the application definition (class_nm) in the specified destination directory
+    '''
+
     print('\texporting: [%s]' % clss_nm)
     res = True
-    category = def_dir = path_dct[clss_nm]['category']
+    category = def_dir = get_category()
 
     if (not os.path.exists(dest_dir)):
         os.makedirs(dest_dir)
@@ -879,7 +1360,8 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
 
     sym_dct = {}
     # process SYMBOLS
-    for sym_nm, d in symbol_dct.items():
+    for d in tables_dct['symbols'].all():
+        sym_nm = d['name']
         if (True):
             #sym_nm = d['name']
             val = int(d['value'])
@@ -892,57 +1374,58 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
         #create the symbol string attrs in the root of the file
         _string_attr(nf, sym_nm, d['doc'])
 
-        # update the DIMENSIONS list by substituting the value for the symbol where it is used to specify the dimension of
-        # a field
-        if('dimensions' in path_dct[clss_nm].keys()):
-            for l in path_dct[clss_nm]['dimensions']:
-                if 'rank' in l['attrib'].keys():
-                    if l['attrib']['rank'] == sym_nm:
-                        #substitute the value
-                        l['attrib']['rank'] = val
+        for l in tables_dct['dimensions'].all():
+            if 'rank' in l['attrib'].keys():
+                if l['attrib']['rank'] == sym_nm:
+                    # substitute the value
+                    l['attrib']['rank'] = val
 
-        if ('dim' in path_dct[clss_nm].keys()):
-            for l in path_dct[clss_nm]['dim']:
-                if 'value' in l['attrib'].keys():
-                    if l['attrib']['value'] == sym_nm:
-                        #substitute the value
-                        l['attrib']['value'] = val
-
-    #check if the definition uses a symbol for a value but has not defined that same symbol
-    if('dim' in path_dct[clss_nm].keys()):
-        for l in path_dct[clss_nm]['dim']:
+        for l in tables_dct['dim'].all():
             if 'value' in l['attrib'].keys():
-                val = l['attrib']['value']
-                if not has_numbers(val):
-                    #does it also contain spaces? if so then it is not a symbol
-                    if val.find(' ') == -1:
-                        if val not in sym_dct.keys():
-                            print('\t-Symbol Warning: the symbol [%s] is being used but has not been defined in the Symbols table, setting to default value of 1' % val)
-                            sym_dct[val] = 1
-                            l['attrib']['value'] = 1
+                if l['attrib']['value'] == sym_nm:
+                    #substitute the value
+                    l['attrib']['value'] = val
 
+    for l in tables_dct['dim'].all():
+        if 'value' in l['attrib'].keys():
+            val = l['attrib']['value']
+            if not has_numbers(val):
+                # does it also contain spaces? if so then it is not a symbol
+                if val.find(' ') == -1:
+                    if val not in sym_dct.keys():
+                        print('\t-Symbol Warning: the symbol [%s] is being used but has not been defined in the Symbols table, setting to default value of 1' % val)
+                        sym_dct[val] = 1
+                        l['attrib']['value'] = 1
+
+    print_script_start(class_nm)
 
     # create GROUPs
-    create_groups(nf, path_dct[clss_nm])
+    create_groups(nf)
+
     # # create FIELDs
-    res = create_fields(nf, path_dct[clss_nm], sym_dct, category)
+    res = create_fields(nf, sym_dct, category)
 
     # create Links
-    create_links(nf, path_dct[clss_nm])
+    create_links(nf)
 
     # add the docs from fields and groups now that they exist
-    add_docs(nf, docs)
+    add_docs(nf, tables_dct['doc'].all())
+
+    h5py_script_lst.append(' ')
+    nxsfrmt_script_lst.append(' ')
 
     if(res):
         # create Attributes
-        create_attributes(nf, path_dct[clss_nm])
+        create_attributes(nf)
 
-        _string_attr(nf, 'file_name', fpath)
-        _string_attr(nf, 'file_time', make_timestamp_now())
+        _string_attr(nf, 'file_name', fpath.replace('\\', '/'), do_print=False)
+        _string_attr(nf, 'file_time', make_timestamp_now(), do_print=False)
+        _string_attr(nf, 'HDF5_Version', h5py.version.hdf5_version, do_print=False)
+        _string_attr(nf, 'h5py_version', h5py.version.version, do_print=False)
         #_string_attr(nf, 'NEXUS_release_ver', rel_ver)
         entry_grp, entry_nm = get_entry(nf)
         #ensure the definition is correct
-        entry_grp['definition'][()] = clss_nm
+        entry_grp['definition'][()] = get_cur_def_name()
         _string_attr(nf, 'default', entry_nm)
         nx_data_grp, nx_data_nm = get_NXdata_nm(nf)
         if (nx_data_nm):
@@ -952,17 +1435,73 @@ def make_class_as_nf_file(clss_nm, path_dct, dest_dir, docs, symbol_dct = {}):
                 _string_attr(nx_data_grp, 'signal', dset_nm)
                 _string_attr(nx_data_grp[dset_nm], 'signal', '1')
 
-        _dataset(nf, 'README', readme_string % (rel_ver, clss_nm), 'NX_CHAR', nx_units='NX_ANY', dset={})
+        _dataset(nf, 'README', readme_string % (rel_ver, clss_nm), 'NX_CHAR', nx_units='NX_UNITLESS', dset={}, do_print=False)
+
+        prune_extended_entries(nf)
+
         nf.close()
-        print('finished exporting to [%s]' % fpath)
+        #print('finished exporting to [%s]' % fpath)
     else:
         print('Failed exporting [%s]' % fpath)
         nf.close()
+
+
+    print_script_versions(class_nm)
+    print_script_close(class_nm)
+
+    write_script_file(class_nm)
+
+
+
     return(res)
 
+def prune_extended_entries(nf):
+    ekeys = list(nf.keys())
+    for k in ekeys:
+        if '_' in k:
+            del(nf[k])
 
 
-def build_class_dict(class_dir='base_classes', desired_class=None, defdir=None, sym_args_dct={},report_symbols_only=False):
+def print_script_versions(fname):
+    print_h5py_versions(fname)
+    print_nxsfrmt_versions(fname)
+
+def print_h5py_versions(class_nm):
+    h5py_script_lst.append('root.attrs[\'file_name\'] = os.path.abspath(\'%s\')' % class_nm)
+    h5py_script_lst.append('root.attrs[\'file_time\'] = datetime.datetime.now().isoformat()')
+    h5py_script_lst.append('root.attrs[\'h5py_version\'] = h5py.version.version')
+    h5py_script_lst.append('root.attrs[\'HDF5_Version\'] = h5py.version.hdf5_version')
+
+
+def print_nxsfrmt_versions(class_nm):
+    # nxsfrmt_script_lst.append('root.attrs[\'file_name\'] = os.path.abspath(\'%s\')' % class_nm)
+    # nxsfrmt_script_lst.append('root.attrs[\'file_time\'] = datetime.datetime.now().isoformat()')
+    # nxsfrmt_script_lst.append('root.attrs[\'nexusformat_version\'] = nexusformat.__version__')
+    # nxsfrmt_script_lst.append('root.attrs[\'HDF5_Version\'] = h5py.version.hdf5_version')
+    pass
+
+def write_script_file(class_nm):
+    write_h5py_script(os.path.join(os.getcwd(), '..', 'autogenerated_examples','nxdl', 'python_scripts','h5py'), class_nm, h5py_script_lst)
+    write_nxsfrmt_script(os.path.join(os.getcwd(), '..', 'autogenerated_examples','nxdl', 'python_scripts', 'nexusformat'), class_nm, nxsfrmt_script_lst)
+
+def write_h5py_script(path, class_nm, script_lst):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        f = open(os.path.join(path, 'ex_h5py_%s.py' % class_nm), 'w')
+        for l in script_lst:
+            f.write(l + '\n')
+        f.close()
+
+def write_nxsfrmt_script(path, class_nm, script_lst):
+    if not os.path.exists(path):
+        os.mkdir(path)
+
+    f = open(os.path.join(path, 'ex_nexusformat_%s.py' % class_nm), 'w')
+    for l in script_lst:
+        f.write(l + '\n')
+    f.close()
+
+def build_class_db(class_dir='base_classes', desired_class=None, defdir=None, sym_args_dct={},report_symbols_only=False):
     '''
     build a nxdl definition into a dict
         class_dir: either 'applications' or 'base_classes'
@@ -999,6 +1538,8 @@ def symbol_args_to_dict(arg_lst):
 
 if __name__ == '__main__':
     import argparse
+
+    init_database()
 
     def_subdirs = ['applications', 'contributed_definitions']
 
@@ -1070,38 +1611,29 @@ if __name__ == '__main__':
     for def_subdir in def_subdirs:
         files = sorted(os.listdir(os.path.join(def_dir, def_subdir)))
         dest_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),'..', 'autogenerated_examples', 'nxdl', def_subdir)
+        # FOR TESTING #####################
+        #dest_dir = 'G:/github/nexusformat/exampledata/autogenerated_examples/nxdl/applications'
+        ##################################
+        if (class_nm is None):
+            do_exit = False
+        else:
+            do_exit = True
         for class_path in files:
             if class_path.find('.nxdl.xml') > -1:
-                if(class_nm is None):
+                if class_nm is None:
                     class_nm = class_path.replace('.nxdl.xml','')
-                    path_dct, syms, docs  = build_class_dict(def_subdir, desired_class=class_nm, defdir=def_dir,
-                                                       sym_args_dct=sym_args_dct,
-                                                       report_symbols_only=report_symbols_only)
-                    if(path_dct[class_nm] is None):
-                        print('\t[%s] does not contain an NXentry group, skipping' % class_nm)
-                        class_nm = None
-                        continue
 
-                    res = make_class_as_nf_file(class_nm, path_dct, dest_dir, docs, symbol_dct=sym_args_dct)
-                    # if(res):
-                    #     run_remote_validator(class_nm)
-                    # else:
-                    #     print('Not validating the file until NXDL file contains no errors')
-                    class_nm = None
-                else:
-                    path_dct, syms, docs = build_class_dict(def_subdir, desired_class=class_nm,
-                                                      defdir=def_dir, sym_args_dct=sym_args_dct,
-                                                      report_symbols_only=report_symbols_only)
-                    if (path_dct[class_nm] is None):
-                        print('\t[%s] does not contain an NXentry group, skipping' % class_nm)
-                        class_nm = None
-                        continue
+                # path_dct, syms, docs = build_class_db(def_subdir, desired_class=class_nm,
+                #                                   defdir=def_dir, sym_args_dct=sym_args_dct,
+                #                                   report_symbols_only=report_symbols_only)
+                build_class_db(def_subdir, desired_class=class_nm,
+                                                        defdir=def_dir, sym_args_dct=sym_args_dct,
+                                                        report_symbols_only=report_symbols_only)
+                res = make_class_as_nf_file(class_nm, dest_dir, symbol_dct=sym_args_dct)
 
-                    res = make_class_as_nf_file(class_nm, path_dct, dest_dir, docs, symbol_dct=sym_args_dct)
-                    # if (res):
-                    #     run_remote_validator(class_nm)
-                    # else:
-                    #     print('Skipping file validation until [%s] contains no errors' % os.path.join(os.path.join(def_dir, def_subdir), class_nm +'nxdl.xml'))
+                init_database()
+                class_nm = None
+                if do_exit:
                     exit()
 
 
