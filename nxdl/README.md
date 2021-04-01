@@ -98,3 +98,8 @@ finished exporting to [G:\tst_nexus\exampledata\nxdl\applications\NXiqproc.hdf5]
 
 [nxdl_validate_out](nxdl_validate_out.md) is the output of running **nxvalidate** against each generated file
 
+[ex_h5py_validation_out.md](ex_h5py_validation_out.md) is the output from **nxvalidate** against the files created by the python scripts using **h5py**
+
+[ex_nexusformat_validation_out.md](ex_nexusformat_validation_out.md) is the output from **nxvalidate** against the files created by the python scripts using **nexusformat**
+
+
