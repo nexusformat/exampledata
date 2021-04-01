@@ -69,9 +69,9 @@ nxdl_to_hdf5 requires the following modules:
     If the definition uses symbols inside but does not specify any in a `Symbols` table then each undefined symbol
     will be set to the value 1. If you want to generate a file using certain values for the symbols you can pass them in:
   ```
-  >python nxdl_to_hdf5.py -f NXiqproc -s NE=5, NQX=3, NQY=3
+  >python nxdl_to_hdf5.py -f NXiqproc -s nE=5, nQX=3, nQY=3
     Process this specific definition [NXiqproc]
-	Process using the following symbols [['NE=5,', 'NQX=3,', 'NQY=3']]
+	Process using the following symbols [['nE=5,', 'nQX=3,', 'nQY=3']]
 
 Processing [C:/controls/test/nexusformat/exampledata\..\definitions\applications\NXiqproc.nxdl.xml]
 	exporting: [NXiqproc]
@@ -89,9 +89,9 @@ finished exporting to [G:\tst_nexus\exampledata\nxdl\applications\NXiqproc.hdf5]
     >python -f NXiqproc -r
     Processing [C:/controls/test/nexusformat/exampledata\..\definitions\applications\NXiqproc.nxdl.xml]
 	exporting: [NXiqproc]
-	-Symbol Warning: the symbol [NE] is being used but has not been defined in the Symbols table, setting to default value of 1
-	-Symbol Warning: the symbol [NQX] is being used but has not been defined in the Symbols table, setting to default value of 1
-	-Symbol Warning: the symbol [NQY] is being used but has not been defined in the Symbols table, setting to default value of 1
+	-Symbol Warning: the symbol [nE] is being used but has not been defined in the Symbols table, setting to default value of 1
+	-Symbol Warning: the symbol [nQX] is being used but has not been defined in the Symbols table, setting to default value of 1
+	-Symbol Warning: the symbol [nQY] is being used but has not been defined in the Symbols table, setting to default value of 1
   ```
 
 [nxdl_to_hdf5_output](nxdl_to_hdf5_output.md) is the output of running nxdl_to_hdf5.py to generate all definitions in `applications`
