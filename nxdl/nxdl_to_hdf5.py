@@ -1612,17 +1612,25 @@ if __name__ == '__main__':
 
     if args.nxdefdir:
         print('\tUsing the following definitions base directory [%s]' % args.nxdefdir)
-        def_dir = args.nxdefdir
+        def_dir = pathlib.Path(args.nxdefdir)
     else:
-        #use the definitions in the installed nexpy
-        def_dir = pathlib.PurePath(pathlib.os.getcwd(), '..', '..', 'definitions')
+        #use the definitions in a neighboring directory
+        def_dir = pathlib.Path("This non-existing path is used for testing.")
+        cwd = pathlib.Path(__file__).parent
+        for _path in (
+            (cwd.parent / "definitions"),
+            (cwd.parent.parent / "definitions"),
+        ):
+            if _path.exists():
+                def_dir = _path
+                break
+    if not def_dir.exists():
+        raise FileNotFoundError("NeXus definitions not found here: " + str(def_dir))
 
     #get the release version of the definitions
-    if pathlib.Path(pathlib.PurePath(def_dir, 'NXDL_VERSION')).exists():
-        f = open(pathlib.PurePath(def_dir, 'NXDL_VERSION'), 'r')
-        l = f.readlines()
-        f.close()
-        rel_ver = l[0].replace('\n','')
+    if (def_dir / 'NXDL_VERSION').exists():
+        with open(pathlib.PurePath(def_dir, 'NXDL_VERSION'), 'r') as f:
+            rel_ver = f.readline().replace('\n','')
 
     if args.report:
         #just repolrt on the symbols that are defined in
@@ -1648,9 +1656,9 @@ if __name__ == '__main__':
 
     files = None
     for def_subdir in def_subdirs:
-        files = sorted(os.listdir(pathlib.PurePath(def_dir, def_subdir)))
+        files = sorted((def_dir / def_subdir).iterdir())
         for class_path in files:
-            process_nxdl(class_path, def_subdir)
+            process_nxdl(str(class_path), def_subdir)
             init_database()
 
 
