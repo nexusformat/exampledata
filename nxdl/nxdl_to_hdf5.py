@@ -1573,7 +1573,7 @@ def process_nxdl(class_nm, def_subdir):
         make_class_as_nf_file(class_nm, dest_dir, symbol_dct=sym_args_dct)
 
 
-if __name__ == '__main__':
+def main():
     import argparse
 
     init_database()
@@ -1663,5 +1663,6 @@ if __name__ == '__main__':
 
 
 
-
+if __name__ == '__main__':
+    main()
 
