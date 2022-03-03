@@ -56,7 +56,7 @@ root['/entry/XAS_data_reduction'].create_dataset(name='version', data='SAMPLE-CH
 root['/entry/XAS_data_reduction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/XAS_data_reduction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/XAS_data_reduction'].create_dataset(name='date', data='2021-03-29T15:51:45.804350', maxshape=None)
+root['/entry/XAS_data_reduction'].create_dataset(name='date', data='2022-03-03T14:34:17.529470', maxshape=None)
 root['/entry/XAS_data_reduction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/XAS_data_reduction/date'].attrs['EX_required'] = 'true'
  
@@ -80,7 +80,7 @@ root['/entry/XAS_data_reduction/program'].attrs['EX_doc'] = 'Name of the program
 root['/entry/XAS_data_reduction/version'].attrs['EX_doc'] = 'Version of the program used '
 root['/entry/XAS_data_reduction/date'].attrs['EX_doc'] = 'Date and time of reconstruction processing. '
 root['/entry/XAS_data_reduction/parameters/raw_file'].attrs['EX_doc'] = 'Original raw data file this data was derived from '
-root['/entry/data/data'].attrs['EX_doc'] = 'This is corrected and calibrated I(incoming)/I(absorbed). So it is the absorption. Expect attribute ``signal=1`` '
+root['/entry/data/data'].attrs['EX_doc'] = 'I(absorbed). So it is the absorption. Expect attribute ``signal=1`` '
  
 
 # Create the ATTRIBUTES 

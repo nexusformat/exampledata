@@ -65,7 +65,7 @@ root['/entry/reconstruction/version'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/reconstruction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/reconstruction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/reconstruction/date'] = NXfield('2021-03-29T15:51:45.375352')
+root['/entry/reconstruction/date'] = NXfield('2022-03-03T14:34:17.310772')
 root['/entry/reconstruction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/reconstruction/date'].attrs['EX_required'] = 'true'
  

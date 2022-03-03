@@ -287,7 +287,7 @@ root['/entry/process/name'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/process/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/process/name'].attrs['EX_required'] = 'false'
  
-root['/entry/process/date'] = NXfield('2021-03-29T15:51:36.547895')
+root['/entry/process/date'] = NXfield('2022-03-03T14:34:12.880239')
 root['/entry/process/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/process/date'].attrs['EX_required'] = 'false'
  
@@ -394,7 +394,7 @@ root['/entry/data'].attrs['signal'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['I_axes'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['mask'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['Mask_indices'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data'].attrs['timestamp'] = '2021-03-29T15:51:36.601894'
+root['/entry/data'].attrs['timestamp'] = '2022-03-03T14:34:12.911481'
 root['/entry/data/Q'].attrs['units'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/Q'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/Q'].attrs['resolutions'] = 'SAMPLE-CHAR-DATA'
@@ -421,7 +421,7 @@ root['/entry/TRANSMISSION_SPECTRUM'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['signal'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['T_axes'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['name'] = 'SAMPLE-CHAR-DATA'
-root['/entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2021-03-29T15:51:36.609872'
+root['/entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2022-03-03T14:34:12.927101'
 root['/entry/TRANSMISSION_SPECTRUM/T'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root.attrs['default'] = 'entry'
 root['/entry/TRANSMISSION_SPECTRUM'].set_default()

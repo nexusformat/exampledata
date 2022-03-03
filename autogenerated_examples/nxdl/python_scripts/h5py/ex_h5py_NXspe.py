@@ -126,7 +126,7 @@ root['/entry/sample/temperature'].attrs['units'] = 'NX_TEMPERATURE'
 # Create the DOC strings 
 root['/entry/definition'].attrs['EX_doc'] = 'Official NeXus NXDL schema to which this file conforms. '
 root['/entry/NXSPE_info/fixed_energy'].attrs['EX_doc'] = 'The fixed energy used for this file. '
-root['/entry/NXSPE_info/ki_over_kf_scaling'].attrs['EX_doc'] = 'Indicates whether ki/kf scaling has been applied or not. '
+root['/entry/NXSPE_info/ki_over_kf_scaling'].attrs['EX_doc'] = 'kf scaling has been applied or not. '
 root['/entry/NXSPE_info/psi'].attrs['EX_doc'] = 'Orientation angle as expected in DCS-MSlice '
  
 

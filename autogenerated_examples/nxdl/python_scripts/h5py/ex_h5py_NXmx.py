@@ -73,15 +73,15 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:40.027458', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2022-03-03T14:34:14.520473', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:51:40.030457', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2022-03-03T14:34:14.536095', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='end_time_estimated', data='2021-03-29T15:51:40.039474', maxshape=None)
+root['/entry'].create_dataset(name='end_time_estimated', data='2022-03-03T14:34:14.536095', maxshape=None)
 root['/entry/end_time_estimated'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time_estimated'].attrs['EX_required'] = 'true'
  
@@ -113,7 +113,7 @@ root['/entry/instrument'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', m
 root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument'].create_dataset(name='time_zone', data='2021-03-29T15:51:40.065477', maxshape=None)
+root['/entry/instrument'].create_dataset(name='time_zone', data='2022-03-03T14:34:14.551718', maxshape=None)
 root['/entry/instrument/time_zone'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/time_zone'].attrs['EX_required'] = 'true'
  
@@ -344,15 +344,15 @@ root['/entry/source/name'].attrs['EX_required'] = 'true'
 
 # Create the DOC strings 
 root['/entry'].attrs['EX_doc'] = 'Note, it is recommended that ``file_name`` and ``file_time`` are included     as attributes at the root of a file that includes :ref:`NXmx`. See     :ref:`NXroot`. '
-root['/entry/start_time'].attrs['EX_doc'] = 'ISO 8601 time/date of the first data point collected in UTC,      using the Z suffix to avoid confusion with local time.      Note that the time zone of the beamline should be provided in      NXentry/NXinstrument/time_zone. '
-root['/entry/end_time'].attrs['EX_doc'] = 'ISO 8601 time/date of the last data point collected in UTC,      using the Z suffix to avoid confusion with local time.      Note that the time zone of the beamline should be provided in      NXentry/NXinstrument/time_zone. This field should only be      filled when the value is accurately observed. If the data      collection aborts or otherwise prevents accurate recording of      the end_time, this field should be omitted. '
-root['/entry/end_time_estimated'].attrs['EX_doc'] = 'ISO 8601 time/date of the last data point collected in UTC,      using the Z suffix to avoid confusion with local time.      Note that the time zone of the beamline should be provided in      NXentry/NXinstrument/time_zone. This field may be filled      with a value estimated before an observed value is available. '
+root['/entry/start_time'].attrs['EX_doc'] = 'time_zone. '
+root['/entry/end_time'].attrs['EX_doc'] = 'time_zone. This field should only be      filled when the value is accurately observed. If the data      collection aborts or otherwise prevents accurate recording of      the end_time, this field should be omitted. '
+root['/entry/end_time_estimated'].attrs['EX_doc'] = 'time_zone. This field may be filled      with a value estimated before an observed value is available. '
 root['/entry/definition'].attrs['EX_doc'] = 'NeXus NXDL schema to which this file conforms '
 root['/entry/data/data'].attrs['EX_doc'] = 'For a dimension-2 detector, the rank of the data array will be 3.       For a dimension-3 detector, the rank of the data array will be 4.       This allows for the introduction of the frame number as the       first index. '
 root['/entry/sample/name'].attrs['EX_doc'] = 'Descriptive name of sample '
 root['/entry/sample/depends_on'].attrs['EX_doc'] = 'This is a requirement to describe for any scan experiment.       The axis on which the sample position depends may be stored       anywhere, but is normally stored in the NXtransformations       group within the NXsample group.       If there is no goniometer, e.g. with a jet, depends_on       should be set to "." '
 root['/entry/sample/transformations'].attrs['EX_doc'] = 'This is the recommended location for sample goniometer       and other related axes.       This is a requirement to describe for any scan experiment.       The reason it is optional is mainly to accommodate XFEL       single shot exposures.       Use of the depends_on field and the NXtransformations group is       strongly recommended. As noted above this should be an absolute       requirement to have for any scan experiment.       The reason it is optional is mainly to accommodate XFEL       single shot exposures. '
-root['/entry/instrument/name'].attrs['EX_doc'] = 'Name of instrument. Consistency with the controlled       vocabulary beamline naming in       https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.pdbx_synchrotron_beamline.html       and       https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.type.html       is highly recommended. '
+root['/entry/instrument/name'].attrs['EX_doc'] = '_diffrn_source.type.html       is highly recommended. '
 root['/entry/instrument/time_zone'].attrs['EX_doc'] = 'ISO 8601 time_zone offset from UTC. '
 root['/entry/instrument/NXdetector_group'].attrs['EX_doc'] = 'Optional logical grouping of detectors.       Each detector is represented as an NXdetector       with its own detector data array. Each detector data array       may be further decomposed into array sections by use of       NXdetector_module groups. Detectors can be grouped logically       together using NXdetector_group. Groups can be further grouped       hierarchically in a single NXdetector_group (for example, if       there are multiple detectors at an endstation or multiple       endstations at a facility). Alternatively, multiple       NXdetector_groups can be provided.       The groups are defined hierarchically, with names given       in the group_names field, unique identifying indices given       in the field group_index, and the level in the hierarchy       given in the group_parent field. For example if an x-ray       detector group, DET, consists of four detectors in a       rectangular array::          DTL DTR          DLL DLR       We could have::        group_names: ["DET", "DTL", "DTR", "DLL", "DLR"]         group_index: [1, 2, 3, 4, 5]         group_parent: [-1, 1, 1, 1, 1] '
 root['/entry/instrument/NXdetector_group/group_names'].attrs['EX_doc'] = 'An array of the names of the detectors or the names of        hierarchical groupings of detectors. '
@@ -363,7 +363,7 @@ root['/entry/instrument/detector/depends_on'].attrs['EX_doc'] = 'NeXus path to t
 root['/entry/instrument/detector/transformations'].attrs['EX_doc'] = 'Location for axes (transformations) to do with the        detector. In the case of a single-module detector, the        axes of the detector axis chain may be stored here. '
 root['/entry/instrument/detector/collection'].attrs['EX_doc'] = 'Suggested container for detailed non-standard detector        information like corrections applied automatically or        performance settings. '
 root['/entry/instrument/detector/data'].attrs['EX_doc'] = 'For a dimension-2 detector, the rank of the data array will be 3.        For a dimension-3 detector, the rank of the data array will be 4.        This allows for the introduction of the frame number as the        first index. '
-root['/entry/instrument/detector/description'].attrs['EX_doc'] = 'name/manufacturer/model/etc. information. '
+root['/entry/instrument/detector/description'].attrs['EX_doc'] = 'etc. information. '
 root['/entry/instrument/detector/time_per_channel'].attrs['EX_doc'] = 'For a time-of-flight detector this is the scaling        factor to convert from the numeric value reported to        the flight time for a given measurement. '
 root['/entry/instrument/detector/NXdetector_module'].attrs['EX_doc'] = 'Many detectors consist of multiple smaller modules that are        operated in sync and store their data in a common dataset.        To allow consistent parsing of the experimental geometry,        this application definiton requires all detectors to        define a detector module, even if there is only one.        This group specifies the hyperslab of data in the data        array associated with the detector that contains the        data for this module. If the module is associated with        a full data array, rather than with a hyperslab within        a larger array, then a single module should be defined,        spanning the entire array. '
 root['/entry/instrument/detector/NXdetector_module/data_origin'].attrs['EX_doc'] = 'A dimension-2 or dimension-3 field which gives the indices         of the origin of the hyperslab of data for this module in the         main area detector image in the parent NXdetector module.         The data_origin is 0-based.         The frame number dimension (nP) is omitted. Thus the         data_origin field for a dimension-2 dataset with indices (nP, i, j)         will be an array with indices (i, j), and for a dimension-3         dataset with indices (nP, i, j, k) will be an array with indices         (i, j, k).         The :ref:`order <Design-ArrayStorageOrder>` of indices (i, j         or i, j, k) is slow to fast. '
@@ -406,8 +406,8 @@ root['/entry/instrument/beam/flux'].attrs['EX_doc'] = 'Flux density incident on 
 root['/entry/instrument/beam/total_flux'].attrs['EX_doc'] = 'Flux incident on beam plane in photons per second.        In the case of a beam that varies in total flux shot-to-shot,        this is an array of values, one for each recorded shot. '
 root['/entry/instrument/beam/incident_beam_size'].attrs['EX_doc'] = 'Two-element array of FWHM (if Gaussian or Airy function) or        diameters (if top hat) or widths (if rectangular) of the beam        in the order x, y '
 root['/entry/instrument/beam/profile'].attrs['EX_doc'] = 'The beam profile, Gaussian, Airy function, top-hat or        rectangular. The profile is given in the plane of        incidence of the beam on the sample. '
-root['/entry/source'].attrs['EX_doc'] = 'The neutron or x-ray storage ring/facility. Note, the NXsource base class      has many more fields available, but at present we only require the name. '
-root['/entry/source/name'].attrs['EX_doc'] = 'Name of source. Consistency with the naming in       https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.pdbx_synchrotron_site.html       controlled vocabulary is highly recommended. '
+root['/entry/source'].attrs['EX_doc'] = 'facility. Note, the NXsource base class      has many more fields available, but at present we only require the name. '
+root['/entry/source/name'].attrs['EX_doc'] = '_diffrn_source.pdbx_synchrotron_site.html       controlled vocabulary is highly recommended. '
  
 
 # Create the ATTRIBUTES 
