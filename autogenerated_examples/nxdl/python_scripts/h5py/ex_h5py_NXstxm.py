@@ -61,11 +61,11 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2021-03-29T15:51:42.787454', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2022-03-03T14:34:16.030189', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2021-03-29T15:51:42.790449', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2022-03-03T14:34:16.030189', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  
@@ -154,7 +154,7 @@ root['/entry/instrument/detector/data'].attrs['EX_doc'] = 'Detector data should 
 root['/entry/instrument/sample_x'].attrs['EX_doc'] = 'Measurements of the sample position from the x-axis interferometer. '
 root['/entry/instrument/sample_y'].attrs['EX_doc'] = 'Measurements of the sample position from the y-axis interferometer. '
 root['/entry/instrument/sample_z'].attrs['EX_doc'] = 'Measurements of the sample position from the z-axis interferometer. '
-root['/entry/data/stxm_scan_type'].attrs['EX_doc'] = 'Label for typical scan types as a convenience for humans. Each label corresponds to a specific set of axes being scanned to produce a data array of shape: * sample point spectrum: (photon_energy,) * sample line spectrum: (photon_energy, sample_y/sample_x) * sample image: (sample_y, sample_x) * sample image stack: (photon_energy, sample_y, sample_x) * sample focus: (zoneplate_z, sample_y/sample_x) * osa image: (osa_y, osa_x) * osa focus: (zoneplate_z, osa_y/osa_x) * detector image: (detector_y, detector_x) The "generic scan" string is to be used when none of the other choices are appropriate. '
+root['/entry/data/stxm_scan_type'].attrs['EX_doc'] = 'osa_x) * detector image: (detector_y, detector_x) The "generic scan" string is to be used when none of the other choices are appropriate. '
 root['/entry/data/data'].attrs['EX_doc'] = 'Detectors that provide more than one value per scan point should be summarised to a single value per scan point for this array in order to simplify plotting. Note that "Line scans" and focus type scans measure along one spatial dimension but are not restricted to being parallel to the X or Y axes. Such scans should therefore use a single dimension for the positions along the spatial line. The "sample_x" and "sample_y" fields should then contain lists of the x- and y-positions and should both have the "axis" attribute pointing to the same dimension. '
 root['/entry/data/energy'].attrs['EX_doc'] = 'List of photon energies of the X-ray beam. If scanned through multiple values, then an "axis" attribute will be required to link the field to the appropriate data array dimension. '
 root['/entry/data/sample_y'].attrs['EX_doc'] = 'List of Y positions on the sample. If scanned through multiple values, then an "axis" attribute will be required to link the field to the appropriate data array dimension. '

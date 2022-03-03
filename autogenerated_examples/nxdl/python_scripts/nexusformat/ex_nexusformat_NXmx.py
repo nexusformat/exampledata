@@ -43,15 +43,15 @@ root['/entry/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'false'
  
-root['/entry/start_time'] = NXfield('2021-03-29T15:51:40.027458')
+root['/entry/start_time'] = NXfield('2022-03-03T14:34:14.520473')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry/end_time'] = NXfield('2021-03-29T15:51:40.030457')
+root['/entry/end_time'] = NXfield('2022-03-03T14:34:14.536095')
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
-root['/entry/end_time_estimated'] = NXfield('2021-03-29T15:51:40.039474')
+root['/entry/end_time_estimated'] = NXfield('2022-03-03T14:34:14.536095')
 root['/entry/end_time_estimated'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time_estimated'].attrs['EX_required'] = 'true'
  
@@ -83,7 +83,7 @@ root['/entry/instrument/name'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument/time_zone'] = NXfield('2021-03-29T15:51:40.065477')
+root['/entry/instrument/time_zone'] = NXfield('2022-03-03T14:34:14.551718')
 root['/entry/instrument/time_zone'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/time_zone'].attrs['EX_required'] = 'true'
  

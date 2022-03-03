@@ -3,3 +3,6 @@
 # Microsoft VSCode
 settings.json
 launch.json
+
+#pyCharm
+.idea
