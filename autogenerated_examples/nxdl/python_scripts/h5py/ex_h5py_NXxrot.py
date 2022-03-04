@@ -57,7 +57,7 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2022-03-03T14:34:19.414948', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2022-03-04T14:56:40.218872', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -232,6 +232,9 @@ root['/entry/sample/rotation_angle_step'].attrs['EX_doc'] = 'This is an array ho
  
 
 # Create the ATTRIBUTES 
+ 
+# Valid enumeration values for root['/entry/instrument/detector/data']['signal'] are: 
+#	 1
 root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root['/'].attrs['default'] = 'entry'
 root['/entry'].attrs['default'] = 'data'

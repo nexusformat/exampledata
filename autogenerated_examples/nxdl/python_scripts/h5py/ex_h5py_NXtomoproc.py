@@ -81,7 +81,7 @@ root['/entry/reconstruction'].create_dataset(name='version', data='SAMPLE-CHAR-D
 root['/entry/reconstruction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/reconstruction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/reconstruction'].create_dataset(name='date', data='2022-03-03T14:34:17.310772', maxshape=None)
+root['/entry/reconstruction'].create_dataset(name='date', data='2022-03-04T14:56:38.000624', maxshape=None)
 root['/entry/reconstruction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/reconstruction/date'].attrs['EX_required'] = 'true'
  

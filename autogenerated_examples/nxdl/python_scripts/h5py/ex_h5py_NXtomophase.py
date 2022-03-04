@@ -53,11 +53,11 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='start_time', data='2022-03-03T14:34:17.154558', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2022-03-04T14:56:37.860033', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2022-03-03T14:34:17.170180', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2022-03-04T14:56:37.860033', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'true'
  

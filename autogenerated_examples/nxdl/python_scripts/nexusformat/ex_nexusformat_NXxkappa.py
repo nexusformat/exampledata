@@ -33,7 +33,7 @@ root['/entry/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry/start_time'] = NXfield('2022-03-03T14:34:18.227730')
+root['/entry/start_time'] = NXfield('2022-03-04T14:56:38.984766')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
@@ -211,6 +211,10 @@ root['/entry/sample/alpha'].attrs['EX_doc'] = 'This holds the inclination angle 
  
 
 # Create the ATTRIBUTES 
+ 
+# Valid enumeration values for root['/entry/instrument/detector/data']['signal'] are: 
+#	 1
+root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root.attrs['default'] = 'entry'
 root['/entry/data'].set_default()
 root['/entry/data'].attrs['signal'] = 'data'

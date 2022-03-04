@@ -45,11 +45,11 @@ root['/entry_1'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=
 root['/entry_1/title'].attrs['type'] = 'NX_CHAR'
 root['/entry_1/title'].attrs['EX_required'] = 'false'
  
-root['/entry_1'].create_dataset(name='start_time', data='2022-03-03T14:34:21.896003', maxshape=None)
+root['/entry_1'].create_dataset(name='start_time', data='2022-03-04T14:56:23.795988', maxshape=None)
 root['/entry_1/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry_1/start_time'].attrs['EX_required'] = 'false'
  
-root['/entry_1'].create_dataset(name='end_time', data='2022-03-03T14:34:21.896003', maxshape=None)
+root['/entry_1'].create_dataset(name='end_time', data='2022-03-04T14:56:23.795988', maxshape=None)
 root['/entry_1/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry_1/end_time'].attrs['EX_required'] = 'false'
  

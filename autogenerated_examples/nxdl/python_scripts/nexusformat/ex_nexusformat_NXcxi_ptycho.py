@@ -29,11 +29,11 @@ root['/entry_1/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry_1/title'].attrs['type'] = 'NX_CHAR'
 root['/entry_1/title'].attrs['EX_required'] = 'false'
  
-root['/entry_1/start_time'] = NXfield('2022-03-03T14:34:21.896003')
+root['/entry_1/start_time'] = NXfield('2022-03-04T14:56:23.795988')
 root['/entry_1/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry_1/start_time'].attrs['EX_required'] = 'false'
  
-root['/entry_1/end_time'] = NXfield('2022-03-03T14:34:21.896003')
+root['/entry_1/end_time'] = NXfield('2022-03-04T14:56:23.795988')
 root['/entry_1/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry_1/end_time'].attrs['EX_required'] = 'false'
  

@@ -257,7 +257,7 @@ root['/entry/duration'].attrs['type'] = 'NX_FLOAT'
 root['/entry/duration'].attrs['EX_required'] = 'false'
 root['/entry/duration'].attrs['units'] = 'NX_TIME'
  
-root['/entry'].create_dataset(name='end_time', data='2022-03-03T14:34:23.341632', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2022-03-04T14:56:25.264424', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
@@ -548,7 +548,7 @@ root['/entry/sample'].create_dataset(name='nature', data='SAMPLE-CHAR-DATA', max
 root['/entry/sample/nature'].attrs['type'] = 'NX_CHAR'
 root['/entry/sample/nature'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='start_time', data='2022-03-03T14:34:23.435329', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2022-03-04T14:56:25.358149', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'false'
  

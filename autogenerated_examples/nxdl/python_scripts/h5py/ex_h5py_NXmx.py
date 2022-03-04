@@ -73,15 +73,15 @@ root['/entry'].create_dataset(name='title', data='SAMPLE-CHAR-DATA', maxshape=No
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='start_time', data='2022-03-03T14:34:14.520473', maxshape=None)
+root['/entry'].create_dataset(name='start_time', data='2022-03-04T14:56:35.329416', maxshape=None)
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  
-root['/entry'].create_dataset(name='end_time', data='2022-03-03T14:34:14.536095', maxshape=None)
+root['/entry'].create_dataset(name='end_time', data='2022-03-04T14:56:35.329416', maxshape=None)
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
-root['/entry'].create_dataset(name='end_time_estimated', data='2022-03-03T14:34:14.536095', maxshape=None)
+root['/entry'].create_dataset(name='end_time_estimated', data='2022-03-04T14:56:35.345038', maxshape=None)
 root['/entry/end_time_estimated'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time_estimated'].attrs['EX_required'] = 'true'
  
@@ -113,7 +113,7 @@ root['/entry/instrument'].create_dataset(name='name', data='SAMPLE-CHAR-DATA', m
 root['/entry/instrument/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/instrument/name'].attrs['EX_required'] = 'true'
  
-root['/entry/instrument'].create_dataset(name='time_zone', data='2022-03-03T14:34:14.551718', maxshape=None)
+root['/entry/instrument'].create_dataset(name='time_zone', data='2022-03-04T14:56:35.345038', maxshape=None)
 root['/entry/instrument/time_zone'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/instrument/time_zone'].attrs['EX_required'] = 'true'
  
@@ -411,19 +411,31 @@ root['/entry/source/name'].attrs['EX_doc'] = '_diffrn_source.pdbx_synchrotron_si
  
 
 # Create the ATTRIBUTES 
-root['/entry'].attrs['version'] = 'SAMPLE-CHAR-DATA'
+ 
+# Valid enumeration values for root['/entry']['version'] are: 
+#	 1.0
+root['/entry'].attrs['version'] = '1.0'
 root['/entry/instrument/name'].attrs['short_name'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['transformation_type'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['vector'] = '1.0'
-root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['offset'] = '1.0'
+ 
+# Valid enumeration values for root['/entry/instrument/detector/NXdetector_module/module_offset']['transformation_type'] are: 
+#	 translation
+root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['transformation_type'] = 'translation'
+root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['vector'] = 'SAMPLE-CHAR-DATA'
+root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['offset'] = 'SAMPLE-CHAR-DATA'
 root['/entry/instrument/detector/NXdetector_module/module_offset'].attrs['depends_on'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['transformation_type'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['vector'] = '1.0'
-root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['offset'] = '1.0'
+ 
+# Valid enumeration values for root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction']['transformation_type'] are: 
+#	 translation
+root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['transformation_type'] = 'translation'
+root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['vector'] = 'SAMPLE-CHAR-DATA'
+root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['offset'] = 'SAMPLE-CHAR-DATA'
 root['/entry/instrument/detector/NXdetector_module/fast_pixel_direction'].attrs['depends_on'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['transformation_type'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['vector'] = '1.0'
-root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['offset'] = '1.0'
+ 
+# Valid enumeration values for root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction']['transformation_type'] are: 
+#	 translation
+root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['transformation_type'] = 'translation'
+root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['vector'] = 'SAMPLE-CHAR-DATA'
+root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['offset'] = 'SAMPLE-CHAR-DATA'
 root['/entry/instrument/detector/NXdetector_module/slow_pixel_direction'].attrs['depends_on'] = 'SAMPLE-CHAR-DATA'
 root['/entry/source/name'].attrs['short_name'] = 'SAMPLE-CHAR-DATA'
 root['/'].attrs['default'] = 'entry'

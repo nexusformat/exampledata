@@ -58,7 +58,7 @@ root['/entry/command'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/command'].attrs['type'] = 'NX_CHAR'
 root['/entry/command'].attrs['EX_required'] = 'false'
  
-root['/entry/date'] = NXfield('2022-03-03T14:34:23.779539')
+root['/entry/date'] = NXfield('2022-03-04T14:56:25.717441')
 root['/entry/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/date'].attrs['EX_required'] = 'false'
  
@@ -243,6 +243,7 @@ root['/entry/monitor/preset'].attrs['units'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['description'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['signal'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['axes'] = 'SAMPLE-CHAR-DATA'
+root['/entry/data'].attrs['AXISNAME_indices'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/data'].attrs['spec_name'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/data'].attrs['units'] = 'SAMPLE-CHAR-DATA'
 root['/entry/counter_cross_reference'].attrs['comment'] = 'SAMPLE-CHAR-DATA'
@@ -254,6 +255,8 @@ root['/entry/G'].attrs['description'] = 'SAMPLE-CHAR-DATA'
 root['/entry/positioners'].attrs['description'] = 'SAMPLE-CHAR-DATA'
 root['/entry/MCA'].attrs['description'] = 'SAMPLE-CHAR-DATA'
 root['/entry/MCA/ROI/roiN'].attrs['description'] = 'SAMPLE-CHAR-DATA'
+root['/entry/MCA/ROI/roiN'].attrs['first_channel'] = 'SAMPLE-CHAR-DATA'
+root['/entry/MCA/ROI/roiN'].attrs['last_channel'] = 'SAMPLE-CHAR-DATA'
 root['/entry/metadata'].attrs['description'] = 'SAMPLE-CHAR-DATA'
 root['/entry/_unrecognized'].attrs['comment'] = 'SAMPLE-CHAR-DATA'
 root['/entry/_unrecognized'].attrs['description'] = 'SAMPLE-CHAR-DATA'

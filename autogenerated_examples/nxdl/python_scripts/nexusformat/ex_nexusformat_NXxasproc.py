@@ -44,7 +44,7 @@ root['/entry/XAS_data_reduction/version'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/XAS_data_reduction/version'].attrs['type'] = 'NX_CHAR'
 root['/entry/XAS_data_reduction/version'].attrs['EX_required'] = 'true'
  
-root['/entry/XAS_data_reduction/date'] = NXfield('2022-03-03T14:34:17.529470')
+root['/entry/XAS_data_reduction/date'] = NXfield('2022-03-04T14:56:38.234943')
 root['/entry/XAS_data_reduction/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/XAS_data_reduction/date'].attrs['EX_required'] = 'true'
  

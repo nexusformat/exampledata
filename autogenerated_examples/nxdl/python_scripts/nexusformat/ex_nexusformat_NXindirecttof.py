@@ -31,7 +31,7 @@ root['/entry/title'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/title'].attrs['type'] = 'NX_CHAR'
 root['/entry/title'].attrs['EX_required'] = 'true'
  
-root['/entry/start_time'] = NXfield('2022-03-03T14:34:13.442607')
+root['/entry/start_time'] = NXfield('2022-03-04T14:56:34.220274')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'true'
  

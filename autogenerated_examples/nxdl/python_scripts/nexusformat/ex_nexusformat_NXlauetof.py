@@ -118,6 +118,10 @@ root['/entry/control/data'].attrs['EX_doc'] = 'use these attributes ``primary=1 
  
 
 # Create the ATTRIBUTES 
+ 
+# Valid enumeration values for root['/entry/instrument/detector/data']['signal'] are: 
+#	 1
+root['/entry/instrument/detector/data'].attrs['signal'] = '1'
 root.attrs['default'] = 'entry'
 root['/entry/name'].set_default()
 root['/entry/name'].attrs['signal'] = 'data'

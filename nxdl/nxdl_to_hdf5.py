@@ -1235,25 +1235,41 @@ def standardize_link_target_str(trgt):
 def _soft_link(nxgrp, name, target):
     nxgrp[name] = h5py.SoftLink(target)
 
-def create_attributes(nf):#, dct):
+def create_attributes(nf, sym_dct):#, dct):
     '''
+    pull all attributes from the database and create them
     '''
-    #paths_lst = get_all_paths_in_hdf5(nf)
     add_line_to_scripts('# Create the ATTRIBUTES ', with_prec_newline=True)
 
     for d in tables_dct['attribute'].all():
         #print(d)
         ppath = get_parent_path(d['abspath'])
+        # get all enumerations if any exist for this parent path
+        name = fix_nx_name(d['attrib']['name'])
+        enums = get_enums(d['abspath'])
+        _type = get_type(d)
+
         if ppath not in nf:
-            print(f"\t-Error: while creating Attributes, this parent path [{ppath}] not exist in generated file")
+            print('\t-Error: while creating Attributes, this parent path [%s] not exist in generated file' % ppath)
             exit()
         else:
             pgrp = nf[ppath]
 
-        if('type' in d['attrib'].keys()):
-            data = get_nx_data_by_type(d['attrib']['type'])
+        if len(enums) > 0:
+            #if this is an enumerated data type just use teh first enumeration as the data
+            data = enums[0]
+            # and include a comment in teh script
+            print_list_attr(pgrp, name, enums)
         else:
             data = get_nx_data_by_type('NX_CHAR')
+        #     if(data is None):
+        #         print('\t\tError: There is an issue with a non standard field for fieldname [%s]' % name)
+        #         return(False)
+        #
+        # if('type' in d['attrib'].keys()):
+        #     data = get_nx_data_by_type(d['attrib']['type'])
+        # else:
+        #     data = get_nx_data_by_type('NX_CHAR')
 
         if type(data) is str:
             _string_attr(pgrp, d['attrib']['name'], data)
@@ -1437,7 +1453,7 @@ def make_class_as_nf_file(class_nm, dest_dir, symbol_dct={}, rel_ver='UNKNOWN'):
 
         if(res):
             # create Attributes
-            create_attributes(nf)
+            create_attributes(nf, sym_dct)
 
             _string_attr(nf, 'file_name', fpath.replace('\\', '/'), do_print=False)
             _string_attr(nf, 'file_time', make_timestamp_now(), do_print=False)
@@ -1566,7 +1582,7 @@ def process_nxdl(class_path, def_dir, def_subdir, sym_args_dct, rel_ver, report_
     as well as example scripts using h5py and nexusformat
     '''
     def_dir = class_path.parent.parent
-    if class_path.is_file():
+    if pathlib.Path(class_path).is_file():
         if class_path.name.find('.nxdl.xml') > -1:
             class_nm = class_path.name.replace('.nxdl.xml', '')
             build_class_db(def_subdir, desired_class=class_nm,
@@ -1600,6 +1616,7 @@ def main():
     class_nm = None
     class_path = None
     report_symbols_only = False
+
     if args.file:
         print(f"\tProcess this specific definition [{args.file}]")
         class_nm = args.file

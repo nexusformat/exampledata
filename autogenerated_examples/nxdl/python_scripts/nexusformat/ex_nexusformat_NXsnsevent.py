@@ -193,7 +193,7 @@ root['/entry/duration'].attrs['type'] = 'NX_FLOAT'
 root['/entry/duration'].attrs['EX_required'] = 'false'
 root['/entry/duration'].attrs['units'] = 'NX_TIME'
  
-root['/entry/end_time'] = NXfield('2022-03-03T14:34:22.583376')
+root['/entry/end_time'] = NXfield('2022-03-04T14:56:24.498980')
 root['/entry/end_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/end_time'].attrs['EX_required'] = 'false'
  
@@ -468,7 +468,7 @@ root['/entry/sample/nature'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/sample/nature'].attrs['type'] = 'NX_CHAR'
 root['/entry/sample/nature'].attrs['EX_required'] = 'false'
  
-root['/entry/start_time'] = NXfield('2022-03-03T14:34:22.708346')
+root['/entry/start_time'] = NXfield('2022-03-04T14:56:24.592709')
 root['/entry/start_time'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/start_time'].attrs['EX_required'] = 'false'
  

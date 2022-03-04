@@ -287,7 +287,7 @@ root['/entry/process/name'] = NXfield('SAMPLE-CHAR-DATA')
 root['/entry/process/name'].attrs['type'] = 'NX_CHAR'
 root['/entry/process/name'].attrs['EX_required'] = 'false'
  
-root['/entry/process/date'] = NXfield('2022-03-03T14:34:12.880239')
+root['/entry/process/date'] = NXfield('2022-03-04T14:56:33.595457')
 root['/entry/process/date'].attrs['type'] = 'NX_DATE_TIME'
 root['/entry/process/date'].attrs['EX_required'] = 'false'
  
@@ -387,41 +387,129 @@ root['/entry/TRANSMISSION_SPECTRUM/Tdev'].attrs['EX_doc'] = '.. index:: NXcanSAS
 # Create the ATTRIBUTES 
 root['/entry/SAMPLE-CHAR-DATA'] = NXdata()
 root['/entry/SAMPLE-CHAR-DATA'].set_default()
-root['/entry'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry'].attrs['version'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data'].attrs['signal'] = 'SAMPLE-CHAR-DATA'
+ 
+# Valid enumeration values for root['/entry']['canSAS_class'] are: 
+#	 SASentry
+root['/entry'].attrs['canSAS_class'] = 'SASentry'
+ 
+# Valid enumeration values for root['/entry']['version'] are: 
+#	 1.1
+root['/entry'].attrs['version'] = '1.1'
+ 
+# Valid enumeration values for root['/entry/data']['canSAS_class'] are: 
+#	 SASdata
+root['/entry/data'].attrs['canSAS_class'] = 'SASdata'
+ 
+# Valid enumeration values for root['/entry/data']['signal'] are: 
+#	 I
+root['/entry/data'].attrs['signal'] = 'I'
 root['/entry/data'].attrs['I_axes'] = 'SAMPLE-CHAR-DATA'
+root['/entry/data'].attrs['Q_indices'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['mask'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data'].attrs['Mask_indices'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data'].attrs['timestamp'] = '2022-03-03T14:34:12.911481'
-root['/entry/data/Q'].attrs['units'] = 'SAMPLE-CHAR-DATA'
+root['/entry/data'].attrs['timestamp'] = 'SAMPLE-CHAR-DATA'
+ 
+# Valid enumeration values for root['/entry/data/Q']['units'] are: 
+#	 1/m
+#	 1/nm
+#	 1/angstrom
+root['/entry/data/Q'].attrs['units'] = '1/m'
 root['/entry/data/Q'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/Q'].attrs['resolutions'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/Q'].attrs['resolutions_description'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data/I'].attrs['units'] = 'SAMPLE-CHAR-DATA'
+ 
+# Valid enumeration values for root['/entry/data/I']['units'] are: 
+#	 1/m
+#	 1/cm
+#	 m2/g
+#	 cm2/g
+#	 arbitrary
+root['/entry/data/I'].attrs['units'] = '1/m'
 root['/entry/data/I'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root['/entry/data/I'].attrs['scaling_factor'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data/Idev'].attrs['units'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data/Qdev'].attrs['units'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data/dQw'].attrs['units'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data/dQl'].attrs['units'] = 'SAMPLE-CHAR-DATA'
-root['/entry/data/Qmean'].attrs['units'] = 'SAMPLE-CHAR-DATA'
+ 
+# Valid enumeration values for root['/entry/data/Idev']['units'] are: 
+#	 1/m
+#	 1/cm
+#	 m2/g
+#	 cm2/g
+#	 arbitrary
+root['/entry/data/Idev'].attrs['units'] = '1/m'
+ 
+# Valid enumeration values for root['/entry/data/Qdev']['units'] are: 
+#	 1/m
+#	 1/nm
+#	 1/angstrom
+root['/entry/data/Qdev'].attrs['units'] = '1/m'
+ 
+# Valid enumeration values for root['/entry/data/dQw']['units'] are: 
+#	 1/m
+#	 1/nm
+#	 1/angstrom
+root['/entry/data/dQw'].attrs['units'] = '1/m'
+ 
+# Valid enumeration values for root['/entry/data/dQl']['units'] are: 
+#	 1/m
+#	 1/nm
+#	 1/angstrom
+root['/entry/data/dQl'].attrs['units'] = '1/m'
+ 
+# Valid enumeration values for root['/entry/data/Qmean']['units'] are: 
+#	 1/m
+#	 1/nm
+#	 1/angstrom
+root['/entry/data/Qmean'].attrs['units'] = '1/m'
 root['/entry/run'].attrs['name'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/aperture'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/collimator'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/detector'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/instrument/source'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/sample'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/process'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/process/collection'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/collection'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/TRANSMISSION_SPECTRUM'].attrs['canSAS_class'] = 'SAMPLE-CHAR-DATA'
-root['/entry/TRANSMISSION_SPECTRUM'].attrs['signal'] = 'SAMPLE-CHAR-DATA'
-root['/entry/TRANSMISSION_SPECTRUM'].attrs['T_axes'] = 'SAMPLE-CHAR-DATA'
+ 
+# Valid enumeration values for root['/entry/instrument']['canSAS_class'] are: 
+#	 SASinstrument
+root['/entry/instrument'].attrs['canSAS_class'] = 'SASinstrument'
+ 
+# Valid enumeration values for root['/entry/instrument/aperture']['canSAS_class'] are: 
+#	 SASaperture
+root['/entry/instrument/aperture'].attrs['canSAS_class'] = 'SASaperture'
+ 
+# Valid enumeration values for root['/entry/instrument/collimator']['canSAS_class'] are: 
+#	 SAScollimation
+root['/entry/instrument/collimator'].attrs['canSAS_class'] = 'SAScollimation'
+ 
+# Valid enumeration values for root['/entry/instrument/detector']['canSAS_class'] are: 
+#	 SASdetector
+root['/entry/instrument/detector'].attrs['canSAS_class'] = 'SASdetector'
+ 
+# Valid enumeration values for root['/entry/instrument/source']['canSAS_class'] are: 
+#	 SASsource
+root['/entry/instrument/source'].attrs['canSAS_class'] = 'SASsource'
+ 
+# Valid enumeration values for root['/entry/sample']['canSAS_class'] are: 
+#	 SASsample
+root['/entry/sample'].attrs['canSAS_class'] = 'SASsample'
+ 
+# Valid enumeration values for root['/entry/process']['canSAS_class'] are: 
+#	 SASprocess
+root['/entry/process'].attrs['canSAS_class'] = 'SASprocess'
+ 
+# Valid enumeration values for root['/entry/process/collection']['canSAS_class'] are: 
+#	 SASprocessnote
+root['/entry/process/collection'].attrs['canSAS_class'] = 'SASprocessnote'
+ 
+# Valid enumeration values for root['/entry/collection']['canSAS_class'] are: 
+#	 SASnote
+root['/entry/collection'].attrs['canSAS_class'] = 'SASnote'
+ 
+# Valid enumeration values for root['/entry/TRANSMISSION_SPECTRUM']['canSAS_class'] are: 
+#	 SAStransmission_spectrum
+root['/entry/TRANSMISSION_SPECTRUM'].attrs['canSAS_class'] = 'SAStransmission_spectrum'
+ 
+# Valid enumeration values for root['/entry/TRANSMISSION_SPECTRUM']['signal'] are: 
+#	 T
+root['/entry/TRANSMISSION_SPECTRUM'].attrs['signal'] = 'T'
+ 
+# Valid enumeration values for root['/entry/TRANSMISSION_SPECTRUM']['T_axes'] are: 
+#	 T
+root['/entry/TRANSMISSION_SPECTRUM'].attrs['T_axes'] = 'T'
 root['/entry/TRANSMISSION_SPECTRUM'].attrs['name'] = 'SAMPLE-CHAR-DATA'
-root['/entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = '2022-03-03T14:34:12.927101'
+root['/entry/TRANSMISSION_SPECTRUM'].attrs['timestamp'] = 'SAMPLE-CHAR-DATA'
 root['/entry/TRANSMISSION_SPECTRUM/T'].attrs['uncertainties'] = 'SAMPLE-CHAR-DATA'
 root.attrs['default'] = 'entry'
 root['/entry/TRANSMISSION_SPECTRUM'].set_default()
