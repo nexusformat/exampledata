@@ -42,6 +42,7 @@ nxsfrmt_script_lst = []
 db = None
 query = None
 tables_dct = None
+script_dir = os.path.dirname(__file__)
 
 
 def init_database():
@@ -156,15 +157,15 @@ def _list_attr(nxgrp, name, lstdata, do_print=True):
 
 def print_list_attr(nxgrp, name, lstdata, do_print=True):
     if do_print:
-        h5py_script_lst.append(" ")
-        nxsfrmt_script_lst.append(" ")
+        h5py_script_lst.append("")
+        nxsfrmt_script_lst.append("")
         # h5py_script_lst.append('root[\'%s\'].attrs[\'%s\'] = \'%s\'' % (nxgrp.name, name, str(lstdata)))
         # h5py_script_lst.append('# the allowable values for root[\'%s\'].attrs[\'%s\'] are: \'%s\'' % (nxgrp.name, name, str(lstdata)))
         h5py_script_lst.append(
-            "# Valid enumeration values for root['%s']['%s'] are: " % (nxgrp.name, name)
+            "# Valid enumeration values for root['%s']['%s'] are:" % (nxgrp.name, name)
         )
         nxsfrmt_script_lst.append(
-            "# Valid enumeration values for root['%s']['%s'] are: " % (nxgrp.name, name)
+            "# Valid enumeration values for root['%s']['%s'] are:" % (nxgrp.name, name)
         )
         for i in lstdata:
             h5py_script_lst.append("#\t %s" % i)
@@ -239,7 +240,7 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units="", dset={}, do_print=True
         if data.find("' ") > -1:
             data = data.replace("' ", "' , ")
         data = data.encode("ascii", "ignore")
-        h5py_script_lst.append(" ")
+        h5py_script_lst.append("")
         h5py_script_lst.append("root['{}']['{}'] = {}".format(nxgrp.name, name, data))
 
     elif type(data) == np.ndarray:
@@ -258,7 +259,7 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units="", dset={}, do_print=True
 
         if s.find(". ") > -1:
             data = s.replace(". ", ". , ").replace("\n", ",")
-        h5py_script_lst.append(" ")
+        h5py_script_lst.append("")
         h5py_script_lst.append(
             "root['%s'].create_dataset(name='%s', data=%s, maxshape=None, compression=\"gzip\")"
             % (nxgrp.name, name, str(data))
@@ -294,8 +295,8 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units="", dset={}, do_print=True
 
         if type(data) is str:
             if do_print:
-                h5py_script_lst.append(" ")
-                nxsfrmt_script_lst.append(" ")
+                h5py_script_lst.append("")
+                nxsfrmt_script_lst.append("")
                 h5py_script_lst.append(
                     "root['%s'].create_dataset(name='%s', data='%s', maxshape=None)"
                     % (nxgrp.name, name, s_data)
@@ -306,8 +307,8 @@ def _dataset(nxgrp, name, data, nxdata_type, nx_units="", dset={}, do_print=True
                 )
         else:
             if do_print:
-                h5py_script_lst.append(" ")
-                nxsfrmt_script_lst.append(" ")
+                h5py_script_lst.append("")
+                nxsfrmt_script_lst.append("")
                 if s_data.find("array") > -1:
                     # make sure it reads correctly as a numpy array
                     s_data = s_data.replace("array", "np.array")
@@ -1147,7 +1148,7 @@ def print_script_group(dct):
     # print('root[\'%s\'] = root.create_group(\'%s\')' % (get_parent_path(dct['abspath']), grp_name))
     if len(parent_grp) > 1:
         # print('root[\'%s\'].create_group(\'%s\')' % (parent_grp, grp_name))
-        h5py_script_lst.append(" ")
+        h5py_script_lst.append("")
         h5py_script_lst.append("root['%s'].create_group('%s')" % (parent_grp, grp_name))
 
         nxsfrmt_script_lst.append(
@@ -1156,7 +1157,7 @@ def print_script_group(dct):
 
     else:
         # print('root.create_group(\'%s\')' % (grp_name))
-        h5py_script_lst.append(" ")
+        h5py_script_lst.append("")
         h5py_script_lst.append("root.create_group('%s')" % (grp_name))
         # h5py_script_lst.append('root[\'%s%s\'] = [()]' % (parent_grp, grp_name))
 
@@ -1201,7 +1202,7 @@ def create_groups(nf):
     walk all dicts of type GROUP creating them as it goes
     """
 
-    add_line_to_scripts("# Create the GROUPS ", with_prec_newline=True)
+    add_line_to_scripts("# Create the GROUPS", with_prec_newline=True)
 
     for d in tables_dct["group"].all():
         _type = get_type(d)
@@ -1257,7 +1258,7 @@ def create_fields(nf, sym_dct={}, category=""):
        'type': 'NX_INT'},
       'doc': '\n     '},
     """
-    add_line_to_scripts("# Create the FIELDS ", with_prec_newline=True)
+    add_line_to_scripts("# Create the FIELDS", with_prec_newline=True)
 
     unit_dct = {}
     valid_fld_attr_nms_lst = [
@@ -1371,7 +1372,7 @@ def fix_link_target(nf, trgt_dct, hdf5_path_lst):
         print("\t\ttarget path: [%s] " % trgt_dct["abspath"])
         exit()
     else:
-        add_line_to_scripts("# Create the LINKS ", with_prec_newline=True)
+        add_line_to_scripts("# Create the LINKS", with_prec_newline=True)
         pgrp = nf[ppath]
         # force link targets to default removal of class type NX, if the have any
         target_str = standardize_link_target_str(trgt_dct["attrib"]["target"])
@@ -1432,7 +1433,7 @@ def _soft_link(nxgrp, name, target):
 def create_attributes(nf):  # , dct):
     """ """
     # paths_lst = get_all_paths_in_hdf5(nf)
-    add_line_to_scripts("# Create the ATTRIBUTES ", with_prec_newline=True)
+    add_line_to_scripts("# Create the ATTRIBUTES", with_prec_newline=True)
 
     for d in tables_dct["attribute"].all():
         # print(d)
@@ -1474,7 +1475,7 @@ def add_docs(nf, docs):
     takes a list of dicts that contain doc strings and the paths to the parent field or group, just add the doc string
     as a string attribute to the field or group for the user reference when looking with an hdf5 inspection tool
     """
-    add_line_to_scripts("# Create the DOC strings ", with_prec_newline=True)
+    add_line_to_scripts("# Create the DOC strings", with_prec_newline=True)
 
     for d in docs:
         # print(d)
@@ -1510,15 +1511,15 @@ def print_nxsfrmt_ex_start(fname):
     """
     global nxsfrmt_script_lst
     nxsfrmt_script_lst = []
-    nxsfrmt_script_lst.append(" ")
+    nxsfrmt_script_lst.append("")
     nxsfrmt_script_lst.append("import numpy as np")
     nxsfrmt_script_lst.append("from nexusformat.nexus import *")
-    nxsfrmt_script_lst.append(" ")
+    nxsfrmt_script_lst.append("")
     nxsfrmt_script_lst.append(
-        "# Note this example script was generated by nxdl_to_hdf5.py using the current \n# installed version of the NEXUS definitions ver[%s] "
+        "# Note this example script was generated by nxdl_to_hdf5.py using the current\n# installed version of the NEXUS definitions ver[%s]"
         % rel_ver
     )
-    nxsfrmt_script_lst.append(" ")
+    nxsfrmt_script_lst.append("")
     nxsfrmt_script_lst.append("root = NXroot()")
 
 
@@ -1530,17 +1531,17 @@ def print_h5py_ex_start(fname):
     global h5py_script_lst
     h5py_script_lst = []
     # fpath = __file__.replace('nxdl_to_hdf5.py','')
-    h5py_script_lst.append(" ")
+    h5py_script_lst.append("")
     h5py_script_lst.append("import numpy as np")
     h5py_script_lst.append("import datetime")
     h5py_script_lst.append("import h5py")
     h5py_script_lst.append("import os")
-    h5py_script_lst.append(" ")
+    h5py_script_lst.append("")
     h5py_script_lst.append(
-        "# Note this example script was generated by nxdl_to_hdf5.py using the current \n# installed version of the NEXUS definitions ver[%s] "
+        "# Note this example script was generated by nxdl_to_hdf5.py using the current\n# installed version of the NEXUS definitions ver[%s]"
         % rel_ver
     )
-    h5py_script_lst.append(" ")
+    h5py_script_lst.append("")
     h5py_script_lst.append("root = h5py.File('%s.h5', 'w')" % (fname))
 
 
@@ -1571,7 +1572,7 @@ def print_nxsfrmt_close(class_nm):
     nxsfrmt_script_lst.append("root.save('%s.nxs', 'w')\n\n" % class_nm)
 
 
-def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
+def make_class_as_nf_file(clss_nm, hdf5_dest_dir, symbol_dct={}):
     """
     create an hdf5 file of the application definition (class_nm) in the specified destination directory
     """
@@ -1580,10 +1581,10 @@ def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
     res = True
     category = def_dir = get_category()
 
-    if not os.path.exists(dest_dir):
-        os.makedirs(dest_dir)
+    if not os.path.exists(hdf5_dest_dir):
+        os.makedirs(hdf5_dest_dir)
 
-    fpath = os.path.join(dest_dir, "%s.hdf5" % clss_nm)
+    fpath = os.path.join(hdf5_dest_dir, "%s.hdf5" % clss_nm)
     nf = h5py.File(fpath, "w")
 
     sym_dct = {}
@@ -1642,8 +1643,8 @@ def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
     # add the docs from fields and groups now that they exist
     add_docs(nf, tables_dct["doc"].all())
 
-    h5py_script_lst.append(" ")
-    nxsfrmt_script_lst.append(" ")
+    h5py_script_lst.append("")
+    nxsfrmt_script_lst.append("")
 
     if res:
         # create Attributes
@@ -1687,7 +1688,7 @@ def make_class_as_nf_file(clss_nm, dest_dir, symbol_dct={}):
     print_script_versions(class_nm)
     print_script_close(class_nm)
 
-    write_script_file(class_nm)
+    write_script_file(class_nm, hdf5_dest_dir)
 
     return res
 
@@ -1721,10 +1722,10 @@ def print_nxsfrmt_versions(class_nm):
     pass
 
 
-def write_script_file(class_nm):
+def write_script_file(class_nm, hdf5_dest_dir):
     write_h5py_script(
         os.path.join(
-            os.getcwd(),
+            script_dir,
             "..",
             "autogenerated_examples",
             "nxdl",
@@ -1733,10 +1734,11 @@ def write_script_file(class_nm):
         ),
         class_nm,
         h5py_script_lst,
+        hdf5_dest_dir,
     )
     write_nxsfrmt_script(
         os.path.join(
-            os.getcwd(),
+            script_dir,
             "..",
             "autogenerated_examples",
             "nxdl",
@@ -1745,26 +1747,66 @@ def write_script_file(class_nm):
         ),
         class_nm,
         nxsfrmt_script_lst,
+        hdf5_dest_dir,
     )
 
 
-def write_h5py_script(path, class_nm, script_lst):
+def reset_readme_files():
+    dirname = os.path.join(
+        script_dir,
+        "..",
+        "autogenerated_examples",
+        "nxdl",
+        "python_scripts",
+        "h5py",
+    )
+    with open(os.path.join(dirname, "README.md"), "w") as readme:
+        readme.write("# Writing NeXus classes with `h5py`\n\n")
+
+    dirname = os.path.join(
+        script_dir,
+        "..",
+        "autogenerated_examples",
+        "nxdl",
+        "python_scripts",
+        "nexusformat",
+    )
+    with open(os.path.join(dirname, "README.md"), "w") as readme:
+        readme.write("# Writing NeXus classes with `nexusformat`\n\n")
+
+
+def write_h5py_script(path, class_nm, script_lst, hdf5_dest_dir):
     if not os.path.exists(path):
         os.makedirs(path)
-    f = open(os.path.join(path, "ex_h5py_%s.py" % class_nm), "w")
-    for l in script_lst:
-        f.write(l + "\n")
-    f.close()
+
+    rel_hdf5_dir = os.path.relpath(hdf5_dest_dir, path)
+
+    with open(os.path.join(path, "README.md"), "a") as readme:
+        filename = "ex_h5py_%s" % class_nm
+        with open(os.path.join(path, filename + ".py"), "w") as f:
+            for l in script_lst:
+                f.write(l + "\n")
+        readme.write(
+            " * `%s` ([script](%s.py), [result](%s/%s.hdf5))\n"
+            % (class_nm, filename, rel_hdf5_dir, class_nm)
+        )
 
 
-def write_nxsfrmt_script(path, class_nm, script_lst):
+def write_nxsfrmt_script(path, class_nm, script_lst, hdf5_dest_dir):
     if not os.path.exists(path):
         os.mkdir(path)
 
-    f = open(os.path.join(path, "ex_nexusformat_%s.py" % class_nm), "w")
-    for l in script_lst:
-        f.write(l + "\n")
-    f.close()
+    rel_hdf5_dir = os.path.relpath(hdf5_dest_dir, path).replace(os.sep, "/")
+
+    with open(os.path.join(path, "README.md"), "a") as readme:
+        filename = "ex_nexusformat_%s" % class_nm
+        with open(os.path.join(path, filename + ".py"), "w") as f:
+            for l in script_lst:
+                f.write(l + "\n")
+        readme.write(
+            " * `%s` ([script](%s.py), [result](%s/%s.hdf5))\n"
+            % (class_nm, filename, rel_hdf5_dir, class_nm)
+        )
 
 
 def build_class_db(
@@ -1914,23 +1956,26 @@ if __name__ == "__main__":
             )
             exit()
 
+    reset_readme_files()
+
     files = None
     for def_subdir in def_subdirs:
         files = sorted(os.listdir(os.path.join(def_dir, def_subdir)))
-        dest_dir = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            "..",
-            "autogenerated_examples",
-            "nxdl",
-            def_subdir,
+        hdf5_dest_dir = os.path.abspath(
+            os.path.join(
+                script_dir,
+                "..",
+                "autogenerated_examples",
+                "nxdl",
+                def_subdir,
+            )
         )
-        # FOR TESTING #####################
-        # dest_dir = 'G:/github/nexusformat/exampledata/autogenerated_examples/nxdl/applications'
-        ##################################
+
         if class_nm is None:
             do_exit = False
         else:
             do_exit = True
+
         for class_path in files:
             if class_path.find(".nxdl.xml") > -1:
                 if class_nm is None:
@@ -1946,7 +1991,9 @@ if __name__ == "__main__":
                     sym_args_dct=sym_args_dct,
                     report_symbols_only=report_symbols_only,
                 )
-                res = make_class_as_nf_file(class_nm, dest_dir, symbol_dct=sym_args_dct)
+                res = make_class_as_nf_file(
+                    class_nm, hdf5_dest_dir, symbol_dct=sym_args_dct
+                )
 
                 init_database()
                 class_nm = None
