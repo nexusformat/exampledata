@@ -1543,6 +1543,7 @@ def print_h5py_ex_start(fname):
     )
     h5py_script_lst.append("")
     h5py_script_lst.append("root = h5py.File('%s.h5', 'w')" % (fname))
+    h5py_script_lst.append("root.attrs['NX_class'] = 'NXroot'")
 
 
 def print_script_close(class_nm):
@@ -1586,6 +1587,7 @@ def make_class_as_nf_file(clss_nm, hdf5_dest_dir, symbol_dct={}):
 
     fpath = os.path.join(hdf5_dest_dir, "%s.hdf5" % clss_nm)
     nf = h5py.File(fpath, "w")
+    nf.attrs["NX_class"] = "NXroot"
 
     sym_dct = {}
     # process SYMBOLS
@@ -1762,6 +1764,9 @@ def reset_readme_files():
     )
     with open(os.path.join(dirname, "README.md"), "w") as readme:
         readme.write("# Writing NeXus classes with `h5py`\n\n")
+        readme.write(
+            "For each NeXus class a script is provided which shows how to write a valid NeXus HDF5 file with `h5py`. Example HDF5 files are also provided.\n\n"
+        )
 
     dirname = os.path.join(
         script_dir,
@@ -1773,6 +1778,9 @@ def reset_readme_files():
     )
     with open(os.path.join(dirname, "README.md"), "w") as readme:
         readme.write("# Writing NeXus classes with `nexusformat`\n\n")
+        readme.write(
+            "For each NeXus class a script is provided which shows how to write a valid NeXus HDF5 file with `nexusformat`. Example HDF5 files are also provided.\n\n"
+        )
 
 
 def write_h5py_script(path, class_nm, script_lst, hdf5_dest_dir):
@@ -1787,7 +1795,7 @@ def write_h5py_script(path, class_nm, script_lst, hdf5_dest_dir):
             for l in script_lst:
                 f.write(l + "\n")
         readme.write(
-            " * `%s` ([script](%s.py), [result](%s/%s.hdf5))\n"
+            " * `%s` ([script](%s.py), [example](%s/%s.hdf5))\n"
             % (class_nm, filename, rel_hdf5_dir, class_nm)
         )
 
@@ -1804,7 +1812,7 @@ def write_nxsfrmt_script(path, class_nm, script_lst, hdf5_dest_dir):
             for l in script_lst:
                 f.write(l + "\n")
         readme.write(
-            " * `%s` ([script](%s.py), [result](%s/%s.hdf5))\n"
+            " * `%s` ([script](%s.py), [example](%s/%s.hdf5))\n"
             % (class_nm, filename, rel_hdf5_dir, class_nm)
         )
 
