@@ -60,6 +60,19 @@ def isNeXusGroup(obj, NXtype):
             nxclass = nxclass.decode()
     return nxclass == NXtype
 
+def readString(data):
+    """There are many ways to encode strings in HDF5 and a variety of code is required for different version of h5py.
+    This function tries to decode and convert the data until it succeeds."""
+    if type(data) is str:
+        return data
+    elif hasattr(data,'decode'):
+        return data.decode("utf-8")
+    else:
+        try:
+            return readString(data[0])
+        except ValueError:
+            return readString(data[()])
+
 
 class Critic(object):
     '''
@@ -82,7 +95,8 @@ class Critic(object):
             try:
                 self.test_results += [getattr(self, t)(path, fname)]
             except:
-                self.test_results += ["error"]
+                #self.test_results += ["error"]
+                self.test_results += [getattr(self, t)(path, fname)]
     
     def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
@@ -158,10 +172,11 @@ class Critic(object):
                         subentry_list = self.find_NX_class_nodes(entry, "NXsubentry")
                         if len(subentry_list) == 0:
                             if 'definition' in list(entry):
-                                ad_list.add(str(entry['definition'][0], encoding='utf-8')) #definition found in NXentry
+                                ad_list.add(readString(entry['definition']))
                         else:
                             for sub in subentry_list:
-                                ad_list.add(str(sub['definition'][0], encoding='utf-8')) #definition found in NXsubentry
+                                if 'definition' in list(sub):
+                                    ad_list.add(readString(sub['definition']))
                 if len(ad_list) == 0:
                     AppDefList = "None found"
                 else:
