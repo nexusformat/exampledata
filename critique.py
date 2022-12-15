@@ -95,8 +95,8 @@ class Critic(object):
             try:
                 self.test_results += [getattr(self, t)(path, fname)]
             except:
-                #self.test_results += ["error"]
-                self.test_results += [getattr(self, t)(path, fname)]
+                self.test_results += ["error"]
+                #self.test_results += [getattr(self, t)(path, fname)]
     
     def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
