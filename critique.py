@@ -92,6 +92,7 @@ class Critic(object):
 
         test_bank = [func for func in dir(Critic) if callable(getattr(Critic, func)) and func.startswith("test_")]
         for t in test_bank:
+            #print(t,path, fname)
             try:
                 self.test_results += [getattr(self, t)(path, fname)]
             except:
@@ -217,11 +218,6 @@ class Registrar(object):
 
     def __init__(self):
         self.db = {}
-        self.test_bank = [
-          func
-          for func in dir(Critic)
-          if callable(getattr(Critic, func)) and func.startswith("test_")
-          ]
         self.table_labels = ["path", "file"] + Critic().test_results
 
 
@@ -257,7 +253,7 @@ def walk_function(registrar, path, files):
     for nm in files:
         if os.path.splitext(nm)[1] not in skip_extensions and nm[0] != '.': # skip other types of file
                 registrar.add(path, Critic(path, nm))
-
+ 
 
 def main(path=None):
     '''traverse a directory and describe how each file conforms to NeXus'''
@@ -268,9 +264,6 @@ def main(path=None):
         for subdir, dir_list, file_list in os.walk(path):
             if os.path.basename(subdir) in (".vscode", ".git"):
                 continue
-            paths += [
-                os.path.join(subdir, p) 
-                for p in dir_list]
             walk_function(registrar, subdir, file_list)
     
     print("# Critique of *exampledata* files")
