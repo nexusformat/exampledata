@@ -147,8 +147,6 @@ class Critic(object):
             with h5py.File(os.path.join(self.path, self.fname), mode="r") as root:
                 NXentry_nodes = self.find_NX_class_nodes(root, "NXentry")
                 self.nNXentry = len(NXentry_nodes)
-            if self.nNXentry == 0:
-                return "not NeXus"
         elif self.filetype == "XML":
             tree = ET.parse(os.path.join(path, fname))
             root = tree.getroot()
@@ -187,8 +185,23 @@ class Critic(object):
                     AppDefList = "None found"
                 else:
                     AppDefList = ",".join(ad_list)
+            
         elif self.filetype == "XML":
-            AppDefList = "*"
+            if self.nNXentry < 1:
+                AppDefList = "-"
+            else:
+                ad_list = set() # like a list, but only keep unique strings
+                tree = ET.parse(os.path.join(path, fname))
+                root = tree.getroot()
+                namespace = root.tag.split('}')[0].strip('{')
+                def_list = root.findall('./{'+namespace+'}NXentry/{'+namespace+'}definition')
+                def_list+= root.findall('./{'+namespace+'}NXentry/{'+namespace+'}NXsubentry/{'+namespace+'}definition')
+                for def_tag in def_list:
+                    ad_list.add(def_tag.text)
+                if len(ad_list) == 0:
+                    AppDefList = "None found"
+                else:
+                    AppDefList = ",".join(ad_list)
             
         elif self.filetype == "HDF4":
             AppDefList = "*"
