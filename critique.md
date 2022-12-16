@@ -1,6 +1,6 @@
 # Critique of *exampledata* files
 
-* date: 2022-12-15 16:18:25.249802
+* date: 2022-12-16 14:56:10.427105
 * h5py version: 2.10.0
 * unimplemented test cases are marked in the table with an asterisk
 
@@ -30,11 +30,11 @@
 | `./APS/scan2nexus/hdf4`                      | `mts_0347.nexus`                       | HDF4         | *             | *                  |
 | `./APS/scan2nexus/hdf4`                      | `mts_0348.nexus`                       | HDF4         | *             | *                  |
 | `./APS/scan2nexus/hdf4`                      | `sample1.nexus`                        | HDF4         | *             | *                  |
-| `./APS/scan2nexus/xml`                       | `14BMC_0015.xml`                       | XML          | *             | *                  |
-| `./APS/scan2nexus/xml`                       | `2iddf_0106.xml`                       | XML          | *             | *                  |
-| `./APS/scan2nexus/xml`                       | `mts_0347.xml`                         | XML          | *             | *                  |
-| `./APS/scan2nexus/xml`                       | `mts_0348.xml`                         | XML          | *             | *                  |
-| `./APS/scan2nexus/xml`                       | `sample1.xml`                          | XML          | *             | *                  |
+| `./APS/scan2nexus/xml`                       | `14BMC_0015.xml`                       | XML          | 1             | *                  |
+| `./APS/scan2nexus/xml`                       | `2iddf_0106.xml`                       | XML          | 1             | *                  |
+| `./APS/scan2nexus/xml`                       | `mts_0347.xml`                         | XML          | 1             | *                  |
+| `./APS/scan2nexus/xml`                       | `mts_0348.xml`                         | XML          | 1             | *                  |
+| `./APS/scan2nexus/xml`                       | `sample1.xml`                          | XML          | 1             | *                  |
 | `./APS/tomo/hdf4`                            | `Tomography_metadata.hdf`              | HDF4         | *             | *                  |
 | `./APS/tomo/hdf4`                            | `Tomography_raw.hdf`                   | HDF4         | *             | *                  |
 | `./DLS/NXquadric/hdf5`                       | `sample_capillary.nxs`                 | HDF5         | 1             | None found         |
@@ -105,5 +105,5 @@
 | `./nxpdb`                                    | `4n8z.cif`                             | unrecognised | -             | -                  |
 | `./nxpdb`                                    | `4n8z.h5.cif`                          | unrecognised | -             | -                  |
 | `./nxpdb/hdf5`                               | `4n8z.h5`                              | HDF5         | 1             | None found         |
-| `./xml`                                      | `verysimple.xml`                       | XML          | *             | *                  |
+| `./xml`                                      | `verysimple.xml`                       | XML          | not NeXus     | *                  |
 

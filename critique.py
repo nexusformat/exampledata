@@ -96,7 +96,6 @@ class Critic(object):
                 self.test_results += [getattr(self, t)(path, fname)]
             except:
                 self.test_results += ["error"]
-                #self.test_results += [getattr(self, t)(path, fname)]
     
     def find_NX_class_nodes(self, parent, nx_class = 'NXentry'):
         '''identify the NXentry (or as specified) nodes'''
@@ -151,12 +150,19 @@ class Critic(object):
             if self.nNXentry == 0:
                 return "not NeXus"
         elif self.filetype == "XML":
-            self.nNXentry = "*"
+            tree = ET.parse(os.path.join(path, fname))
+            root = tree.getroot()
+            namespace = root.tag.split('}')[0].strip('{')
+            NXentry_nodes = root.findall('{'+namespace+'}NXentry')
+            self.nNXentry = len(NXentry_nodes)
         elif self.filetype == "HDF4":
             self.nNXentry = "*"
         else:
             self.nNXentry = "-"
-        return self.nNXentry
+        if self.nNXentry == 0:
+            return "not NeXus"
+        else:
+            return self.nNXentry
 
     def test_03_ApplicationDefinition(self, path, fname):
         if path is None and fname is None:
